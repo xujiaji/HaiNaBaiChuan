@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "io.xujiaji.developersbackpack"
+        applicationId "io.xujiaji.hnbc"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1

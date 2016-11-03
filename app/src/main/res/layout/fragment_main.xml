@@ -130,7 +130,7 @@
             app:rippleColor="@color/fab_highlight" />
     </no.agens.depth.lib.DepthLayout>
 
-    <io.xujiaji.developersbackpack.widget.SheetLayout
+    <io.xujiaji.hnbc.widget.SheetLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
