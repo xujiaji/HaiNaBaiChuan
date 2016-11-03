@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="card_padding">14dp</dimen>
+
+    <dimen name="card_padding_top">10dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="seekbar_padding">10dp</dimen>
+    <dimen name="seekbar_margin_top">11dp</dimen>
+    <dimen name="default_subheading_margin_top">12dp</dimen>
+    <dimen name="seekbar_margin_sides">8dp</dimen>
+    <dimen name="menu_item_height">53dp</dimen>
+    <dimen name="menu_item_height_padding">6dp</dimen>
+    <dimen name="main_viewpager_height">202dp</dimen>
+
+    <dimen name="blog_card_elevation">2dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+
+    <dimen name="fab_minimun_x_distance">70dp</dimen>
+    <dimen name="main_card1_bottom_height">220dp</dimen>
+    <dimen name="main_card1_user_info_height">52dp</dimen>
+    <dimen name="main_card1_height">272dp</dimen>
+    <dimen name="card1_img_size">100dp</dimen>
+    <dimen name="write_bottom_btn_size">52dp</dimen>
+    <dimen name="write_padding">5dp</dimen>
+</resources>

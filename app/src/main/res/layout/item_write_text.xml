@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:background="@color/white"
+    android:paddingEnd="@dimen/write_padding"
+    android:paddingStart="@dimen/write_padding">
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edit_text"
+        android:paddingBottom="5dp"
+        android:paddingStart="10dp"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:textCursorDrawable="@drawable/color_cursor" />
+
+    <include layout="@layout/item_write_item_menu" />
+
+
+    <ImageButton
+        android:id="@+id/btnMenu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_menu" />
+
+</FrameLayout>

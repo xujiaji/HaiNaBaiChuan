@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/btnAddImg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/write_bottom_btn_size"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_img"
+        android:gravity="center"
+        android:textColor="@color/write_bottom_color"
+        android:text="@string/add_img" />
+
+
+    <TextView
+        android:id="@+id/btnAddText"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/write_bottom_btn_size"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_file"
+        android:textColor="@color/write_bottom_color"
+        android:gravity="center"
+        android:text="@string/add_text" />
+
+
+    <TextView
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/write_bottom_btn_size"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_clear"
+        android:gravity="center"
+        android:textColor="@color/write_bottom_color"
+        android:text="@string/all_clear" />
+
+
+</LinearLayout>

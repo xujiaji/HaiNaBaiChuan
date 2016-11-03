@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">杂应用</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_world">Hello World</string>
+    <string name="self_info">个人信息</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="my_release">我的发布</string>
+    <string name="set">设置</string>
+    <string name="main_page">首页</string>
+    <string name="title_prompt">请输入标题</string>
+    <string name="title">标题</string>
+    <string name="add_img">添加图片</string>
+    <string name="add_text">添加文字</string>
+    <string name="all_clear">清空</string>
+    <string name="email">邮箱</string>
+    <string name="pwd">密码</string>
+    <string name="login">登陆</string>
+</resources>
