@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.FragmentManager;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,17 +17,19 @@ import android.widget.RelativeLayout;
 
 import java.lang.ref.WeakReference;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.adapters.MainPagerAdapter;
 import io.xujiaji.hnbc.adapters.MainRecyclerAdapter;
-import io.xujiaji.hnbc.anim.TransitionHelper;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
-import io.xujiaji.hnbc.utils.LogHelper;
 import io.xujiaji.hnbc.utils.MaterialRippleHelper;
 import io.xujiaji.hnbc.utils.ScreenUtils;
+import io.xujiaji.hnbc.utils.TransitionHelper;
 import io.xujiaji.hnbc.widget.SheetLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import me.relex.circleindicator.CircleIndicator;
@@ -44,16 +45,24 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
     public static final int BOTTOM_VIEW_STATUS_BOTTOM = 0;
 
     private boolean fabContentOpen = false;
-
-
-    private ViewGroup appbar, dl2, dl3;
-    private View status;
-    private ViewPager mainViewPager;
-    private CircleIndicator mainIndicator;
-    private MainPagerAdapter mMainPagerAdapter;
-    private RecyclerView mainRecycler, mainBottomRecycler;
-    private ImageView imgScrollInfo;
-    private FloatingActionButton fab;
+    @BindView(R.id.appbar)
+    ViewGroup appbar;
+    @BindView(R.id.dl2)
+    ViewGroup dl2;
+    @BindView(R.id.dl3)
+    ViewGroup dl3;
+    @BindView(R.id.status)
+    View status;
+    @BindView(R.id.mainViewPager)
+    ViewPager mainViewPager;
+    @BindView(R.id.mainIndicator)
+    CircleIndicator mainIndicator;
+    @BindView(R.id.mainRecycler)
+    RecyclerView mainRecycler;
+    @BindView(R.id.mainBottomRecycler)
+    RecyclerView mainBottomRecycler;
+    @BindView(R.id.imgScrollInfo)
+    ImageView imgScrollInfo;
     private MainFragHandler handler;
     private Runnable runnableTop, runnableBottom;
     private boolean scrollRunning;//底部view是否正在滚动
@@ -61,7 +70,9 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
     private RelativeLayout.LayoutParams params = null;//底部view的layoutParams
     private int minTopMargin;//底部view最小topMargin值
     private int bottomViewNowStatus;
-    private SheetLayout mSheetLayout;
+    @BindView(R.id.bottom_sheet)
+    SheetLayout mSheetLayout;
+    private MainPagerAdapter mMainPagerAdapter;
 
 
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
@@ -77,9 +88,9 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
         return new MainFragment();
     }
 
-    @Override
-    protected void click(int id) {
-        switch (id) {
+    @OnClick({R.id.menu, R.id.imgScrollInfo, R.id.fab})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.menu:
                 if (!scrollRunning) {
                     ((MainActivity) getActivity()).menuOpen();
@@ -110,7 +121,6 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
                 }
                 break;
             case R.id.fab:
-                LogHelper.E("fab clicked");
                 addWriteFragment();
                 fabContentOpen = true;
                 mSheetLayout.expandFab();
@@ -134,35 +144,19 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
         return R.layout.fragment_main;
     }
 
-    @Override
-    protected Class<?> getViewClass() {
-        return MainContract.MainFragView.class;
-    }
 
     @Override
-    protected void initView() {
+    protected void onInit() {
         handler = new MainFragHandler(this);
-        appbar = $G(R.id.appbar);
-        dl2 = $G(R.id.dl2);
-        status = $(R.id.status);
-        fab = $(R.id.fab);
-        dl3 = $(R.id.dl3);
-        mSheetLayout = $(R.id.bottom_sheet);
-        mainViewPager = $(R.id.mainViewPager);
-        mainIndicator = $(R.id.mainIndicator);
-        mainRecycler = $(R.id.mainRecycler);
-        imgScrollInfo = $(R.id.imgScrollInfo);
-        mainBottomRecycler = $(R.id.mainBottomRecycler);
         MaterialRippleHelper.ripple(imgScrollInfo);
         initStatusHeight();
         initViewPager();
-        initClick(R.id.menu, R.id.imgScrollInfo, R.id.fab);
         initRecycler();
         initSheetLayout();
     }
 
     private void initSheetLayout() {
-        View view = $(R.id.fab_container);
+        View view = ButterKnife.findById(rootView, R.id.fab_container);
         mSheetLayout.setFab(view);
         mSheetLayout.setFabAnimationEndListener(new SheetLayout.OnFabAnimationEndListener() {
             @Override
@@ -203,7 +197,7 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
     }
 
     @Override
-    protected void addListener() {
+    protected void onListener() {
         mainViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -336,7 +330,6 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
 
     @Override
     public void animateTOMenu() {
-        LogHelper.E("------------------MainFragment ---- animateTOMenu rootView = " + getView());
         TransitionHelper.animateToMenuState(getView(), new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {

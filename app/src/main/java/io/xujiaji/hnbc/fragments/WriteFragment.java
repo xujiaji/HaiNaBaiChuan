@@ -12,13 +12,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.adapters.WriteAdapter;
 import io.xujiaji.hnbc.contracts.WriteContract;
 import io.xujiaji.hnbc.presenters.WritePresenter;
-import io.xujiaji.hnbc.utils.LogHelper;
 
 public class WriteFragment extends BaseFragment<WritePresenter> implements WriteContract.View{
     /**
@@ -26,15 +25,15 @@ public class WriteFragment extends BaseFragment<WritePresenter> implements Write
      */
     public static final int REQUEST_IMG_SELECT = 16;
 
-    @Bind(R.id.etTitle)
+    @BindView(R.id.etTitle)
     EditText etTitle;
-    @Bind(R.id.tilTitle)
+    @BindView(R.id.tilTitle)
     TextInputLayout tilTitle;
-    @Bind(R.id.layoutWriteBar)
+    @BindView(R.id.layoutWriteBar)
     RelativeLayout layoutWriteBar;
-    @Bind(R.id.rvWriteContent)
+    @BindView(R.id.rvWriteContent)
     RecyclerView rvWriteContent;
-    @Bind(R.id.layoutWrite)
+    @BindView(R.id.layoutWrite)
     LinearLayout layoutWrite;
     private WriteAdapter adapter;
 
@@ -42,10 +41,6 @@ public class WriteFragment extends BaseFragment<WritePresenter> implements Write
         return new WriteFragment();
     }
 
-    @Override
-    protected void click(int id) {
-
-    }
 
     @Override
     protected int getLayoutId() {
@@ -53,12 +48,7 @@ public class WriteFragment extends BaseFragment<WritePresenter> implements Write
     }
 
     @Override
-    protected Class getViewClass() {
-        return WriteContract.View.class;
-    }
-
-    @Override
-    protected void initView() {
+    protected void onInit() {
         initRvWriteContent();
         tilTitle.setHint(getString(R.string.title));
     }
@@ -89,7 +79,6 @@ public class WriteFragment extends BaseFragment<WritePresenter> implements Write
         }
         //选择的图片的Uri
         Uri imageUri = data.getData();
-        LogHelper.E("imageUri = " + imageUri);
         adapter.addImg(imageUri);
     }
 }

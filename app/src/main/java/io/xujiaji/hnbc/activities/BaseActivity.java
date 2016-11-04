@@ -12,81 +12,30 @@ import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.Contract;
 import io.xujiaji.hnbc.utils.ActivityUtils;
-import io.xujiaji.hnbc.utils.LogHelper;
+import io.xujiaji.hnbc.utils.GenericHelper;
 
 /**
  * 项目中Activity的基类
  */
-public abstract class BaseActivity<T extends Contract.BasePresenter> extends AppCompatActivity implements View.OnClickListener {
-    /**
-     * 日志输出标志
-     **/
-    protected final String TAG = this.getClass().getSimpleName();
-
+public abstract class BaseActivity<T extends Contract.BasePresenter> extends AppCompatActivity {
     protected T presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogHelper.changeTag(TAG);
         setContentView(getContentId());
         ButterKnife.bind(this);
-        presenter = getPresenter();
-        initView();
-        addListener();
+        presenter = GenericHelper.initPresenter(this);
+        onInit();
+        onListener();
         initStatus();
     }
 
     private void initStatus() {
-        View status = $(R.id.status);
+        View status = ButterKnife.findById(this, R.id.status);
         if (status != null) {
             ActivityUtils.initSatus(status);
         }
-    }
-
-    /**
-     * [绑定控件]
-     *
-     * @param resId 控件id
-     * @return view
-     */
-    protected <V extends View> V $(int resId) {
-        return (V) findViewById(resId);
-    }
-
-    /**
-     * [绑定控件]
-     *
-     * @param resId 控件id
-     * @return view
-     */
-    protected <V extends View> V $(View view, int resId) {
-        return (V) view.findViewById(resId);
-    }
-
-    /**
-     * 初始化view的点击事件
-     *
-     * @param viewIds
-     */
-    protected void initClick(int... viewIds) {
-        if (viewIds == null || viewIds.length == 0) return;
-        for (int viewId : viewIds) {
-            $(viewId).setOnClickListener(this);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        click(view.getId());
-    }
-
-
-    /**
-     * 添加监听
-     */
-    protected void addListener(){
-
     }
 
     /**
@@ -101,20 +50,9 @@ public abstract class BaseActivity<T extends Contract.BasePresenter> extends App
         }
     }
 
-    /**
-     * 初始化控件
-     */
-    protected abstract void initView();
-
-    /**
-     * view的点击事件
-     *
-     * @param id view的id
-     */
-    protected abstract void click(int id);
+    protected void onInit() {}
+    protected void onListener() {}
 
     protected abstract int getContentId();
-
-    protected abstract T getPresenter();
 
 }

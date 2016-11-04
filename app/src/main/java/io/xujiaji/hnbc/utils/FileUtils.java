@@ -20,15 +20,4 @@ public class FileUtils {
         }
         return cachePath;
     }
-
-//    LogHelper.E("Environment.getDataDirectory() = " + Environment.getDataDirectory());
-//    LogHelper.E("Environment.getExternalStorageState() = " + Environment.getExternalStorageState());
-//    LogHelper.E("Environment.getRootDirectory()" + Environment.getRootDirectory());
-//    LogHelper.E("Environment.getDownloadCacheDirectory() = " + Environment.getDownloadCacheDirectory());
-//    LogHelper.E("Environment.getExternalStorageDirectory() = " + Environment.getExternalStorageDirectory());
-//
-//    LogHelper.E("getExternalFilesDir(Environment.DIRECTORY_PICTURES) = " + getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-//    LogHelper.E("getFilesDir() = " + getFilesDir());
-//    LogHelper.E("getCacheDir() = " + getCacheDir());
-//    LogHelper.E("getExternalCacheDir() = " + getExternalCacheDir());
 }

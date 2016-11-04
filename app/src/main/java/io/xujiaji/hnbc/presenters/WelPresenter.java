@@ -8,13 +8,13 @@ import io.xujiaji.hnbc.activities.WelcomeActivity;
 import io.xujiaji.hnbc.contracts.WelcomeContract;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImageLoadHelper;
-import io.xujiaji.hnbc.utils.LogHelper;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.SharedPreferencesUtil;
 
-public class WelPresenter implements WelcomeContract.Presenter {
+public class WelPresenter extends BasePresenter implements WelcomeContract.Presenter {
     public WelcomeContract.View view;
     public WelPresenter(WelcomeContract.View view) {
+        super(view);
         this.view = view;
     }
 
@@ -25,13 +25,11 @@ public class WelPresenter implements WelcomeContract.Presenter {
     @Override
     public void setWelPic(ImageView pic) {
         String welPicPath = SharedPreferencesUtil.getWelPicPath();
-        LogHelper.E("获取了本地图片：" + welPicPath);
         if (welPicPath == null || "null".equals(welPicPath)) {
             getNetImg();
             return;
         }
         String nowName = welPicPath.substring(welPicPath.lastIndexOf('/') + 1, welPicPath.lastIndexOf('.'));
-        LogHelper.E("本地图片名：" + nowName);
         boolean isLoad = false;
         if (!(OtherUtils.currDay()).equals(nowName)) {
             getNetImg();

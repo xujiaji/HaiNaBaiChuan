@@ -7,7 +7,7 @@ import io.xujiaji.hnbc.contracts.MainContract;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainFragPresenter implements MainContract.MainFragPersenter  {
+public class MainFragPresenter extends BasePresenter implements MainContract.MainFragPersenter  {
     private MainContract.MainFragView view;
     private Handler handler;
     private Runnable runnable = new Runnable() {
@@ -25,6 +25,7 @@ public class MainFragPresenter implements MainContract.MainFragPersenter  {
         }
     };
     public MainFragPresenter(MainContract.MainFragView view) {
+        super(view);
         this.view = view;
     }
 

@@ -10,7 +10,7 @@ import cn.bmob.v3.listener.FindListener;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
-import io.xujiaji.hnbc.utils.LogHelper;
+import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.OtherUtils;
 
 /**
@@ -31,7 +31,6 @@ public class NetRequest {
 
     public void getWelcomePic (final WelcomeActivity context) {
         BmobQuery<Wel> bmobQuery = new BmobQuery<>();
-        LogHelper.E("OtherUtils.currDay() = " + OtherUtils.currDay());
         bmobQuery.addWhereEqualTo("imgDate", OtherUtils.currDay());
         bmobQuery.findObjects(new FindListener<Wel>() {
             @Override
@@ -39,9 +38,9 @@ public class NetRequest {
                 if (list == null) {
                     return;
                 }
-                LogHelper.E("list.size() = " + list.size());
+                LogUtil.e3("list.size() = " + list.size());
                 for (int i = 0; i < list.size(); i++) {
-                    LogHelper.E(list.get(i).toString());
+                    LogUtil.e3(list.get(i).toString());
                     Intent intent = new Intent(context, DownLoadWelPicService.class);
                     intent.putExtra("imgPath", list.get(i).getImgAddress());
                     context.startService(intent);

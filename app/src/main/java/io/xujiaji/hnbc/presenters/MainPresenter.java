@@ -10,10 +10,11 @@ import io.xujiaji.hnbc.contracts.MainContract;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainPresenter implements MainContract.Presenter {
+public class MainPresenter extends BasePresenter implements MainContract.Presenter {
     private MainContract.View view;
     private List<String> menuData;
     public MainPresenter(MainContract.View view) {
+        super(view);
         this.view = view;
         menuData = new ArrayList<>();
         menuData.add(App.getAppContext().getString(R.string.main_page));

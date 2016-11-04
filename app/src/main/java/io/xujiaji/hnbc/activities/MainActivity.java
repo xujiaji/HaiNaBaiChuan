@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.fragments.MainFragment;
@@ -20,10 +22,12 @@ import io.xujiaji.hnbc.utils.ToastUtil;
 import no.agens.depth.lib.tween.interpolators.ExpoIn;
 import no.agens.depth.lib.tween.interpolators.QuintOut;
 
-public class MainActivity extends BaseActivity<MainContract.Presenter> implements MainContract.View{
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View{
     private MainContract.MainFragView mainFragment;
     private static boolean isMenuVisible = false;
-    private ViewGroup menu;
+
+    @BindView(R.id.menu_container)
+    ViewGroup menu;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -31,7 +35,8 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     }
 
     @Override
-    protected void initView() {
+    protected void onInit() {
+        super.onInit();
         MainFragment fragment = MainFragment.newInstance();
         mainFragment = fragment;
         addFragment(fragment, R.id.fragment_container);
@@ -40,23 +45,13 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
 
     @Override
-    protected void click(int id) {
-
-    }
-
-    @Override
     protected int getContentId() {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected MainContract.Presenter getPresenter() {
-        return new MainPresenter(this);
-    }
 
     @Override
     public void setupMenu() {
-        menu = $(R.id.menu_container);
         List<String> list = presenter.getMenuData();
         for (int i = 0, len = list.size(); i < len; i++) {
             addMenuItem(menu, list.get(i), i);
@@ -95,8 +90,8 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
                 menuItemStatus(menuIndex);
             }
         });
-        TextView itemText = $(item, R.id.item_text);
-        ImageView imgMark = $(item, R.id.imgMark);
+        TextView itemText = ButterKnife.findById(item, R.id.item_text);
+        ImageView imgMark = ButterKnife.findById(item, R.id.imgMark);
 
         itemText.setText(text);
 //        item.setOnClickListener(getMenuItemCLick(menuIndex, splashColor));
@@ -120,9 +115,9 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     private void menuItemStatus(int position) {
         for (int i = 0; i < menu.getChildCount(); i++) {
             if (i == position) {
-                $(menu.getChildAt(i), R.id.imgMark).setVisibility(View.VISIBLE);
+                ButterKnife.findById(menu.getChildAt(i), R.id.imgMark).setVisibility(View.VISIBLE);
             } else {
-                $(menu.getChildAt(i), R.id.imgMark).setVisibility(View.GONE);
+                ButterKnife.findById(menu.getChildAt(i), R.id.imgMark).setVisibility(View.GONE);
             }
 
         }

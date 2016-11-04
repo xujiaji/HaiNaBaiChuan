@@ -18,15 +18,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.BindDimen;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.WriteContract;
 import io.xujiaji.hnbc.model.entity.Write;
 import io.xujiaji.hnbc.utils.ImageLoadHelper;
-import io.xujiaji.hnbc.utils.LogHelper;
+import io.xujiaji.hnbc.utils.LogUtil;
 
 /**
  * 写作adapter
@@ -94,7 +94,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
         } else if (holder instanceof TextHolder) {
             TextHolder mTextHolder = (TextHolder) holder;
             Write.Content content = contents.get(position);
-            LogHelper.E(position + " : content.getText() = " + content.getText());
+            LogUtil.e3(position + " : content.getText() = " + content.getText());
             mTextHolder.text.setText(content.getText());
             mTextHolder.mMyCustomEditTextListener.updatePosition(holder.getAdapterPosition(), ((TextHolder) holder).text);
             mTextHolder.hideMenu();
@@ -155,7 +155,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
      * @param isDown   true：向下移动
      */
     void move(int position, boolean isDown) {
-        LogHelper.E((isDown ? "下" : "上") + "移：" + position);
+        LogUtil.e3((isDown ? "下" : "上") + "移：" + position);
         if (isDown && position < getItemCount() - 2) {
             onItemMove(position, position + 1);
         }
@@ -232,11 +232,11 @@ public class WriteAdapter extends RecyclerView.Adapter {
     }
 
     public static class ImgHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.img)
+        @BindView(R.id.img)
         ImageView img;
-        @Bind(R.id.layoutMenu)
+        @BindView(R.id.layoutMenu)
         LinearLayout layoutMenu;
-        @Bind(R.id.layoutImgParent)
+        @BindView(R.id.layoutImgParent)
         FrameLayout layoutImgParent;
         @BindDimen(R.dimen.write_padding)
         int imgPadd;
@@ -289,9 +289,9 @@ public class WriteAdapter extends RecyclerView.Adapter {
     }
 
     public static class TextHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.text)
+        @BindView(R.id.text)
         EditText text;
-        @Bind(R.id.layoutMenu)
+        @BindView(R.id.layoutMenu)
         LinearLayout layoutMenu;
         MyCustomEditTextListener mMyCustomEditTextListener;
         private WeakReference<WriteAdapter> wf;
@@ -362,7 +362,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
                 return;
             }
             contents.get(position).setText(charSequence.toString());
-            LogHelper.E("position = " + position + " -- charSequence = " + charSequence);
+            LogUtil.e3("position = " + position + " -- charSequence = " + charSequence);
         }
 
         @Override

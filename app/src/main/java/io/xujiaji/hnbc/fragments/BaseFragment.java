@@ -7,123 +7,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Constructor;
-
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.Contract;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.GenericHelper;
-import io.xujiaji.hnbc.utils.LogHelper;
 
 /**
  * 项目中Fragment的基类
  */
-public abstract class BaseFragment<T extends Contract.BasePresenter> extends Fragment implements View.OnClickListener {
-    /**
-     * 日志输出标志
-     **/
-    protected final String TAG = this.getClass().getSimpleName();
+public abstract class BaseFragment<T extends Contract.BasePresenter> extends Fragment {
 
     protected T presenter;
 
     protected View rootView;
-
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogHelper.changeTag(TAG);
-//        presenter = getPresenter();
-        try {
-            LogHelper.E("BaseFragment ----- getPresenter = " + getPresenter());
-            Constructor construct = getPresenter().getConstructor(getViewClass());
-            LogHelper.E("construct = " + construct);
-            presenter = (T) construct.newInstance(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        presenter = GenericHelper.initPresenter(this);
         rootView = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, rootView);
+        unbinder = ButterKnife.bind(this, rootView);
         initStatus();
-        initView();
-        addListener();
+        onInit();
+        onListener();
         return rootView;
+    }
+
+    private void initStatus() {
+        View status = ButterKnife.findById(rootView, R.id.status);
+        if (status != null) {
+            ActivityUtils.initSatus(status);
+        }
+    }
+
+
+    /**
+     * 添加监听
+     */
+    protected void onListener(){
+
+    }
+
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化控件
+     */
+    protected void onInit(){}
+
+    public View getRootView() {
+        return this.rootView;
     }
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    private void initStatus() {
-        View status = $(R.id.status);
-        if (status != null) {
-            ActivityUtils.initSatus(status);
-        }
-    }
-
-    /**
-     * [绑定控件]
-     *
-     * @param resId 控件id
-     * @return view
-     */
-    protected <V extends View> V $(int resId) {
-        return (V) rootView.findViewById(resId);
-    }
-
-    protected <Z extends ViewGroup> Z $G(int resId) {
-        return (Z) rootView.findViewById(resId);
-    }
-
-    /**
-     * 初始化view的点击事件
-     *
-     * @param viewIds
-     */
-    protected void initClick(int... viewIds) {
-        if (viewIds == null || viewIds.length == 0) return;
-        for (int viewId : viewIds) {
-            $(viewId).setOnClickListener(this);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        click(view.getId());
-    }
-
-    /**
-     * view的点击事件
-     *
-     * @param id view的id
-     */
-    protected abstract void click(int id);
-
-    /**
-     * 添加监听
-     */
-    protected void addListener(){
-
-    }
-
-    protected abstract int getLayoutId();
-
-    private Class<T> getPresenter() {
-        return GenericHelper.getViewClass(getClass());
-    }
-
-    protected abstract Class getViewClass();
-
-    /**
-     * 初始化控件
-     */
-    protected abstract void initView();
-
-    public View getRootView() {
-        return this.rootView;
+        unbinder.unbind();
     }
 }

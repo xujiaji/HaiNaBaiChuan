@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc.anim;
+package io.xujiaji.hnbc.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

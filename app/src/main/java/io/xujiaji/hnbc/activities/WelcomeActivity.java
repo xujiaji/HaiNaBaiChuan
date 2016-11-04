@@ -12,6 +12,8 @@ import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 import com.flaviofaria.kenburnsview.Transition;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.WelcomeContract;
 import io.xujiaji.hnbc.presenters.WelPresenter;
@@ -19,12 +21,13 @@ import io.xujiaji.hnbc.utils.ScreenUtils;
 import no.agens.depth.lib.tween.interpolators.ExpoOut;
 
 
-public class WelcomeActivity extends BaseActivity<WelcomeContract.Presenter> implements WelcomeContract.View {
-    private KenBurnsView mKenBurnsView;
+public class WelcomeActivity extends BaseActivity<WelPresenter> implements WelcomeContract.View {
+    @BindView(R.id.img)
+    KenBurnsView mKenBurnsView;
 
     @Override
-    protected void initView() {
-        mKenBurnsView = $(R.id.img);
+    protected void onInit() {
+        super.onInit();
         initKenBurn();
         presenter.setWelPic(mKenBurnsView);
         presenter.start();
@@ -36,7 +39,8 @@ public class WelcomeActivity extends BaseActivity<WelcomeContract.Presenter> imp
     }
 
     @Override
-    protected void addListener() {
+    protected void onListener() {
+        super.onListener();
         mKenBurnsView.setTransitionListener(new KenBurnsView.TransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
@@ -51,24 +55,14 @@ public class WelcomeActivity extends BaseActivity<WelcomeContract.Presenter> imp
     }
 
     @Override
-    protected void click(int id) {
-
-    }
-
-    @Override
     protected int getContentId() {
         return R.layout.activity_welcome;
-    }
-
-    @Override
-    protected WelcomeContract.Presenter getPresenter() {
-        return new WelPresenter(this);
     }
 
 
     @Override
     public void startAnim() {
-        ViewGroup view = $(R.id.layout);
+        ViewGroup view = ButterKnife.findById(this, R.id.layout);
         float curTranslationY = view.getTranslationY();
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, curTranslationY, ScreenUtils.getScreenHeight(this) / 2);
         animator.setDuration(3000);
@@ -86,6 +80,6 @@ public class WelcomeActivity extends BaseActivity<WelcomeContract.Presenter> imp
 
     @Override
     public void showHello() {
-        $(R.id.tvHello).setVisibility(View.VISIBLE);
+        ButterKnife.findById(this, R.id.tvHello).setVisibility(View.VISIBLE);
     }
 }

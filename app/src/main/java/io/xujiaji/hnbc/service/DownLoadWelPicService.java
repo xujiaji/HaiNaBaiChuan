@@ -12,7 +12,6 @@ import java.net.URL;
 
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.utils.FileUtils;
-import io.xujiaji.hnbc.utils.LogHelper;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.SharedPreferencesUtil;
 
@@ -26,7 +25,6 @@ public class DownLoadWelPicService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        LogHelper.E("onHandleIntent");
         String imgUrl = intent.getExtras().getString("imgPath");
         if (imgUrl == null) {
             return;
@@ -34,7 +32,6 @@ public class DownLoadWelPicService extends IntentService {
         File cache = new File(FileUtils.getAppCacheDir(App.getAppContext()) + "/" + getImgName(imgUrl));
         if (cache.exists()) {
             SharedPreferencesUtil.saveWelPicPath(cache.getPath());
-            LogHelper.E("Welcome图片已存在");
             return;
         }
         try {
@@ -48,7 +45,6 @@ public class DownLoadWelPicService extends IntentService {
                 input.close();
                 output.close();
                 SharedPreferencesUtil.saveWelPicPath(cache.getPath());
-                LogHelper.E("成功下载Welcome图片");
             }
         } catch (Exception e) {
             e.printStackTrace();
