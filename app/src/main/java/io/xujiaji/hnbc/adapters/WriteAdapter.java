@@ -25,7 +25,7 @@ import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.WriteContract;
 import io.xujiaji.hnbc.model.entity.Write;
-import io.xujiaji.hnbc.utils.ImageLoadHelper;
+import io.xujiaji.hnbc.utils.ImgLoadUtil;
 import io.xujiaji.hnbc.utils.LogUtil;
 
 /**
@@ -89,7 +89,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
             ImgHolder mImgHolder = (ImgHolder) holder;
             Write.Content content = contents.get(position);
             mImgHolder.hideMenu();
-            ImageLoadHelper.loadWriteImg(context, mImgHolder.img, content);
+            ImgLoadUtil.loadWriteImg(context, mImgHolder.img, content);
 
         } else if (holder instanceof TextHolder) {
             TextHolder mTextHolder = (TextHolder) holder;

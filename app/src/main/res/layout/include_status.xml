@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<no.agens.depth.lib.DepthLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/status"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/theme_red"
+    android:layerType="hardware"
+    app:edge_color="@color/fab_highlight"
+    tools:showIn="@layout/fragment_main" />

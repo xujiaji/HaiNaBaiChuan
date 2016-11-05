@@ -2,7 +2,12 @@ package io.xujiaji.hnbc.presenters;
 
 import android.os.Handler;
 
+import java.util.List;
+
 import io.xujiaji.hnbc.contracts.MainContract;
+import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.entity.MainPersonMsg;
+import io.xujiaji.hnbc.model.entity.MainTag;
 
 /**
  * Created by jiana on 16-7-22.
@@ -36,10 +41,28 @@ public class MainFragPresenter extends BasePresenter implements MainContract.Mai
     }
 
     @Override
+    public void end() {
+        view = null;
+        runnable = null;
+        handler = null;
+    }
+
+    @Override
     public void autoScrollPager() {
         handler = new Handler();
         handler.postDelayed(runnable, 2000);
     }
+
+    @Override
+    public List<MainTag> getTags() {
+        return DataFiller.getTagsData();
+    }
+
+    @Override
+    public List<MainPersonMsg> getPersonMsgs() {
+        return DataFiller.getPersonMsgs();
+    }
+
 
     public void stop() {
         handler.removeCallbacks(runnable);

@@ -6,6 +6,7 @@ package io.xujiaji.hnbc.contracts;
 public interface Contract {
     interface BasePresenter {
         void start();
+        void end();
     }
 
     interface BaseView {

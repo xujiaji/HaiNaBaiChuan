@@ -14,8 +14,24 @@ import io.xujiaji.hnbc.model.entity.Write;
 /**
  * 图片加载帮助类
  */
-public class ImageLoadHelper {
-    private ImageLoadHelper() {
+public class ImgLoadUtil {
+    private ImgLoadUtil() {
+    }
+
+    public static void load(Context context, ImageView img, String url) {
+        Glide.with(context)
+                .load(url)
+                .into(img);
+    }
+
+    public static void loadHead(Context context, ImageView img, String url) {
+        Glide.with(context)
+                .load(url)
+                .crossFade()
+                .placeholder(R.drawable.head)
+                .error(R.drawable.head)
+                .transform(new GlideCircleTransform(context))
+                .into(img);
     }
 
     public static void loadNoCache(Context context, ImageView img, File file) {

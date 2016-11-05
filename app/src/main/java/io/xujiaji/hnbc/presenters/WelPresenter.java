@@ -7,7 +7,7 @@ import java.io.File;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
 import io.xujiaji.hnbc.contracts.WelcomeContract;
 import io.xujiaji.hnbc.model.net.NetRequest;
-import io.xujiaji.hnbc.utils.ImageLoadHelper;
+import io.xujiaji.hnbc.utils.ImgLoadUtil;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.SharedPreferencesUtil;
 
@@ -37,7 +37,7 @@ public class WelPresenter extends BasePresenter implements WelcomeContract.Prese
         }
         File file = new File(welPicPath);
         if (file.exists()) {
-            ImageLoadHelper.loadNoCache(pic.getContext(), pic, file);
+            ImgLoadUtil.loadNoCache(pic.getContext(), pic, file);
         } else if (!isLoad) {
             getNetImg();
         }
@@ -46,5 +46,10 @@ public class WelPresenter extends BasePresenter implements WelcomeContract.Prese
     @Override
     public void start() {
         view.startAnim();
+    }
+
+    @Override
+    public void end() {
+        view = null;
     }
 }

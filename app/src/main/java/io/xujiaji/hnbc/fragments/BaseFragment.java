@@ -33,6 +33,7 @@ public abstract class BaseFragment<T extends Contract.BasePresenter> extends Fra
         initStatus();
         onInit();
         onListener();
+        presenter.start();
         return rootView;
     }
 
@@ -66,6 +67,7 @@ public abstract class BaseFragment<T extends Contract.BasePresenter> extends Fra
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.end();
         unbinder.unbind();
     }
 }

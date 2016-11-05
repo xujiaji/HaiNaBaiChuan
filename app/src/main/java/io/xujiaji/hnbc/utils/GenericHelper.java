@@ -3,6 +3,7 @@ package io.xujiaji.hnbc.utils;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 import io.xujiaji.hnbc.contracts.Contract;
 
@@ -31,20 +32,21 @@ public class GenericHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new RuntimeException("instance of presenter fail");
+        throw new RuntimeException("instance of presenter fail\n" +
+                " Remind presenter need to extends BasePresenter");
     }
 
 
     public static Class<?> getViewInterface(Class currentClass) {
         Class<?>[] classes = currentClass.getInterfaces();
+        LogUtil.e3(Arrays.toString(classes));
         for (Class<?> c : classes) {
-            Class<?>[] ccs = c.getInterfaces();
-            for(Class<?> c2 : ccs) {
-                if (c2 != Contract.BaseView.class) {
-                    continue;
+            if (c != Contract.BaseView.class) {
+                if (getViewInterface(c) == Contract.BaseView.class) {
+                    return c;
                 }
-                return c;
             }
+            return c;
         }
         throw new RuntimeException("no implement Contract.BaseView");
     }

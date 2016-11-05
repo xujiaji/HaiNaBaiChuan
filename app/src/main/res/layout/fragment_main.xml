@@ -42,13 +42,7 @@
             android:src="@drawable/ic_person_black_24dp" />
     </no.agens.depth.lib.DepthLayout>
 
-    <no.agens.depth.lib.DepthLayout
-        android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/theme_red"
-        android:layerType="hardware"
-        app:edge_color="@color/fab_highlight" />
+    <include layout="@layout/include_status" />
 
     <ImageView
         android:id="@+id/actionbar_shadow"
@@ -62,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/main_viewpager_height"
-        android:background="@color/theme_grey_white"
+        android:background="@color/white"
         android:layerType="hardware"
         app:custom_elevation="1dp">
 

@@ -23,7 +23,14 @@
     <dimen name="main_card1_bottom_height">220dp</dimen>
     <dimen name="main_card1_user_info_height">52dp</dimen>
     <dimen name="main_card1_height">272dp</dimen>
-    <dimen name="card1_img_size">100dp</dimen>
+    <dimen name="card1_img_size">160dp</dimen>
     <dimen name="write_bottom_btn_size">52dp</dimen>
     <dimen name="write_padding">5dp</dimen>
+    <dimen name="main_head_height">62dp</dimen>
+    <dimen name="login_card_width">280dp</dimen>
+    <dimen name="text_size_level2">22sp</dimen>
+    <dimen name="text_size_level3">18sp</dimen>
+    <dimen name="text_size_level4">16sp</dimen>
+    <dimen name="text_size_level5">14sp</dimen>
+    <dimen name="text_size_level6">12sp</dimen>
 </resources>

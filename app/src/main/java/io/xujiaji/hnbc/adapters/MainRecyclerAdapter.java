@@ -1,38 +1,38 @@
 package io.xujiaji.hnbc.adapters;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.xujiaji.hnbc.R;
+import io.xujiaji.hnbc.model.entity.MainTag;
 
 /**
  * Created by jiana on 16-7-24.
  */
-public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainRecyclerHolder> {
-
-    @Override
-    public MainRecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MainRecyclerHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_tag, parent, false));
+public class MainRecyclerAdapter extends BaseQuickAdapter<MainTag, BaseViewHolder> {
+    private List<Integer> widthList;
+    public MainRecyclerAdapter(List<MainTag> mainTags) {
+        super(R.layout.item_main_tag, mainTags);
+        widthList = new ArrayList<>();
     }
 
     @Override
-    public void onBindViewHolder(MainRecyclerHolder holder, int position) {
-        holder.tagContent.setText("Android" + position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return 20;
-    }
-
-    public static class MainRecyclerHolder extends RecyclerView.ViewHolder {
-        TextView tagContent;
-        public MainRecyclerHolder(View itemView) {
-            super(itemView);
-            tagContent = (TextView) itemView.findViewById(R.id.tagContent);
+    protected void convert(BaseViewHolder baseViewHolder, MainTag mainTag) {
+        TextView textView = baseViewHolder.getView(R.id.tagContent);
+        textView.setText(mainTag.getName());
+        ViewGroup.LayoutParams params = textView.getLayoutParams();
+        int position = baseViewHolder.getAdapterPosition();
+        if (widthList.size() <= position || widthList.get(position) == null) {
+            widthList.add(params.width);
+        } else {
+            params.width = widthList.get(position);
+            textView.setLayoutParams(params);
         }
     }
 }

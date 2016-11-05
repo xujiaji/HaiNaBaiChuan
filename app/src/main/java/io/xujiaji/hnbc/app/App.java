@@ -2,6 +2,7 @@ package io.xujiaji.hnbc.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Typeface;
 
 import cn.bmob.v3.Bmob;
 import io.xujiaji.hnbc.config.Constant;
@@ -10,12 +11,15 @@ import io.xujiaji.hnbc.config.Constant;
  * application类
  */
 public class App extends Application {
+    private static final String EXTRA_FONT = "fonts/mini_simple.ttf";
     private static Context mContext;
+    private static Typeface extraFont = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this.getApplicationContext();
+        initTypeface();
         try {
             Bmob.initialize(this, Constant.CBmob.BMOB_ID);
         } catch (Exception e) {
@@ -23,7 +27,18 @@ public class App extends Application {
         }
     }
 
+    public void initTypeface() {
+        if (extraFont != null) {
+            return;
+        }
+        extraFont = Typeface.createFromAsset(getAssets(), EXTRA_FONT);
+    }
+
     public static Context getAppContext() {
         return mContext;
+    }
+
+    public static Typeface getExtraFont() {
+        return extraFont;
     }
 }

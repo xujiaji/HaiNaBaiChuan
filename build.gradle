@@ -48,4 +48,5 @@ ext{
     rippleVersion='1.0.2'
     legacyVersion='1.0'
     glideVersion='3.7.0'
+    BaseRecyclerViewAdapterHelperVersion='2.4.5'
 }

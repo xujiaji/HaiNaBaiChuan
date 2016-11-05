@@ -29,6 +29,7 @@ public abstract class BaseActivity<T extends Contract.BasePresenter> extends App
         onInit();
         onListener();
         initStatus();
+        presenter.start();
     }
 
     private void initStatus() {
@@ -55,4 +56,9 @@ public abstract class BaseActivity<T extends Contract.BasePresenter> extends App
 
     protected abstract int getContentId();
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.end();
+    }
 }

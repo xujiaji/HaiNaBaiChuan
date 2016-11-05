@@ -34,4 +34,10 @@ public class MainPresenter extends BasePresenter implements MainContract.Present
     public void start() {
 
     }
+
+    @Override
+    public void end() {
+        view = null;
+        menuData = null;
+    }
 }

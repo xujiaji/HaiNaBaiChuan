@@ -1,14 +1,12 @@
 package io.xujiaji.hnbc.fragments;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.FragmentManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +27,11 @@ import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
 import io.xujiaji.hnbc.utils.MaterialRippleHelper;
 import io.xujiaji.hnbc.utils.ScreenUtils;
-import io.xujiaji.hnbc.utils.TransitionHelper;
 import io.xujiaji.hnbc.widget.SheetLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import me.relex.circleindicator.CircleIndicator;
 
-public class MainFragment extends BaseFragment<MainFragPresenter> implements MainContract.MainFragView {
+public class MainFragment extends BaseMainFragment<MainFragPresenter> implements MainContract.MainFragView {
     /**
      * 底部布局到达顶部
      */
@@ -75,18 +72,19 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
     private MainPagerAdapter mMainPagerAdapter;
 
 
-    AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            super.onAnimationEnd(animation);
-//            showShadow();
-//            waterScene.setPause(false);
-        }
-    };
-
     public static MainFragment newInstance() {
         return new MainFragment();
     }
+
+
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        super.onHiddenChanged(hidden);
+//        LogUtil.e3("hidden = " + hidden);
+//        if (!hidden) {
+//            introAnimate();
+//        }
+//    }
 
     @OnClick({R.id.menu, R.id.imgScrollInfo, R.id.fab})
     public void onClick(View view) {
@@ -166,12 +164,12 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
     }
 
     private void initRecycler() {
-        mainRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.HORIZONTAL, false));
+        mainRecycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         OverScrollDecoratorHelper.setUpOverScroll(mainRecycler, OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL);
-        mainRecycler.setAdapter(new MainRecyclerAdapter());
+        mainRecycler.setAdapter(new MainRecyclerAdapter(presenter.getTags()));
 
         mainBottomRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mainBottomRecycler.setAdapter(new MainBottomRecyclerAdapter());
+        mainBottomRecycler.setAdapter(new MainBottomRecyclerAdapter(presenter.getPersonMsgs()));
     }
 
     private void initViewPager() {
@@ -214,19 +212,27 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
         });
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
+            int dyDiff = 0;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+//                LogUtil.e1("newState = " + newState + "; dyDiff = " + dyDiff);
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (newState == 0 && manager.findFirstVisibleItemPosition() == 0) {
+                if (dyDiff <= 0 && newState == 0 && manager.findFirstVisibleItemPosition() == 0) {
                     contentLayoutToDown();
+                }
+
+                if (newState == 0) {
+                    dyDiff = 0;
+//                    LogUtil.e1("set newState == 0");
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+//                LogUtil.e1("dy = " + dy);
+                dyDiff += dy;
                 if (dy > 0) {
                     contentLayoutToTop();
                 }
@@ -324,34 +330,6 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
         }
     }
 
-    /**
-     * 布局到顶部
-     */
-
-    @Override
-    public void animateTOMenu() {
-        TransitionHelper.animateToMenuState(getView(), new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
-        });
-//        menuIcon.animateIconState(MaterialMenuDrawable.IconState.ARROW);
-//        hideShadow();
-//        waterScene.setPause(true);
-    }
-
-    @Override
-    public void revertFromMenu() {
-        TransitionHelper.startRevertFromMenu(getRootView(), showShadowListener);
-//        menuIcon.animateIconState(MaterialMenuDrawable.IconState.BURGER);
-//        waterScene.setPause(true);
-    }
-
-    @Override
-    public void exitFromMenu() {
-        TransitionHelper.animateMenuOut(getRootView());
-    }
 
     @Override
     public void currentPager(int position) {
@@ -396,6 +374,9 @@ public class MainFragment extends BaseFragment<MainFragPresenter> implements Mai
 
     @Override
     public boolean clickBack() {
+        if (super.clickBack()) {
+            return true;
+        }
         if (fabContentOpen) {
             mSheetLayout.contractFab();
             fabContentOpen = false;

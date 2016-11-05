@@ -1,51 +1,28 @@
 package io.xujiaji.hnbc.adapters;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+
+import java.util.List;
 
 import io.xujiaji.hnbc.R;
+import io.xujiaji.hnbc.model.entity.MainPersonMsg;
+import io.xujiaji.hnbc.utils.ImgLoadUtil;
 
-public class MainBottomRecyclerAdapter extends RecyclerView.Adapter<MainBottomRecyclerAdapter.MainBottomRecyclerHolder> {
-    /**
-     * 显示图片布局
-     */
-    public static final int LAYOUT_IMG = 1;
-    /**
-     * 显示文字的布局
-     */
-    public static final int LAYOUT_MSG = 2;
-    @Override
-    public MainBottomRecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case LAYOUT_IMG:
-                return new MainBottomRecyclerHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_card1, parent, false));
-            case LAYOUT_MSG:
-                return new MainBottomRecyclerHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_card2, parent, false));
-        }
-        return new MainBottomRecyclerHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_card1, parent, false));
+public class MainBottomRecyclerAdapter extends BaseQuickAdapter<MainPersonMsg, BaseViewHolder> {
+    public MainBottomRecyclerAdapter(List<MainPersonMsg> data) {
+        super(R.layout.item_main_card, data);
     }
 
     @Override
-    public void onBindViewHolder(MainBottomRecyclerHolder holder, int position) {
+    protected void convert(BaseViewHolder baseViewHolder, MainPersonMsg mainPersonMsg) {
+        baseViewHolder.setText(R.id.tvUserName, "@" + mainPersonMsg.getName())
+                .setText(R.id.tvContent, mainPersonMsg.getMsgContent())
+                .setText(R.id.tvUserSign, mainPersonMsg.getSign());
 
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position % 2 == 0 ? LAYOUT_IMG : LAYOUT_MSG;
-    }
-
-    @Override
-    public int getItemCount() {
-        return 20;
-    }
-
-    public static class MainBottomRecyclerHolder extends RecyclerView.ViewHolder {
-
-        public MainBottomRecyclerHolder(View itemView) {
-            super(itemView);
-        }
+        ImgLoadUtil.loadHead(mContext, (ImageView) baseViewHolder.getView(R.id.imgHead), mainPersonMsg.getHeadPic());
+        ImgLoadUtil.load(mContext, (ImageView) baseViewHolder.getView(R.id.imageThumb), mainPersonMsg.getBigPic());
     }
 }

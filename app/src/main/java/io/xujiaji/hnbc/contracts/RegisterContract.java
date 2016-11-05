@@ -6,12 +6,7 @@ package io.xujiaji.hnbc.contracts;
 public interface RegisterContract {
 
     interface Presenter extends Contract.BasePresenter {
-        void requestEmail();
-        void requestPhone();
-        void requestSina();
-        void requestQQ();
-        void requestWeiXin();
-
+        void requestRegister();
     }
 
     interface View extends Contract.BaseView {

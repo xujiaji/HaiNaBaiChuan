@@ -17,5 +17,10 @@ public class WritePresenter extends BasePresenter implements WriteContract.Prese
     public void start() {
     }
 
+    @Override
+    public void end() {
+        view = null;
+    }
+
 
 }
