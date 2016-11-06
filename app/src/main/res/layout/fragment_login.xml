@@ -9,16 +9,16 @@
     <include layout="@layout/include_status" />
 
     <no.agens.depth.lib.DepthLayout
-        android:id="@+id/dl2"
+        android:id="@+id/root_dl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layerType="hardware"
+        android:layout_below="@+id/status"
         app:custom_elevation="1dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="@dimen/login_card_width"
             android:layout_height="348dp"
-            android:layout_below="@+id/status"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="34dp"
             app:cardCornerRadius="12dp"
@@ -27,12 +27,12 @@
 
             <Button
                 android:id="@+id/btnRegistered"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/registered"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_gravity="end"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:text="@string/registered"
+                android:textColor="@color/colorPrimaryDark" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,33 +55,24 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/usernameWrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:textColorHint="@color/text_color_level_2">
+                    style="@style/textInputLayoutStyle">
 
                     <EditText
                         android:id="@+id/username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColorHint="@color/colorPrimaryDark" />
+                        style="@style/inputEditTextStyle"
+                        android:hint="@string/username"
+                        android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/passwordWrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="4dp"
-                    android:textColorHint="@color/text_color_level_2">
+                    app:counterEnabled="true"
+                    style="@style/textInputLayoutStyle">
 
                     <EditText
                         android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/inputEditTextStyle"
+                        android:hint="@string/password"
                         android:inputType="textPassword" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -89,10 +80,10 @@
     </no.agens.depth.lib.DepthLayout>
 
     <no.agens.depth.lib.DepthLayout
-        android:id="@+id/fab_container"
+        android:id="@+id/appbar"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"
-        android:layout_below="@+id/dl2"
+        android:layout_below="@+id/root_dl"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-38dp"
         android:layerType="hardware"
@@ -106,12 +97,12 @@
             android:layout_height="match_parent"
             android:layout_margin="1dp"
             android:clickable="true"
-            app:elevation="0dp"
             android:layerType="hardware"
             android:src="@drawable/ic_send_black_24dp"
             app:backgroundTint="@color/theme_red"
             app:borderWidth="1dp"
-            app:pressedTranslationZ="0dp"/>
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp" />
 
         <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
             android:id="@+id/google_progress"
@@ -123,13 +114,13 @@
     </no.agens.depth.lib.DepthLayout>
 
     <no.agens.depth.lib.DepthLayout
-        android:id="@+id/dl3"
+        android:id="@+id/dl2"
         android:layout_width="@dimen/login_card_width"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layerType="hardware"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
+        android:layerType="hardware"
         app:custom_elevation="0dp"
         app:edge_color="@color/transparent"
         app:is_circle="false">
@@ -141,24 +132,24 @@
             android:layout_alignParentEnd="true"
             android:text="@string/other_login"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_level6" />
+            android:textSize="@dimen/text_size_level6"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/tvOtherLogin"
-            android:background="@color/colorPrimary"
-            android:layout_marginStart="160dp"/>
+            android:layout_marginStart="160dp"
+            android:background="@color/colorPrimary" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line"
-            android:gravity="center"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <android.support.design.widget.FloatingActionButton

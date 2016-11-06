@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_world">Hello World</string>
+    <string name="hello_world">Welcome</string>
     <string name="self_info">个人信息</string>
     <string name="my_collect">我的收藏</string>
     <string name="my_release">我的发布</string>
@@ -23,4 +23,9 @@
     <string name="password">密码</string>
     <string name="other_login">其他登录方式</string>
     <string name="registered">注册</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="sex_secret">保密</string>
+    <string name="phone">手机号</string>
+    <string name="nickname">昵称</string>
 </resources>

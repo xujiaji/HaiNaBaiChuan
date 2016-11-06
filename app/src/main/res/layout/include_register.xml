@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/fab_size"
+    tools:showIn="@layout/fragment_register">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:padding="30dp"
+        android:src="@mipmap/big_icon" />
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registered"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="32sp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/usernameWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/username"
+            style="@style/inputEditTextStyle"
+            android:hint="@string/username"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/nicknameWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/nickname"
+            style="@style/inputEditTextStyle"
+            android:hint="@string/nickname"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/man"/>
+        <RadioButton
+            android:id="@+id/rbWoman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/woman"/>
+        <RadioButton
+            android:id="@+id/rbSexSecret"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sex_secret"/>
+    </RadioGroup>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/phoneWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/phone"
+            style="@style/inputEditTextStyle"
+            android:hint="@string/phone"
+            android:inputType="phone" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/emailWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/inputEditTextStyle"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/password"
+            style="@style/inputEditTextStyle"
+            android:hint="密码"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordConfirmWrapper"
+        style="@style/textInputLayoutStyle">
+
+        <EditText
+            android:id="@+id/passwordConfirm"
+            style="@style/inputEditTextStyle"
+            android:hint="再次输入密码"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

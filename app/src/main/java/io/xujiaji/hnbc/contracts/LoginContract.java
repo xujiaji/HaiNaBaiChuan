@@ -1,6 +1,6 @@
 package io.xujiaji.hnbc.contracts;
 
-import android.content.Context;
+import io.xujiaji.hnbc.fragments.BaseMainFragment;
 
 /**
  * Created by jiana on 16-11-4.
@@ -12,7 +12,7 @@ public interface LoginContract {
         void requestSina();
         void requestQQ();
         void requestWeiXin();
-        void requestRegistered(Context context);
+        void requestRegistered(BaseMainFragment loginFragment);
     }
 
     interface View extends MainContract.MainBaseFragView {

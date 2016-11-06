@@ -15,7 +15,7 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
     //是否是打开LoginFragment
     private boolean introAnimate = false;
     //是否同意返回
-    private static boolean isAgreeBlack = false;
+    private static boolean isAgreeBlack = true;
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
@@ -85,6 +85,7 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                introAnimate = false;
                 rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 TransitionHelper.startIntroAnim(rootView, showShadowListener);
             }

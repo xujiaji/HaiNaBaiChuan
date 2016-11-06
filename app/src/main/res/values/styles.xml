@@ -28,4 +28,18 @@
         <item name="rippleColor">@color/fab_highlight</item>
         <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
     </style>
+
+    <style name="textInputLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginStart">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColorHint">@color/text_color_level_2</item>
+    </style>
+
+    <style name="inputEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+    </style>
 </resources>

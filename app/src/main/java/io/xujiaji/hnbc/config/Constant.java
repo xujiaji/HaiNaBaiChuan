@@ -40,4 +40,17 @@ public class Constant {
             "电视节目时间表",
             "简/繁/火星字体转换",
             "新闻头条"};
+    /**
+     * 男
+     */
+    public static final int SEX_MAN = 0;
+    /**
+     * 女
+     */
+    public static final int SEX_WOMAN = 1;
+    /**
+     * 性别保密
+     */
+    public static final int SEX_SECRET = 2;
+
 }

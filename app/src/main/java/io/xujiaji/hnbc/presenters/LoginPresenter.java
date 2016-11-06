@@ -1,8 +1,9 @@
 package io.xujiaji.hnbc.presenters;
 
-import android.content.Context;
-
+import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.contracts.LoginContract;
+import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.RegisterFragment;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.utils.ToastUtil;
 
@@ -12,6 +13,7 @@ import io.xujiaji.hnbc.utils.ToastUtil;
 
 public class LoginPresenter extends BasePresenter implements LoginContract.Presenter {
     private LoginContract.View view;
+
     public LoginPresenter(LoginContract.View view) {
         super(view);
         this.view = view;
@@ -59,7 +61,10 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
     }
 
     @Override
-    public void requestRegistered(Context context) {
-        ToastUtil.getInstance().showShortT("未知区域：注册功能");
+    public void requestRegistered(final BaseMainFragment loginFragment) {
+        loginFragment.exitFromMenu();
+        final MainActivity mainActivity = (MainActivity) loginFragment.getActivity();
+        mainActivity.fragGoToFrag(RegisterFragment.newInstance(), loginFragment, false);
     }
+
 }

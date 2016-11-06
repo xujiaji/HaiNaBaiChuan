@@ -34,7 +34,7 @@ public class WelcomeActivity extends BaseActivity<WelPresenter> implements Welco
     }
 
     private void initKenBurn() {
-        RandomTransitionGenerator rtg = new RandomTransitionGenerator(6000, new AccelerateInterpolator());
+        RandomTransitionGenerator rtg = new RandomTransitionGenerator(4000, new AccelerateInterpolator());
         mKenBurnsView.setTransitionGenerator(rtg);
     }
 

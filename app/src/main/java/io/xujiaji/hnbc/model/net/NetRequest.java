@@ -7,7 +7,9 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
+import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -15,11 +17,13 @@ import io.xujiaji.hnbc.utils.OtherUtils;
 
 /**
  * 网络请求
- *
  */
 public class NetRequest {
     private static NetRequest mNetRequest;
-    private NetRequest() {}
+
+    private NetRequest() {
+    }
+
     public static NetRequest Instance() {
         if (mNetRequest == null) {
             synchronized (NetRequest.class) {
@@ -29,7 +33,7 @@ public class NetRequest {
         return mNetRequest;
     }
 
-    public void getWelcomePic (final WelcomeActivity context) {
+    public void getWelcomePic(final WelcomeActivity context) {
         BmobQuery<Wel> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("imgDate", OtherUtils.currDay());
         bmobQuery.findObjects(new FindListener<Wel>() {
@@ -50,5 +54,25 @@ public class NetRequest {
         });
     }
 
+    /**
+     * 注册
+     * @param user
+     */
+    public void userRegister(User user, final RequestListener<User> listener) {
+        user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    listener.success(user);
+                } else {
+                    listener.error(e);
+                }
+            }
+        });
+    }
 
+    public interface RequestListener<T> {
+        void success(T t);
+        void error(BmobException err);
+    }
 }

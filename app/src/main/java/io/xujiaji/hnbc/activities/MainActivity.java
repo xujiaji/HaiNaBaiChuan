@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.MainContract;
-import io.xujiaji.hnbc.fragments.BaseFragment;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.LoginFragment;
 import io.xujiaji.hnbc.fragments.MainFragment;
@@ -52,7 +51,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      * 设置
      */
     public static final int MENU_SET = 4;
-    private BaseFragment[] baseFragments;
+    private BaseMainFragment[] baseFragments;
     //当前Fragment
     private BaseMainFragment currentFragment;
     private static boolean isMenuVisible = false;
@@ -68,7 +67,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void onInit() {
         super.onInit();
-        baseFragments = new BaseFragment[FRAGMENT_NUM];
+        baseFragments = new BaseMainFragment[FRAGMENT_NUM];
         MainFragment fragment = MainFragment.newInstance();
         currentFragment = fragment;
         baseFragments[MENU_HOME] = fragment;
@@ -244,6 +243,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         }
     }
 
+    public BaseMainFragment[] getBaseMainFragments() {
+        return baseFragments;
+    }
+
     public static boolean isMenuVisible() {
         return isMenuVisible;
     }
@@ -272,6 +275,33 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 getFragmentManager().beginTransaction().hide(oldFragment).commit();
             }
         }, 2000);
+    }
 
+    /**
+     * Fragment跳转Fragment
+     * @param newFragment 要跳转的Fragment
+     * @param oldFragment 当前的Fragment
+     * @param delOldFrag 是否把当前的Fragment删除
+     */
+    public void fragGoToFrag(BaseMainFragment newFragment, final BaseMainFragment oldFragment, final boolean delOldFrag) {
+        currentFragment = newFragment;
+        oldFragment.exitFromMenu();
+        newFragment.setIntroAnimate(true);
+        if (newFragment.isAdded()) {
+            getFragmentManager().beginTransaction().show(newFragment).commit();
+            newFragment.introAnimate();
+        } else {
+            getFragmentManager().beginTransaction().add(R.id.fragment_container, newFragment).commit();
+        }
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (delOldFrag) {
+                    getFragmentManager().beginTransaction().remove(oldFragment).commit();
+                } else {
+                    getFragmentManager().beginTransaction().hide(oldFragment).commit();
+                }
+            }
+        }, 2000);
     }
 }

@@ -27,10 +27,6 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     EditText username;
     @BindView(R.id.password)
     EditText password;
-    @BindView(R.id.dl2)
-    DepthLayout dl2;
-    @BindView(R.id.fab_container)
-    DepthLayout fabContainer;
     @BindView(R.id.passwordWrapper)
     TextInputLayout passwordWrapper;
     @BindView(R.id.usernameWrapper)
@@ -40,10 +36,26 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     @BindView(R.id.btnLogin)
     FloatingActionButton btnLogin;
 
+    /**
+     * 当注册后来后设置这个值
+     */
+    private String registerUsername = null;
     private boolean openMenu = false;
 
+    public void setRegisterUsername(String name) {
+        registerUsername = name;
+    }
 
-//    @Override
+    @Override
+    public void introAnimate() {
+        super.introAnimate();
+        if (registerUsername == null) {
+            return;
+        }
+        username.setText(registerUsername);
+    }
+
+    //    @Override
 //    public void onHiddenChanged(boolean hidden) {
 //        super.onHiddenChanged(hidden);
 //        if (!hidden) {
@@ -64,7 +76,6 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     @Override
     protected void onInit() {
         super.onInit();
-        initTextInputLayout();
         initOtherLoginBold();
     }
 
@@ -77,13 +88,6 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
         paint.setFakeBoldText(true);
     }
 
-    /**
-     * 初始化输入提示
-     */
-    private void initTextInputLayout() {
-        passwordWrapper.setHint(getString(R.string.password));
-        usernameWrapper.setHint(getString(R.string.username));
-    }
 
     @OnClick({R.id.btnLogin, R.id.btnRegistered, R.id.btnLoginQQ, R.id.btnLoginWeixin, R.id.btnLoginSina})
     void onClick(View view) {
@@ -95,7 +99,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
                 presenter.requestLogin(username.getText().toString().trim(), password.getText().toString().trim());
                 break;
             case R.id.btnRegistered:
-                presenter.requestRegistered(getActivity());
+                presenter.requestRegistered(this);
                 break;
             case R.id.btnLoginQQ:
                 presenter.requestQQ();

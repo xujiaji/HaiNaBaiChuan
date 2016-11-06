@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<no.agens.depth.lib.DepthRendrer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layerType="hardware">
+
+    <include layout="@layout/include_status" />
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/root_dl"
+        android:layout_below="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layerType="hardware"
+        app:custom_elevation="1dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/login_card_width"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="@dimen/fab_size"
+            app:cardUseCompatPadding="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/include_register" />
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+    </no.agens.depth.lib.DepthLayout>
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/dl2"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="28dp"
+        android:layerType="hardware"
+        app:custom_elevation="1dp"
+        app:edge_color="@color/fab"
+        app:is_circle="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnRegistered"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:clickable="true"
+            app:elevation="0dp"
+            android:layerType="hardware"
+            android:src="@drawable/ic_send_black_24dp"
+            app:backgroundTint="@color/theme_red"
+            app:borderWidth="1dp"
+            app:pressedTranslationZ="0dp"/>
+
+        <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
+            android:id="@+id/google_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:type="folding_circles" />
+    </no.agens.depth.lib.DepthLayout>
+
+</no.agens.depth.lib.DepthRendrer>
