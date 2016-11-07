@@ -8,9 +8,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.presenters.UserInfoPresenter;
+import io.xujiaji.hnbc.utils.ToastUtil;
+import io.xujiaji.hnbc.widget.PupList;
 import io.xujiaji.hnbc.widget.TextViewNew;
 
 /**
@@ -35,6 +38,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     ImageView menu;
     @BindView(R.id.more)
     ImageView more;
+    private PupList pupList;
 
     @Override
     protected void onInit() {
@@ -57,9 +61,30 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
                 clickBack();
                 break;
             case R.id.more:
-                presenter.requestOpenMore(more);
+                openMore();
                 break;
         }
+    }
+
+    private void openMore() {
+        if (pupList == null) {
+            pupList = new PupList(getActivity());
+            pupList.setListener(new PupList.PupListener() {
+                @Override
+                public void itemClick(int itemId) {
+                    switch (itemId) {
+                        case C.pupmenu.EDIT:
+                            ToastUtil.getInstance().showShortT("编辑");
+                            break;
+                        case C.pupmenu.EXIT_LOGIN:
+                            presenter.requestExitLogin();
+                            break;
+                    }
+                    pupList.dismiss();
+                }
+            });
+        }
+        pupList.show(more);
     }
 
     public static UserInfoFragment newInstance() {
@@ -72,7 +97,14 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         tvNickname.setText(user.getNickname());
         tvSign.setText(user.getSign());
         presenter.requestDisplayHeadPic(imgHead, user.getHeadPic());
-        presenter.requestDisplayUserInfoBg(imgUserInfoBg, "http://easyread.ph.126.net/TakfO4_UqLa9ieRuhJGEYQ==/7917100546012586604.jpg");
+        presenter.requestDisplayUserInfoBg(imgUserInfoBg, "http://c.hiphotos.baidu.com/zhidao/pic/item/8c1001e93901213f1268ab8757e736d12f2e9516.jpg");
+    }
+
+    @Override
+    public void exitLoginSuccess() {
+        setDeleted(true);
+        MainActivity.startFragment(C.fragment.LOGIN);
+        pupList = null;
     }
 
     @Override
@@ -85,8 +117,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         if (super.clickBack()) {
             return true;
         }
-        final MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.menuToggle();
+        MainActivity.clickMenuItem(C.M_Menu.HOME);
         return true;
     }
 

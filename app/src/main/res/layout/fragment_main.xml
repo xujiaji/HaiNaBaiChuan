@@ -38,6 +38,7 @@
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
             android:layout_alignParentBottom="true"
+            android:padding="6dp"
             android:scaleType="centerInside"
             android:src="@drawable/head" />
     </no.agens.depth.lib.DepthLayout>

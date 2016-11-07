@@ -90,7 +90,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
                 presenter.requestLogin(username.getText().toString().trim(), password.getText().toString().trim());
                 break;
             case R.id.btnRegistered:
-                presenter.requestRegistered(this);
+                MainActivity.startFragment(C.fragment.REGISTER);
                 break;
             case R.id.btnLoginQQ:
                 presenter.requestQQ();
@@ -123,6 +123,8 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     public void callLoginSuccess() {
         onLogging(false);
         ToastUtil.getInstance().showLongT("登陆成功！");
+        setDeleted(true);
+        MainActivity.startFragment(C.fragment.USER_INFO);
     }
 
     @Override
@@ -162,7 +164,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
             return true;
         }
         LogUtil.e3("clickBack");
-        ((MainActivity) getActivity()).menuItemStatus(C.M_Menu.HOME);
+        MainActivity.clickMenuItem(C.M_Menu.HOME);
         return true;
     }
 

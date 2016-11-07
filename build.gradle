@@ -49,4 +49,7 @@ ext{
     legacyVersion='1.0'
     glideVersion='3.7.0'
     BaseRecyclerViewAdapterHelperVersion='2.4.5'
+    eventBusVersion='3.0.0'
+    galleryfinalVersion='1.4.8.7'
+    googleprogressbarVersion='1.1.0'
 }

@@ -18,6 +18,8 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.adapters.WriteAdapter;
 import io.xujiaji.hnbc.contracts.WriteContract;
 import io.xujiaji.hnbc.presenters.WritePresenter;
+import io.xujiaji.hnbc.utils.FileUtils;
+import io.xujiaji.hnbc.utils.LogUtil;
 
 public class WriteFragment extends BaseFragment<WritePresenter> implements WriteContract.View{
     /**
@@ -79,6 +81,7 @@ public class WriteFragment extends BaseFragment<WritePresenter> implements Write
         }
         //选择的图片的Uri
         Uri imageUri = data.getData();
+        LogUtil.e3(FileUtils.getImageAbsolutePath(getActivity(), imageUri));
         adapter.addImg(imageUri);
     }
 }

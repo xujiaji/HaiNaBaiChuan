@@ -60,6 +60,8 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     RecyclerView mainBottomRecycler;
     @BindView(R.id.imgScrollInfo)
     ImageView imgScrollInfo;
+    @BindView(R.id.menu)
+    ImageView menu;
     private MainFragHandler handler;
     private Runnable runnableTop, runnableBottom;
     private boolean scrollRunning;//底部view是否正在滚动
@@ -151,6 +153,7 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         initViewPager();
         initRecycler();
         initSheetLayout();
+        presenter.requestLoadHead(menu);
     }
 
     private void initSheetLayout() {

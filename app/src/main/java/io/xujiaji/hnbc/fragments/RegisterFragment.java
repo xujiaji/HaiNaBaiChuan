@@ -174,8 +174,7 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
             return true;
         }
         setDeleted(true);
-        final MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.goToFragment(C.fragment.LOGIN);
+        MainActivity.startFragment(C.fragment.LOGIN);
         return true;
     }
 

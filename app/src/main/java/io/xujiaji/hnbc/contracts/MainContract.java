@@ -1,5 +1,7 @@
 package io.xujiaji.hnbc.contracts;
 
+import android.widget.ImageView;
+
 import java.util.List;
 
 import io.xujiaji.hnbc.model.entity.MainPersonMsg;
@@ -36,6 +38,7 @@ public interface MainContract {
         void autoScrollPager();
         List<MainTag> getTags();
         List<MainPersonMsg> getPersonMsgs();
+        void requestLoadHead(ImageView head);
     }
 
     interface MainFragView extends MainBaseFragView {

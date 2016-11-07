@@ -51,4 +51,23 @@ public class ActivityUtils {
         statusParams.height = statusHeight;
         view.setLayoutParams(statusParams);
     }
+
+    private static long lastClickTime;
+    public static boolean isFastClick() {
+        return isFastClick(false);
+    }
+
+    public static boolean isFastClick(boolean isPrompt) {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (timeD < 2000) {
+            if (isPrompt) {
+                ToastUtil.getInstance().showShortT("重复点击！");
+            }
+            return true;
+        } else {
+            lastClickTime = time;
+            return false;
+        }
+    }
 }

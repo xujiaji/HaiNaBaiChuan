@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,6 +24,7 @@ import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.model.entity.Msg;
 import io.xujiaji.hnbc.presenters.MainPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -55,6 +60,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         currentFragment = FragmentFactory.newFragment(C.fragment.HOME);
         addFragment(currentFragment, R.id.fragment_container);
         setupMenu();
+//        NetRequest.Instance().uploadHeadPic(new File("/storage/emulated/0/Download/trim.jpg"));
+//        NetRequest.Instance().editSign("求仁而得仁，又何怨 发愤忘食，乐以忘忧，不知老之将至 敬鬼神而远之 子罕言利，与命，与仁", new NetRequest.RequestListener<String>() {
+//            @Override
+//            public void success(String s) {
+//
+//            }
+//
+//            @Override
+//            public void error(BmobException err) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -71,7 +88,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         }
         menu.setTranslationY(20000);
     }
-
 
 
     @Override
@@ -148,7 +164,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuItemStatus(menuIndex);
+                MainActivity.clickMenuItem(menuIndex);
             }
         });
         TextView itemText = ButterKnife.findById(item, R.id.item_text);
@@ -180,8 +196,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             } else {
                 ButterKnife.findById(menu.getChildAt(i), R.id.imgMark).setVisibility(View.GONE);
             }
-
         }
+
+//        if (ActivityUtils.isFastClick(true)) {
+//            return;
+//        }
 
         if (FragmentFactory.menuName(position).contains(currentFragment.getClass().getSimpleName())) {
 //            menuClose();
@@ -258,5 +277,54 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             }
         }, 2000);
         menuClose();
+    }
+
+
+    /*
+     * eventBus事件处理
+     * ----------------------------------------------------------------------
+     */
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * 通过fragmentKey启动对应的Fragment
+     * @param fragmentKey
+     */
+    public static void startFragment(String fragmentKey) {
+        EventBus.getDefault().post(new Msg(Msg.GOTO_FRAGMENT, fragmentKey));
+    }
+
+    /**
+     * 通过menuIndex选择菜单项
+     * @param menuIndex
+     */
+    public static void clickMenuItem(int menuIndex) {
+        if (ActivityUtils.isFastClick()) {
+            return;
+        }
+        EventBus.getDefault().post(new Msg(Msg.CHOOSE_MENU, menuIndex));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMsgEvent(Msg msg) {
+        switch (msg.type) {
+            case Msg.GOTO_FRAGMENT:
+                goToFragment(msg.fragment);
+                break;
+            case Msg.CHOOSE_MENU:
+                menuItemStatus(msg.menuIndex);
+                break;
+        }
     }
 }

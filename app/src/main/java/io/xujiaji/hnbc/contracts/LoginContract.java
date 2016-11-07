@@ -1,7 +1,5 @@
 package io.xujiaji.hnbc.contracts;
 
-import io.xujiaji.hnbc.fragments.BaseMainFragment;
-
 /**
  * Created by jiana on 16-11-4.
  */
@@ -12,7 +10,6 @@ public interface LoginContract {
         void requestSina();
         void requestQQ();
         void requestWeiXin();
-        void requestRegistered(BaseMainFragment loginFragment);
     }
 
     interface View extends MainContract.MainBaseFragView {

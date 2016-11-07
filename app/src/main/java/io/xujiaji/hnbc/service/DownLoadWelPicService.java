@@ -10,7 +10,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.utils.FileUtils;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.SharedPreferencesUtil;
@@ -29,7 +28,7 @@ public class DownLoadWelPicService extends IntentService {
         if (imgUrl == null) {
             return;
         }
-        File cache = new File(FileUtils.getAppCacheDir(App.getAppContext()) + "/" + getImgName(imgUrl));
+        File cache = new File(FileUtils.getAppCacheDir() + "/" + getImgName(imgUrl));
         if (cache.exists()) {
             SharedPreferencesUtil.saveWelPicPath(cache.getPath());
             return;

@@ -39,5 +39,8 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="user_info_head_width">120dp</dimen>
     <dimen name="user_info_height">290dp</dimen>
+    <dimen name="pop_item_size">36dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="small_margin_min">4dp</dimen>
 
 </resources>

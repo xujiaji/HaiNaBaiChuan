@@ -3,6 +3,7 @@ package io.xujiaji.hnbc.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,9 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
+import io.xujiaji.hnbc.config.C;
+import io.xujiaji.hnbc.model.entity.PopupItem;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ScreenUtils;
 
@@ -83,6 +93,48 @@ public class PupList extends PopupWindow {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
+            rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            final List<PopupItem> data = new ArrayList<>();
+            data.add(new PopupItem("编辑", C.pupmenu.EDIT, R.drawable.ic_border_color_black_24dp));
+            data.add(new PopupItem("退出登录", C.pupmenu.EXIT_LOGIN, R.drawable.ic_keyboard_tab_black_24dp));
+            rv.setAdapter(new PupAdapter(data));
+            rv.addOnItemTouchListener(new OnItemClickListener() {
+                @Override
+                public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                    if (listener != null) {
+                        listener.itemClick(data.get(i).getId());
+                    }
+                }
+            });
         }
+
+        private PupListener listener;
+
+        public void setListener(PupListener listener) {
+            this.listener = listener;
+        }
+    }
+
+    private static class PupAdapter extends BaseQuickAdapter<PopupItem, BaseViewHolder>{
+
+        public PupAdapter(List<PopupItem> data) {
+            super(R.layout.item_popup, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder baseViewHolder, PopupItem popupItem) {
+//            MaterialRippleHelper.ripple(baseViewHolder.getConvertView());
+            baseViewHolder.setImageResource(R.id.imgMark, popupItem.getImgRes());
+            baseViewHolder.setText(R.id.tvItem, popupItem.getName());
+        }
+    }
+
+
+    public void setListener(PupListener listener) {
+        viewHolder.setListener(listener);
+    }
+
+    public interface PupListener {
+        void itemClick(int itemId);
     }
 }

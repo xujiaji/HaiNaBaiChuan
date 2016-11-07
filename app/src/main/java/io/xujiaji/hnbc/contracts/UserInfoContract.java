@@ -12,16 +12,17 @@ import io.xujiaji.hnbc.model.entity.User;
 public interface UserInfoContract {
 
     interface Presenter extends Contract.BasePresenter {
+        void requestExitLogin();
         void requestUserInfo();
         void requestEdit(Context context);
         void requestDisplayHeadPic(ImageView imgHead, String url);
         void requestDisplayUserInfoBg(ImageView imgUserInfoBg, String url);
         void requestBack();
-        void requestOpenMore(android.view.View view);
     }
 
     interface View extends Contract.BaseView {
         void displayUser(User user);
+        void exitLoginSuccess();
     }
 
 }

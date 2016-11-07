@@ -1,13 +1,12 @@
 package io.xujiaji.hnbc.presenters;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
 import io.xujiaji.hnbc.contracts.UserInfoContract;
 import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
-import io.xujiaji.hnbc.widget.PupList;
 
 /**
  * Created by jiana on 16-11-6.
@@ -15,12 +14,18 @@ import io.xujiaji.hnbc.widget.PupList;
 
 public class UserInfoPresenter extends BasePresenter implements UserInfoContract.Presenter {
     private UserInfoContract.View view = null;
-    private PupList pupList;
 
     public UserInfoPresenter(UserInfoContract.View view) {
         super(view);
         this.view = view;
     }
+
+    @Override
+    public void requestExitLogin() {
+        NetRequest.Instance().exitLogin();
+        view.exitLoginSuccess();
+    }
+
 
     @Override
     public void requestUserInfo() {
@@ -48,14 +53,6 @@ public class UserInfoPresenter extends BasePresenter implements UserInfoContract
     }
 
     @Override
-    public void requestOpenMore(View view) {
-        if (pupList == null) {
-            pupList = new PupList(view.getContext());
-        }
-        pupList.show(view);
-    }
-
-    @Override
     public void start() {
         requestUserInfo();
     }
@@ -63,6 +60,5 @@ public class UserInfoPresenter extends BasePresenter implements UserInfoContract
     @Override
     public void end() {
         view = null;
-        pupList = null;
     }
 }

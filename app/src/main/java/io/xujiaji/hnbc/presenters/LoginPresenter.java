@@ -1,11 +1,8 @@
 package io.xujiaji.hnbc.presenters;
 
 import cn.bmob.v3.exception.BmobException;
-import io.xujiaji.hnbc.activities.MainActivity;
-import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
-import io.xujiaji.hnbc.fragments.BaseMainFragment;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
@@ -74,12 +71,6 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
     @Override
     public void requestWeiXin() {
         ToastUtil.getInstance().showShortT("未知区域：微信登录");
-    }
-
-    @Override
-    public void requestRegistered(final BaseMainFragment loginFragment) {
-        final MainActivity mainActivity = (MainActivity) loginFragment.getActivity();
-        mainActivity.goToFragment(C.fragment.REGISTER);
     }
 
 }

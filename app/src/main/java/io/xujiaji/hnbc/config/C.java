@@ -113,4 +113,19 @@ public class C {
          */
         public static final String SET = "set";
     }
+
+    /**
+     * 弹出菜单id号
+     */
+    public static class pupmenu {
+        /**
+         * 编辑
+         */
+        public static final int EDIT = 0;
+        /**
+         * 退出登陆
+         */
+        public static final int EXIT_LOGIN = 1;
+
+    }
 }

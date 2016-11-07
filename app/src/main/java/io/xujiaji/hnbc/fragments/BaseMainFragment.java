@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.view.ViewTreeObserver;
 
 import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.TransitionHelper;
 
 /**
@@ -22,11 +23,13 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
     private boolean isDeleted = false;
     //是否同意返回
     private boolean isAgreeBlack = true;
+
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
             super.onAnimationEnd(animation);
             isAgreeBlack = true;
+            LogUtil.e2("Fragment Animate end");
         }
     };
 
@@ -47,10 +50,6 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
      * 打开菜单时Fragment向上侧身移动
      */
     public void animateTOMenu() {
-//        if (!isAgreeBlack) {
-//            return;
-//        }
-//        isAgreeBlack = false;
         TransitionHelper.animateToMenuState(getView(), showShadowListener);
     }
 
@@ -58,11 +57,6 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
      * 关闭菜单时，Fragment恢复
      */
     public void revertFromMenu() {
-//        if (!isAgreeBlack) {
-//            return;
-//        }
-//        LogUtil.e2(getClass().getSimpleName() + " revertFromMenu()");
-//        isAgreeBlack = false;
         TransitionHelper.startRevertFromMenu(getRootView(), showShadowListener);
     }
 
@@ -90,6 +84,7 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
         if (!introAnimate) {
             return;
         }
+        LogUtil.e2("Fragment Animate introAnimate start");
         rootView.setTranslationY(0);
         isAgreeBlack = false;
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -119,7 +114,4 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
         return !isAgreeBlack;
     }
 
-    public boolean isAgreeBlack() {
-        return isAgreeBlack;
-    }
 }

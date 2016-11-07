@@ -1,13 +1,17 @@
 package io.xujiaji.hnbc.presenters;
 
 import android.os.Handler;
+import android.widget.ImageView;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.MainPersonMsg;
 import io.xujiaji.hnbc.model.entity.MainTag;
+import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.hnbc.utils.ImgLoadUtil;
 
 /**
  * Created by jiana on 16-7-22.
@@ -61,6 +65,15 @@ public class MainFragPresenter extends BasePresenter implements MainContract.Mai
     @Override
     public List<MainPersonMsg> getPersonMsgs() {
         return DataFiller.getPersonMsgs();
+    }
+
+    @Override
+    public void requestLoadHead(final ImageView head) {
+        User user = BmobUser.getCurrentUser(User.class);
+        if (user == null) {
+            return;
+        }
+        ImgLoadUtil.loadHead(head.getContext(), head, user.getHeadPic());
     }
 
 

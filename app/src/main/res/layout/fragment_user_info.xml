@@ -20,7 +20,8 @@
                 android:id="@+id/imgUserInfoBg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:alpha="0.8"/>
 
             <ImageView
                 android:id="@+id/imgHead"
@@ -33,6 +34,7 @@
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:id="@+id/tvUsername"
                 style="@style/userInfoTextStyle"
+                android:layout_marginTop="@dimen/small_margin"
                 android:layout_below="@+id/imgHead"
                 android:text="\@account" />
 
@@ -40,15 +42,16 @@
                 android:id="@+id/tvNickname"
                 style="@style/userInfoTextStyle"
                 android:layout_below="@+id/tvUsername"
+                android:layout_marginTop="@dimen/small_margin_min"
                 android:text="昵称" />
 
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:id="@+id/tvSign"
                 style="@style/userInfoTextStyle"
                 android:layout_below="@+id/tvNickname"
-                android:maxWidth="160dp"
+                android:layout_marginTop="@dimen/small_margin_min"
+                android:maxWidth="280dp"
                 android:maxLines="3"
-                android:text="签的骄傲是否.........................................................."
                 android:textSize="@dimen/text_size_level5" />
 
         </RelativeLayout>
