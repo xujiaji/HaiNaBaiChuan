@@ -6,6 +6,7 @@ import java.util.List;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contracts.MainContract;
+import io.xujiaji.hnbc.model.data.DataFiller;
 
 /**
  * Created by jiana on 16-7-22.
@@ -27,6 +28,11 @@ public class MainPresenter extends BasePresenter implements MainContract.Present
     @Override
     public List<String> getMenuData() {
         return menuData;
+    }
+
+    @Override
+    public boolean checkLocalUser() {
+        return DataFiller.getLocalUser() != null;
     }
 
 

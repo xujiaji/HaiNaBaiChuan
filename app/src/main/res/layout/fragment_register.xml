@@ -32,39 +32,4 @@
             </ScrollView>
         </android.support.v7.widget.CardView>
     </no.agens.depth.lib.DepthLayout>
-
-    <no.agens.depth.lib.DepthLayout
-        android:id="@+id/dl2"
-        android:layout_width="@dimen/fab_size"
-        android:layout_height="@dimen/fab_size"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="28dp"
-        android:layerType="hardware"
-        app:custom_elevation="1dp"
-        app:edge_color="@color/fab"
-        app:is_circle="true">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btnRegistered"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:clickable="true"
-            app:elevation="0dp"
-            android:layerType="hardware"
-            android:src="@drawable/ic_send_black_24dp"
-            app:backgroundTint="@color/theme_red"
-            app:borderWidth="1dp"
-            app:pressedTranslationZ="0dp"/>
-
-        <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
-            android:id="@+id/google_progress"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            app:type="folding_circles" />
-    </no.agens.depth.lib.DepthLayout>
-
 </no.agens.depth.lib.DepthRendrer>

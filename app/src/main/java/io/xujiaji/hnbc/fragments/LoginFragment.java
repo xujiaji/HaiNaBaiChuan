@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
 import io.xujiaji.hnbc.presenters.LoginPresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -40,7 +41,6 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
      * 当注册后来后设置这个值
      */
     private String registerUsername = null;
-    private boolean openMenu = false;
 
     public void setRegisterUsername(String name) {
         registerUsername = name;
@@ -54,15 +54,6 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
         }
         username.setText(registerUsername);
     }
-
-    //    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if (!hidden) {
-//            LogUtil.e3("hidden = " + hidden);
-//            introAnimate();
-//        }
-//    }
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -130,30 +121,14 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
 
     @Override
     public void callLoginSuccess() {
-        LogUtil.e3("");
         onLogging(false);
+        ToastUtil.getInstance().showLongT("登陆成功！");
     }
 
     @Override
     public void callLoginFail(final String failMassage) {
         LogUtil.e3("");
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.getInstance().showShortT(failMassage);
-                        onLogging(false);
-                    }
-                });
-            }
-        }.start();
+        ToastUtil.getInstance().showLongT(failMassage);
     }
 
 
@@ -187,7 +162,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
             return true;
         }
         LogUtil.e3("clickBack");
-        ((MainActivity) getActivity()).menuItemStatus(MainActivity.MENU_HOME);
+        ((MainActivity) getActivity()).menuItemStatus(C.M_Menu.HOME);
         return true;
     }
 

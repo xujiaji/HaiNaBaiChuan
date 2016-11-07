@@ -12,8 +12,9 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
-import io.xujiaji.hnbc.config.Constant;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
+import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.presenters.RegisterPresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ToastUtil;
@@ -63,13 +64,13 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rbMan:
-                        presenter.sex(Constant.SEX_MAN);
+                        presenter.sex(C.SEX_MAN);
                         break;
                     case R.id.rbWoman:
-                        presenter.sex(Constant.SEX_WOMAN);
+                        presenter.sex(C.SEX_WOMAN);
                         break;
                     case R.id.rbSexSecret:
-                        presenter.sex(Constant.SEX_SECRET);
+                        presenter.sex(C.SEX_SECRET);
                         break;
                 }
             }
@@ -84,8 +85,7 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
     public void callRegisterSuccess(String username) {
         onRegister(false);
         ToastUtil.getInstance().showLongT("注册成功！\n去登陆吧！");
-        final MainActivity mainActivity = (MainActivity) getActivity();
-        LoginFragment lf = (LoginFragment) mainActivity.getBaseMainFragments()[MainActivity.MENU_USER_INFO];
+        LoginFragment lf = (LoginFragment) FragmentFactory.getFrag(C.fragment.LOGIN);
         lf.setRegisterUsername(username);
         clickBack();
     }
@@ -173,10 +173,9 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
         if (super.clickBack()) {
             return true;
         }
+        setDeleted(true);
         final MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.fragGoToFrag(mainActivity.getBaseMainFragments()[MainActivity.MENU_USER_INFO],
-                this,
-                true);
+        mainActivity.goToFragment(C.fragment.LOGIN);
         return true;
     }
 

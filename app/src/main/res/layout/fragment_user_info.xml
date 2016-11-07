@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<no.agens.depth.lib.DepthRendrer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layerType="hardware">
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/root_dl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:layerType="hardware">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_info_height"
+            android:layerType="hardware">
+            <ImageView
+                android:id="@+id/imgUserInfoBg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/imgHead"
+                android:layout_width="@dimen/user_info_head_width"
+                android:layout_height="@dimen/user_info_head_width"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="?actionBarSize"
+                android:src="@drawable/head" />
+
+            <io.xujiaji.hnbc.widget.TextViewNew
+                android:id="@+id/tvUsername"
+                style="@style/userInfoTextStyle"
+                android:layout_below="@+id/imgHead"
+                android:text="\@account" />
+
+            <io.xujiaji.hnbc.widget.TextViewNew
+                android:id="@+id/tvNickname"
+                style="@style/userInfoTextStyle"
+                android:layout_below="@+id/tvUsername"
+                android:text="昵称" />
+
+            <io.xujiaji.hnbc.widget.TextViewNew
+                android:id="@+id/tvSign"
+                style="@style/userInfoTextStyle"
+                android:layout_below="@+id/tvNickname"
+                android:maxWidth="160dp"
+                android:maxLines="3"
+                android:text="签的骄傲是否.........................................................."
+                android:textSize="@dimen/text_size_level5" />
+
+        </RelativeLayout>
+    </no.agens.depth.lib.DepthLayout>
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/dl2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/user_info_height"
+        android:background="@color/white"
+        android:layerType="hardware"
+        app:custom_elevation="1dp">
+
+    </no.agens.depth.lib.DepthLayout>
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/fab_container"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@+id/status"
+        android:fitsSystemWindows="true"
+        android:layerType="hardware"
+        app:custom_elevation="1dp"
+        app:edge_color="#0000">
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_chevron_left_black_24dp" />
+    </no.agens.depth.lib.DepthLayout>
+
+    <no.agens.depth.lib.DepthLayout
+        android:id="@+id/fab_right"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@+id/status"
+        android:fitsSystemWindows="true"
+        android:layerType="hardware"
+        android:layout_alignParentEnd="true"
+        app:custom_elevation="1dp"
+        app:edge_color="#0000">
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_black_24dp" />
+    </no.agens.depth.lib.DepthLayout>
+
+
+    <include layout="@layout/include_status" />
+</no.agens.depth.lib.DepthRendrer>

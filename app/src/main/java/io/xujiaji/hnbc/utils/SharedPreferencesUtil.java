@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import io.xujiaji.hnbc.app.App;
-import io.xujiaji.hnbc.config.Constant;
+import io.xujiaji.hnbc.config.C;
 
 /**
  * Created by jiana on 16-7-25.
@@ -25,7 +25,7 @@ public class SharedPreferencesUtil {
     }
 
     public static SharedPreferences get() {
-        return App.getAppContext().getSharedPreferences(Constant.CFile.XML_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        return App.getAppContext().getSharedPreferences(C.CFile.XML_PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
     public static SharedPreferences.Editor getEdit() {

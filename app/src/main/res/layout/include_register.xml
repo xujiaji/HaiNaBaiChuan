@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,18 +9,13 @@
     android:paddingBottom="@dimen/fab_size"
     tools:showIn="@layout/fragment_register">
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:padding="30dp"
-        android:src="@mipmap/big_icon" />
-
     <io.xujiaji.hnbc.widget.TextViewNew
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/registered"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="32sp" />
+        android:textSize="@dimen/text_size_level1" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/usernameWrapper"
@@ -49,21 +45,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/rbMan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/man"/>
+            android:text="@string/man" />
+
         <RadioButton
             android:id="@+id/rbWoman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/woman"/>
+            android:text="@string/woman" />
+
         <RadioButton
             android:id="@+id/rbSexSecret"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sex_secret"/>
+            android:text="@string/sex_secret" />
     </RadioGroup>
 
     <android.support.design.widget.TextInputLayout
@@ -111,4 +110,42 @@
             android:hint="再次输入密码"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
+
+    <FrameLayout
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layerType="hardware">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnRegistered"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:clickable="true"
+            android:layerType="hardware"
+            android:src="@drawable/ic_send_black_24dp"
+            app:backgroundTint="@color/theme_red"
+            app:borderWidth="1dp"
+            app:elevation="0dp"
+            app:rippleColor="@color/fab_highlight"
+            app:pressedTranslationZ="0dp" />
+
+        <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
+            android:id="@+id/google_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:type="folding_circles" />
+    </FrameLayout>
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:text="@string/welcome_register"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_level1"
+        android:layout_marginTop="80dp"/>
+
 </LinearLayout>

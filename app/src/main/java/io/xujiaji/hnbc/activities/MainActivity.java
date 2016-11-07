@@ -1,7 +1,8 @@
 package io.xujiaji.hnbc.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
+import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
-import io.xujiaji.hnbc.fragments.LoginFragment;
-import io.xujiaji.hnbc.fragments.MainFragment;
 import io.xujiaji.hnbc.presenters.MainPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -27,37 +28,21 @@ import no.agens.depth.lib.tween.interpolators.ExpoIn;
 import no.agens.depth.lib.tween.interpolators.QuintOut;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
-    /**
-     * Fragment数量
-     */
-    private static final int FRAGMENT_NUM = 5;
-    /**
-     * 首页
-     */
-    public static final int MENU_HOME = 0;
-    /**
-     * 用户信息
-     */
-    public static final int MENU_USER_INFO = 1;
-    /**
-     * 收藏
-     */
-    public static final int MENU_COLLECT = 2;
-    /**
-     * 发布
-     */
-    public static final int MENU_RELEASE = 3;
-    /**
-     * 设置
-     */
-    public static final int MENU_SET = 4;
-    private BaseMainFragment[] baseFragments;
     //当前Fragment
     private BaseMainFragment currentFragment;
     private static boolean isMenuVisible = false;
     @BindView(R.id.menu_container)
     ViewGroup menu;
-    private int curretMenuIndex = 0;
+    private ObjectAnimator translationOpen, translationClose;
+
+    private AnimatorListenerAdapter animListener = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            LogUtil.e3("isMenuVisible = " + isMenuVisible);
+            isMenuVisible = !isMenuVisible;
+        }
+    };
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -67,14 +52,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void onInit() {
         super.onInit();
-        baseFragments = new BaseMainFragment[FRAGMENT_NUM];
-        MainFragment fragment = MainFragment.newInstance();
-        currentFragment = fragment;
-        baseFragments[MENU_HOME] = fragment;
-        addFragment(fragment, R.id.fragment_container);
+        currentFragment = FragmentFactory.newFragment(C.fragment.HOME);
+        addFragment(currentFragment, R.id.fragment_container);
         setupMenu();
     }
-
 
     @Override
     protected int getContentId() {
@@ -91,19 +72,20 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         menu.setTranslationY(20000);
     }
 
+
+
     @Override
     public void menuOpen() {
         if (isMenuVisible) {
             return;
         }
         isMenuVisible = true;
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(menu, View.TRANSLATION_Y, menu.getHeight(), 0);
-        translationY.setDuration(1000);
-        translationY.setInterpolator(new QuintOut());
-        translationY.setStartDelay(150);
-        translationY.start();
-//        selectMenuItem(curretMenuIndex, ((TextView) menu.getChildAt(curretMenuIndex).findViewById(R.id.item_text)).getCurrentTextColor());
-//        ((MenuAnimation) currentFragment).animateTOMenu();
+        translationOpen = ObjectAnimator.ofFloat(menu, View.TRANSLATION_Y, menu.getHeight(), 0);
+        translationOpen.setDuration(1000);
+        translationOpen.setInterpolator(new QuintOut());
+        translationOpen.setStartDelay(150);
+//        translationOpen.addListener(animListener);
+        translationOpen.start();
         currentFragment.animateTOMenu();
     }
 
@@ -113,37 +95,36 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             return;
         }
         isMenuVisible = false;
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(menu, View.TRANSLATION_Y, menu.getHeight());
-        translationY.setDuration(750);
-        translationY.setInterpolator(new ExpoIn());
-        translationY.start();
+        translationClose = ObjectAnimator.ofFloat(menu, View.TRANSLATION_Y, menu.getHeight());
+        translationClose.setDuration(750);
+        translationClose.setInterpolator(new ExpoIn());
+//        translationClose.addListener(animListener);
+        translationClose.start();
+    }
+
+    @Override
+    public void menuToggle() {
+        if (isMenuVisible) {
+            menuClose();
+        } else {
+            menuOpen();
+        }
     }
 
     @Override
     public void clickHome() {
         LogUtil.e3("clickHome()");
-        currentFragment.exitFromMenu();
-        MainFragment mainFragment = (MainFragment) baseFragments[MENU_HOME];
-        goToFragment(mainFragment);
-        menuClose();
+        goToFragment(C.fragment.HOME);
     }
 
     @Override
     public void clickUserInfo() {
-        LogUtil.e3("clickUserInfo()");
-        currentFragment.exitFromMenu();
-        LoginFragment loginFragment;
-        if (baseFragments[MENU_USER_INFO] == null) {
-            loginFragment = LoginFragment.newInstance();
-            loginFragment.setIntroAnimate(true);
+        LogUtil.e3("clickUserInfo() " + presenter.checkLocalUser());
+        if (presenter.checkLocalUser()) {
+            goToFragment(C.fragment.USER_INFO);
         } else {
-            loginFragment = (LoginFragment) baseFragments[MENU_USER_INFO];
-            loginFragment.setIntroAnimate(true);
-            loginFragment.introAnimate();
+            goToFragment(C.fragment.LOGIN);
         }
-        goToFragment(loginFragment);
-        baseFragments[MENU_USER_INFO] = loginFragment;
-        menuClose();
     }
 
     @Override
@@ -202,31 +183,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
         }
 
-        LogUtil.e3("curretMenuIndex = " + curretMenuIndex);
-        LogUtil.e3("position = " + position);
-
-        if (position == curretMenuIndex) {
+        if (FragmentFactory.menuName(position).contains(currentFragment.getClass().getSimpleName())) {
+//            menuClose();
+//            currentFragment.revertFromMenu();
             onBackPressed();
             return;
         }
         switch (position) {
-            case MENU_HOME:
+            case C.M_Menu.HOME:
                 clickHome();
                 break;
-            case MENU_USER_INFO:
+            case C.M_Menu.USER_INFO:
                 clickUserInfo();
                 break;
-            case MENU_COLLECT:
+            case C.M_Menu.COLLECT:
                 clickCollect();
                 break;
-            case MENU_RELEASE:
+            case C.M_Menu.RELEASE:
                 clickRelease();
                 break;
-            case MENU_SET:
+            case C.M_Menu.SET:
                 clickSet();
                 break;
         }
-        curretMenuIndex = position;
     }
 
     @Override
@@ -243,9 +222,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         }
     }
 
-    public BaseMainFragment[] getBaseMainFragments() {
-        return baseFragments;
-    }
 
     public static boolean isMenuVisible() {
         return isMenuVisible;
@@ -254,54 +230,33 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     /**
      * 跳转到另一个fragment
      *
-     * @param newFragment
+     * @param fragmentKey fragment对应的key值
      */
-    public void goToFragment(final BaseMainFragment newFragment) {
-        final Fragment oldFragment = currentFragment;
+    public void goToFragment(String fragmentKey) {
+        BaseMainFragment newFragment = FragmentFactory.getOrCreate(fragmentKey);
+        currentFragment.exitFromMenu();
+        final BaseMainFragment oldFragment = currentFragment;
         currentFragment = newFragment;
-        if (newFragment.isAdded()) {
-            LogUtil.e3("已经添加newFragment，显示");
-            getFragmentManager().beginTransaction().show(newFragment).commit();
-            newFragment.setIntroAnimate(true);
-            newFragment.introAnimate();
-        } else {
-            LogUtil.e3("没有添加newFragment，添加显示");
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, newFragment).commit();
-        }
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LogUtil.e3("隐藏oldFragment");
-                getFragmentManager().beginTransaction().hide(oldFragment).commit();
-            }
-        }, 2000);
-    }
-
-    /**
-     * Fragment跳转Fragment
-     * @param newFragment 要跳转的Fragment
-     * @param oldFragment 当前的Fragment
-     * @param delOldFrag 是否把当前的Fragment删除
-     */
-    public void fragGoToFrag(BaseMainFragment newFragment, final BaseMainFragment oldFragment, final boolean delOldFrag) {
-        currentFragment = newFragment;
-        oldFragment.exitFromMenu();
         newFragment.setIntroAnimate(true);
         if (newFragment.isAdded()) {
+            LogUtil.e3("已经添加" + newFragment.getClass().getSimpleName() + "，显示");
             getFragmentManager().beginTransaction().show(newFragment).commit();
             newFragment.introAnimate();
         } else {
+            LogUtil.e3("没有添加" + newFragment.getClass().getSimpleName() + "，添加显示");
             getFragmentManager().beginTransaction().add(R.id.fragment_container, newFragment).commit();
         }
         getWindow().getDecorView().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (delOldFrag) {
+                if (oldFragment.isDeleted()) {
                     getFragmentManager().beginTransaction().remove(oldFragment).commit();
+                    FragmentFactory.rmFrag(oldFragment.getClass().getSimpleName());
                 } else {
                     getFragmentManager().beginTransaction().hide(oldFragment).commit();
                 }
             }
         }, 2000);
+        menuClose();
     }
 }

@@ -1,7 +1,7 @@
 package io.xujiaji.hnbc.presenters;
 
 import cn.bmob.v3.exception.BmobException;
-import io.xujiaji.hnbc.config.Constant;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.check.LoginCheck;
@@ -29,7 +29,7 @@ public class RegisterPresenter extends BasePresenter implements RegisterContract
     @Override
     public void start() {
         user = new User();
-        user.setSex(Constant.SEX_SECRET);
+        user.setSex(C.SEX_SECRET);
     }
 
     @Override

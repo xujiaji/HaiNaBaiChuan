@@ -3,23 +3,33 @@ package io.xujiaji.hnbc.model.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.xujiaji.hnbc.config.Constant;
+import cn.bmob.v3.BmobUser;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.model.entity.MainPersonMsg;
 import io.xujiaji.hnbc.model.entity.MainTag;
+import io.xujiaji.hnbc.model.entity.User;
 
 /**
  * Created by jiana on 16-11-4.
  */
 
 public class DataFiller {
+    /**
+     * 获取首页tag标签集合
+     * @return
+     */
     public static List<MainTag> getTagsData() {
         List<MainTag> mainTags = new ArrayList<>();
-        for (int i = 0; i < Constant.MAIN_TAG.length; i++) {
-            mainTags.add(new MainTag(Constant.MAIN_TAG[i]));
+        for (int i = 0; i < C.MAIN_TAG.length; i++) {
+            mainTags.add(new MainTag(C.MAIN_TAG[i]));
         }
         return mainTags;
     }
 
+    /**
+     * 获取Person列表
+     * @return
+     */
     public static List<MainPersonMsg> getPersonMsgs() {
         List<MainPersonMsg> personMsgs = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -31,5 +41,12 @@ public class DataFiller {
             personMsgs.add(mpm);
         }
         return personMsgs;
+    }
+
+    /**
+     * 获取本地用户信息
+     */
+    public static User getLocalUser() {
+        return BmobUser.getCurrentUser(User.class);
     }
 }

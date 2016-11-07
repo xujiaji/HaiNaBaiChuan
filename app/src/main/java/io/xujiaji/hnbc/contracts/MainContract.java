@@ -11,12 +11,14 @@ import io.xujiaji.hnbc.model.entity.MainTag;
 public interface MainContract {
     interface Presenter extends Contract.BasePresenter {
         List<String> getMenuData();
+        boolean checkLocalUser();
     }
 
     interface View extends Contract.BaseView {
         void setupMenu();
         void menuOpen();
         void menuClose();
+        void menuToggle();
         void clickHome();
         void clickUserInfo();
         void clickCollect();

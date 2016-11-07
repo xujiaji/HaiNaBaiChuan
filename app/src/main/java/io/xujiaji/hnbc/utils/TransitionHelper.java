@@ -46,6 +46,10 @@ public class TransitionHelper {
         if (dl != null) {
             objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 210);
         }
+        dl = getLayout(root, R.id.fab_right);
+        if (dl != null) {
+            objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 190);
+        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
             objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 190);
@@ -232,6 +236,10 @@ public class TransitionHelper {
         if (dl != null) {
             valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 250, false);
         }
+        dl = getLayout(root, R.id.fab_right);
+        if (dl != null) {
+            valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
+        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
             valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
@@ -273,6 +281,10 @@ public class TransitionHelper {
         dl = getLayout(root, R.id.status);
         if (dl != null) {
             continueOutToRight(dl, MOVE_Y_STEP * 2, 80);
+        }
+        dl = getLayout(root, R.id.fab_right);
+        if (dl != null) {
+            continueOutToRight(dl, MOVE_Y_STEP * 2f, 40);
         }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
@@ -323,30 +335,38 @@ public class TransitionHelper {
 
     public static void startRevertFromMenu(View root, AnimatorListenerAdapter animatorListenerAdapter) {
         DepthLayout dl = getLayout(root, R.id.root_dl);
+        ObjectAnimator oa = null;
         if (dl != null) {//exitAnimate(dl, 0, 30f, 15, 190, false);
-            revertFromMenu(dl, 30f, 10, 0);
+            oa = revertFromMenu(dl, 30f, 10, 0);
         }
         dl = getLayout(root, R.id.appbar);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP, 20f, 30, 170, false);
-            revertFromMenu(dl, 20f, 0, 0);
+            oa = revertFromMenu(dl, 20f, 0, 0);
         }
         dl = getLayout(root, R.id.status);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 250, false);
-            revertFromMenu(dl, 20f, 40, 2);
+            oa = revertFromMenu(dl, 20f, 40, 2);
+        }
+        dl = getLayout(root, R.id.fab_right);
+        if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
+            oa = revertFromMenu(dl, 20f, 20, 6);
         }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
-            revertFromMenu(dl, 20f, 20, 6);
+            oa = revertFromMenu(dl, 20f, 20, 6);
         }
         dl = getLayout(root, R.id.dl2);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP, 20f, 60, 230, false);
-            revertFromMenu(dl, 20f, 30, 1);
+            oa = revertFromMenu(dl, 20f, 30, 1);
         }
         dl = getLayout(root, R.id.dl3);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 250, false).addListener(onMenuAnimFinished);
-            revertFromMenu(dl, 20f, 40, 2).addListener(animatorListenerAdapter);
+            oa = revertFromMenu(dl, 20f, 40, 2);
         }
 
+        if (oa != null) {
+            oa.addListener(animatorListenerAdapter);
+        }
 //        ObjectAnimator translationY = ObjectAnimator.ofFloat(root, View.TRANSLATION_Y, -90f * root.getResources().getDisplayMetrics().density).setDuration(DURATION);
 //        translationY.setInterpolator(VALUEinterpolator);
 //        translationY.start();

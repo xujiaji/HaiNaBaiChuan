@@ -39,7 +39,7 @@
             android:layout_height="?actionBarSize"
             android:layout_alignParentBottom="true"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_person_black_24dp" />
+            android:src="@drawable/head" />
     </no.agens.depth.lib.DepthLayout>
 
     <include layout="@layout/include_status" />

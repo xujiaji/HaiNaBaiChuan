@@ -1,10 +1,15 @@
 package io.xujiaji.hnbc.presenters;
 
+import cn.bmob.v3.exception.BmobException;
 import io.xujiaji.hnbc.activities.MainActivity;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
+import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
-import io.xujiaji.hnbc.fragments.RegisterFragment;
 import io.xujiaji.hnbc.model.check.LoginCheck;
+import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.ToastUtil;
 
 /**
@@ -37,12 +42,23 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
             view.nameFormatError(nameErr);
             return;
         }
+
         if (passwordErr != null) {
             view.passwordFormatError(passwordErr);
             return;
         }
-        ToastUtil.getInstance().showShortT("未知区域：登录功能");
-        view.callLoginFail("登录失败，未开发区域！");
+
+        NetRequest.Instance().login(name, MD5Util.getMD5(password), new NetRequest.RequestListener<User>() {
+            @Override
+            public void success(User user) {
+                view.callLoginSuccess();
+            }
+
+            @Override
+            public void error(BmobException err) {
+                view.callLoginFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+            }
+        });
     }
 
     @Override
@@ -62,9 +78,8 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
     @Override
     public void requestRegistered(final BaseMainFragment loginFragment) {
-        loginFragment.exitFromMenu();
         final MainActivity mainActivity = (MainActivity) loginFragment.getActivity();
-        mainActivity.fragGoToFrag(RegisterFragment.newInstance(), loginFragment, false);
+        mainActivity.goToFragment(C.fragment.REGISTER);
     }
 
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 
 import cn.bmob.v3.Bmob;
-import io.xujiaji.hnbc.config.Constant;
+import io.xujiaji.hnbc.config.C;
 
 /**
  * application类
@@ -21,7 +21,7 @@ public class App extends Application {
         mContext = this.getApplicationContext();
         initTypeface();
         try {
-            Bmob.initialize(this, Constant.CBmob.BMOB_ID);
+            Bmob.initialize(this, C.CBmob.BMOB_ID);
         } catch (Exception e) {
             e.printStackTrace();
         }

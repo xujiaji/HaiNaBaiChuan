@@ -14,8 +14,14 @@ import io.xujiaji.hnbc.utils.TransitionHelper;
 public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends BaseFragment<T> {
     //是否是打开LoginFragment
     private boolean introAnimate = false;
+    /**
+     * 是否将Fragment删除<br>
+     * 代表着这个Fragment在跳转到另一个Fragment时会被删除掉<br>
+     * 处理这个逻辑的方法在MainActivity的goToFragment()方法中
+     */
+    private boolean isDeleted = false;
     //是否同意返回
-    private static boolean isAgreeBlack = true;
+    private boolean isAgreeBlack = true;
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
@@ -41,18 +47,22 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
      * 打开菜单时Fragment向上侧身移动
      */
     public void animateTOMenu() {
-        TransitionHelper.animateToMenuState(getView(), new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
-        });
+//        if (!isAgreeBlack) {
+//            return;
+//        }
+//        isAgreeBlack = false;
+        TransitionHelper.animateToMenuState(getView(), showShadowListener);
     }
 
     /**
      * 关闭菜单时，Fragment恢复
      */
     public void revertFromMenu() {
+//        if (!isAgreeBlack) {
+//            return;
+//        }
+//        LogUtil.e2(getClass().getSimpleName() + " revertFromMenu()");
+//        isAgreeBlack = false;
         TransitionHelper.startRevertFromMenu(getRootView(), showShadowListener);
     }
 
@@ -93,6 +103,14 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
 
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     /**
      * 处理点击返回，处理点击返回键时，动画没有执行完，则不执行操作
      * @return
@@ -100,10 +118,8 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
     public boolean clickBack() {
         return !isAgreeBlack;
     }
-//    void exitFromMenu();
-//    void animateTOMenu();
-//    void revertFromMenu();
-//    void introAnimate();
-//    boolean getIntroAnimate();
-//    void setIntroAnimate(boolean introAnimate);
+
+    public boolean isAgreeBlack() {
+        return isAgreeBlack;
+    }
 }

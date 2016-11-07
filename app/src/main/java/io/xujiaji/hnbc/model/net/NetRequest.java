@@ -5,8 +5,10 @@ import android.content.Intent;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
 import io.xujiaji.hnbc.model.entity.User;
@@ -60,6 +62,25 @@ public class NetRequest {
      */
     public void userRegister(User user, final RequestListener<User> listener) {
         user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    listener.success(user);
+                } else {
+                    listener.error(e);
+                }
+            }
+        });
+    }
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @param listener
+     */
+    public void login(String username, String password, final RequestListener<User> listener) {
+        BmobUser.loginByAccount(username, password, new LogInListener<User>() {
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
