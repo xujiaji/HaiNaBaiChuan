@@ -26,6 +26,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':depth')
+    compile project(':crop')
+    compile project(':dialog')
     testCompile "junit:junit:$rootProject.junitVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
@@ -49,6 +51,10 @@ dependencies {
     compile "cn.finalteam:galleryfinal:$rootProject.galleryfinalVersion"
     compile "com.jpardogo.googleprogressbar:library:$rootProject.googleprogressbarVersion"
     compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+    compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
+    compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+
 }
 
 repositories {

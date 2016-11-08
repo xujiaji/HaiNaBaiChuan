@@ -52,4 +52,5 @@ ext{
     eventBusVersion='3.0.0'
     galleryfinalVersion='1.4.8.7'
     googleprogressbarVersion='1.1.0'
+    bottomsheetVersion='1.5.2'
 }

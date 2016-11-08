@@ -5,6 +5,7 @@ import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
 import io.xujiaji.hnbc.fragments.LoginFragment;
 import io.xujiaji.hnbc.fragments.MainFragment;
 import io.xujiaji.hnbc.fragments.RegisterFragment;
@@ -19,7 +20,7 @@ public class FragmentFactory {
     /**
      * 主页Fragment数量
      */
-    private static final int FRAGMENT_NUM = 7;
+    private static final int FRAGMENT_NUM = 8;
 
     /**
      * 统一管理MainActivity中所有Fragment
@@ -45,6 +46,9 @@ public class FragmentFactory {
                 break;
             case C.fragment.USER_INFO:
                 newFragment = UserInfoFragment.newInstance();
+                break;
+            case C.fragment.EDIT_USER_INFO:
+                newFragment = EditUserInfoFragment.newInstance();
                 break;
             default:
                 break;
@@ -105,5 +109,16 @@ public class FragmentFactory {
     public static void rmFrag(String key) {
         MAIN_WIND_FRAG.remove(key);
         LogUtil.e3("remove key = " + key + "; value = " + MAIN_WIND_FRAG.get(key));
+    }
+
+    /**
+     * 更新头像
+     */
+    public static void updatedHeadPic() {
+        for (String key : MAIN_WIND_FRAG.keySet()) {
+            BaseMainFragment fragment = MAIN_WIND_FRAG.get(key);
+            if (fragment == null) continue;
+            fragment.setUpdatedHeadPic(true);
+        }
     }
 }

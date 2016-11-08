@@ -42,5 +42,6 @@
     <dimen name="pop_item_size">36dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="small_margin_min">4dp</dimen>
+    <dimen name="item_edit_user_info_height">48dp</dimen>
 
 </resources>

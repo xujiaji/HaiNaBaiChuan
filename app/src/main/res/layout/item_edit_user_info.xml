@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/small_margin"
+    android:layout_marginBottom="@dimen/small_margin"
+    android:background="@drawable/shape_box_type1">
+
+    <ImageView
+        android:id="@+id/imgHead"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="2dp"/>
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:id="@+id/tvTypeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size_level4"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/text_color_level_2" />
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@+id/tvTypeName"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size_level5"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/text_color_level_3" />
+
+</RelativeLayout>

@@ -3,6 +3,7 @@ package io.xujiaji.hnbc.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -326,5 +327,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 menuItemStatus(msg.menuIndex);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        currentFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

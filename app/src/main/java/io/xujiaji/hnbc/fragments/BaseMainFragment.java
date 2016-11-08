@@ -24,6 +24,9 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
     //是否同意返回
     private boolean isAgreeBlack = true;
 
+    //是否更新过头像
+    private boolean updatedHeadPic = false;
+
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
@@ -37,6 +40,23 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
     protected void onInit() {
         super.onInit();
         introAnimate();
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (updatedHeadPic && !hidden) {
+            updateShowHeadPic();
+            updatedHeadPic = false;
+        }
+    }
+
+    /**
+     * 更新显示新的头像
+     */
+    protected void updateShowHeadPic() {
+
     }
 
     /**
@@ -114,4 +134,7 @@ public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends
         return !isAgreeBlack;
     }
 
+    public void setUpdatedHeadPic(boolean updatedHeadPic) {
+        this.updatedHeadPic = updatedHeadPic;
+    }
 }

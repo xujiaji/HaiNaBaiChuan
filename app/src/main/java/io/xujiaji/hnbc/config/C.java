@@ -91,6 +91,11 @@ public class C {
          * key：用户信息
          */
         public static final String USER_INFO = "UserInfoFragment";
+
+        /**
+         * 编辑个人信息
+         */
+        public static final String EDIT_USER_INFO = "EditUserInfoFragment";
         /**
          * key：登陆
          */
@@ -112,6 +117,7 @@ public class C {
          * key：设置
          */
         public static final String SET = "set";
+
     }
 
     /**
@@ -127,5 +133,47 @@ public class C {
          */
         public static final int EXIT_LOGIN = 1;
 
+    }
+
+    /**
+     * 个人信息编辑界面对应的id号
+     */
+    public static class euii {
+        /**
+         * 头像
+         */
+        public static final int HEAD = 0;
+        /**
+         * 昵称
+         */
+        public static final int NICKNAME = 1;
+        /**
+         * 性别
+         */
+        public static final int SEX = 2;
+        /**
+         * 手机
+         */
+        public static final int PHONE = 3;
+        /**
+         * 城市
+         */
+        public static final int CITY = 4;
+        /**
+         * 生日
+         */
+        public static final int BIRTHDAY = 5;
+        /**
+         * Email
+         */
+        public static final int EMAIL = 6;
+        /**
+         * 密码
+         */
+        public static final int PASSWORD = 7;
+        /**
+         * 签名
+         */
+        public static final int SIGN = 8;
     }
 }

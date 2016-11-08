@@ -15,6 +15,15 @@ public class User extends BmobUser{
     private int sex;
     private String sign;
     private String headPic;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getHeadPic() {
         return headPic;

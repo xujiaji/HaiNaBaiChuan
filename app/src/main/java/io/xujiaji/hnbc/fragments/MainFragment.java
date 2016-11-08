@@ -156,6 +156,12 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         presenter.requestLoadHead(menu);
     }
 
+    @Override
+    protected void updateShowHeadPic() {
+        super.updateShowHeadPic();
+        presenter.requestLoadHead(menu);
+    }
+
     private void initSheetLayout() {
         View view = ButterKnife.findById(rootView, R.id.fab_container);
         mSheetLayout.setFab(view);

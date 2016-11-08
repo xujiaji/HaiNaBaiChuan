@@ -12,16 +12,19 @@
         android:background="@color/white"
         android:fitsSystemWindows="true"
         android:layerType="hardware">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/user_info_height"
+            android:background="@color/white"
             android:layerType="hardware">
+
             <ImageView
                 android:id="@+id/imgUserInfoBg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:alpha="0.8"/>
+                android:alpha="0.8"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/imgHead"
@@ -34,8 +37,8 @@
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:id="@+id/tvUsername"
                 style="@style/userInfoTextStyle"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_below="@+id/imgHead"
+                android:layout_marginTop="@dimen/small_margin"
                 android:text="\@account" />
 
             <io.xujiaji.hnbc.widget.TextViewNew
@@ -50,8 +53,8 @@
                 style="@style/userInfoTextStyle"
                 android:layout_below="@+id/tvNickname"
                 android:layout_marginTop="@dimen/small_margin_min"
-                android:maxWidth="280dp"
                 android:maxLines="3"
+                android:maxWidth="280dp"
                 android:textSize="@dimen/text_size_level5" />
 
         </RelativeLayout>
@@ -90,10 +93,10 @@
         android:id="@+id/fab_right"
         android:layout_width="wrap_content"
         android:layout_height="?actionBarSize"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/status"
         android:fitsSystemWindows="true"
         android:layerType="hardware"
-        android:layout_alignParentEnd="true"
         app:custom_elevation="1dp"
         app:edge_color="#0000">
 

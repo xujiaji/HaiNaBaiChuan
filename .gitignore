@@ -6,3 +6,7 @@
 
 /.gradle/
 /app/build/
+/CropPic/build/
+/CropPic/src/androidTest/
+/crop/build/
+/dialog/build/

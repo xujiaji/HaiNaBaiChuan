@@ -31,6 +31,21 @@ public class FileUtils {
     }
 
     /**
+     * 判断是否是gif图片
+     * @return
+     */
+    public static boolean isGif(String path) {
+        if (path == null) return false;
+        int pathLen = path.length();
+        try{
+            return (".GIF".equals(path.substring(pathLen - 4, pathLen).toUpperCase()));
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
      * 根据Uri获取图片绝对路径，解决Android4.4以上版本Uri转换
      * @param imageUri
      * @author yaoxing

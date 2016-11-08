@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'signing'
+//apply from: '../.publishing/sonatype.gradle'
+
+archivesBaseName = 'android-crop'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+//    androidTestCompile 'com.squareup:fest-android:1.0.7'
+//    androidTestCompile 'com.android.support:support-v4:23.0.1'
+//    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+//    androidTestCompile 'com.google.dexmaker:dexmaker:1.0'
+//    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
+}
+

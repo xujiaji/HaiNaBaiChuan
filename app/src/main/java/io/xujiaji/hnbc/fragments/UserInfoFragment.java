@@ -12,7 +12,6 @@ import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.presenters.UserInfoPresenter;
-import io.xujiaji.hnbc.utils.ToastUtil;
 import io.xujiaji.hnbc.widget.PupList;
 import io.xujiaji.hnbc.widget.TextViewNew;
 
@@ -72,15 +71,17 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
             pupList.setListener(new PupList.PupListener() {
                 @Override
                 public void itemClick(int itemId) {
+                    if (pupList != null) {
+                        pupList.dismiss();
+                    }
                     switch (itemId) {
                         case C.pupmenu.EDIT:
-                            ToastUtil.getInstance().showShortT("编辑");
+                            MainActivity.startFragment(C.fragment.EDIT_USER_INFO);
                             break;
                         case C.pupmenu.EXIT_LOGIN:
                             presenter.requestExitLogin();
                             break;
                     }
-                    pupList.dismiss();
                 }
             });
         }
@@ -89,6 +90,12 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
 
     public static UserInfoFragment newInstance() {
         return new UserInfoFragment();
+    }
+
+    @Override
+    protected void updateShowHeadPic() {
+        super.updateShowHeadPic();
+        presenter.requestUserInfo();
     }
 
     @Override

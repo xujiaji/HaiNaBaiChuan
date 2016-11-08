@@ -1,0 +1,68 @@
+<com.flipboard.bottomsheet.BottomSheetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <no.agens.depth.lib.DepthRendrer
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layerType="hardware">
+
+        <no.agens.depth.lib.DepthLayout
+            android:id="@+id/root_dl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:fitsSystemWindows="true"
+            android:layerType="hardware">
+
+        </no.agens.depth.lib.DepthLayout>
+
+
+        <no.agens.depth.lib.DepthLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_below="@+id/status"
+            android:background="@color/colorAccent"
+            android:fitsSystemWindows="true"
+            android:layerType="hardware"
+            app:edge_color="#0000">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_chevron_left_black_24dp" />
+
+            <io.xujiaji.hnbc.widget.TextViewNew
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/person_info"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_level3" />
+        </no.agens.depth.lib.DepthLayout>
+
+        <include layout="@layout/include_status" />
+
+        <no.agens.depth.lib.DepthLayout
+            android:id="@+id/dl2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:background="@color/white"
+            android:layerType="hardware"
+            app:custom_elevation="1dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvUserInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </no.agens.depth.lib.DepthLayout>
+
+
+    </no.agens.depth.lib.DepthRendrer>
+</com.flipboard.bottomsheet.BottomSheetLayout>

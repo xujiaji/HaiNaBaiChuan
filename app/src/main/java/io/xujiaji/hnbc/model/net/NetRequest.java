@@ -125,11 +125,10 @@ public class NetRequest {
         });
     }
 
-    public void uploadHeadPic(File file) {
+    public void uploadHeadPic(File file, final RequestListener<String> listener) {
         final BmobFile bmobFile = new BmobFile(file);
         final User newUser = new User();
         bmobFile.uploadblock(new UploadFileListener() {
-
             @Override
             public void done(BmobException e) {
                 if(e==null){
@@ -141,14 +140,17 @@ public class NetRequest {
                         @Override
                         public void done(BmobException e) {
                             if(e==null){
+                                listener.success(newUser.getHeadPic());
                                 LogUtil.e3("更新用户信息成功");
                             }else{
+                                listener.error(e);
                                 LogUtil.e3("更新用户信息失败:" + e.getMessage());
                             }
                         }
                     });
                 }else{
-                    LogUtil.e3("上传文件失败：" + e.getMessage());
+                    listener.error(e);
+                    LogUtil.e3("上传头像失败：" + e.getMessage());
                 }
 
             }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="LOADING">Loading...</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="secret">保密</string>
+    <string name="old_password">旧密码：</string>
+    <string name="new_password">新密码：</string>
+</resources>
