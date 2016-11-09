@@ -280,6 +280,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 goToFragment(msg.fragment);
                 break;
             case Msg.CHOOSE_MENU:
+                menuHelper.selectMenuItem(msg.menuIndex, getResources().getColor(R.color.colorPrimary));
                 menuItemStatus(msg.menuIndex);
                 break;
         }

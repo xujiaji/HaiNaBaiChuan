@@ -6,7 +6,6 @@ import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
-import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.ToastUtil;
 
 /**
@@ -45,7 +44,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
             return;
         }
 
-        NetRequest.Instance().login(name, MD5Util.getMD5(password), new NetRequest.RequestListener<User>() {
+        NetRequest.Instance().login(name, password, new NetRequest.RequestListener<User>() {
             @Override
             public void success(User user) {
                 view.callLoginSuccess();
@@ -53,6 +52,10 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void error(BmobException err) {
+                if (Integer.compare(101, err.getErrorCode()) == 0) {
+                    view.callLoginFail("用户名或密码不正确");
+                    return;
+                }
                 view.callLoginFail(ErrMsgFactory.errMSG(err.getErrorCode()));
             }
         });

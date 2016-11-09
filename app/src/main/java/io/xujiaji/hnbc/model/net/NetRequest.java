@@ -3,6 +3,7 @@ package io.xujiaji.hnbc.model.net;
 import android.content.Intent;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -19,6 +20,7 @@ import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
 import io.xujiaji.hnbc.utils.LogUtil;
+import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.OtherUtils;
 
 /**
@@ -86,7 +88,7 @@ public class NetRequest {
      * @param listener
      */
     public void login(String username, String password, final RequestListener<User> listener) {
-        BmobUser.loginByAccount(username, password, new LogInListener<User>() {
+        BmobUser.loginByAccount(username, MD5Util.getMD5(password), new LogInListener<User>() {
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
@@ -162,10 +164,89 @@ public class NetRequest {
         });
     }
 
+    /**
+     * 更新用户信息
+     * @param type
+     * @param info
+     * @param listener
+     * @param <T>
+     */
+    public <T> void updateInfo(UpdateType type, T info, final RequestListener<User> listener) {
+        final User newUser = new User();
+        switch (type) {
+            case NICKNAME:
+                newUser.setNickname((String) info);
+                break;
+            case BIRTHDAY:
+                newUser.setBirthday((Date) info);
+                break;
+            case SEX:
+                newUser.setSex((Integer) info);
+                break;
+            case PHONE:
+                newUser.setMobilePhoneNumber((String) info);
+                break;
+            case CITY:
+                newUser.setCity((String) info);
+                break;
+            case EMAIL:
+                newUser.setEmail((String) info);
+                break;
+            case SIGN:
+                newUser.setSign((String) info);
+                break;
+            default:
+                throw new RuntimeException("UpdateType don't have " + type);
+        }
+        BmobUser bmobUser = BmobUser.getCurrentUser();
+        newUser.update(bmobUser.getObjectId(),new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    listener.success(newUser);
+                    LogUtil.e3("更新用户信息成功");
+                }else{
+                    listener.error(e);
+                    LogUtil.e3("更新用户信息失败:" + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 更新密码
+     * @param oldPwd
+     * @param newPwd
+     * @param listener
+     */
+    public void updatePassword(String oldPwd, String newPwd, final RequestListener<User> listener) {
+        BmobUser.updateCurrentUserPassword(MD5Util.getMD5(oldPwd), MD5Util.getMD5(newPwd), new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    listener.success(null);
+                }else{
+                    listener.error(e);
+                }
+            }
+        });
+    }
+
+    /**
+     * 更新类型
+     */
+    public enum UpdateType {
+        NICKNAME,
+        BIRTHDAY,
+        SEX,
+        PHONE,
+        CITY,
+        EMAIL,
+        SIGN
+    }
 
     public interface RequestListener<T> {
         void success(T t);
-
         void error(BmobException err);
     }
 }

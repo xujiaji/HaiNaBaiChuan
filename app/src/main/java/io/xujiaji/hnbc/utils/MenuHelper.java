@@ -43,7 +43,7 @@ public class MenuHelper {
         menu.setTranslationY(20000);
     }
 
-    private void selectMenuItem(int menuIndex, int color) {
+    public void selectMenuItem(int menuIndex, int color) {
         for (int i = 0; i < menu.getChildCount(); i++) {
             View menuItem = menu.getChildAt(i);
             if (i == menuIndex)
@@ -66,16 +66,9 @@ public class MenuHelper {
         ic.setSplash(getBitmap(context));
         ic.setSplashColor(context.getResources().getColor(colors[new Random().nextInt(colors.length)]));
         item.setOnClickListener(getMenuItemCLick(menuIndex, context.getResources().getColor(colors[new Random().nextInt(colors.length)])));
-//        if (menuIndex == 0) {
-//            int padding = (int) getResources().getDimension(R.dimen.menu_item_height_padding);
-//            menu.addView(item, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.menu_item_height) + padding));
-//            item.setPadding(0, padding, 0, 0);
-//        } else if (menuIndex == 3) {
         int padding = (int) context.getResources().getDimension(R.dimen.menu_item_height_padding);
         menu.addView(item, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.menu_item_height) + padding));
         item.setPadding(0, 0, 0, padding);
-//        } else
-//            menu.addView(item, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.menu_item_height)));
         item.setBackground(context.getResources().getDrawable(R.drawable.menu_btn, null));
     }
 

@@ -28,6 +28,7 @@ dependencies {
     compile project(':depth')
     compile project(':crop')
     compile project(':dialog')
+    compile project(':citypicker')
     testCompile "junit:junit:$rootProject.junitVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"

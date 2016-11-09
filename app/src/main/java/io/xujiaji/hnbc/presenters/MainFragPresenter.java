@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
+import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.MainPersonMsg;
@@ -71,6 +72,7 @@ public class MainFragPresenter extends BasePresenter implements MainContract.Mai
     public void requestLoadHead(final ImageView head) {
         User user = BmobUser.getCurrentUser(User.class);
         if (user == null) {
+            head.setImageResource(R.drawable.head);
             return;
         }
         ImgLoadUtil.loadHead(head.getContext(), head, user.getHeadPic());

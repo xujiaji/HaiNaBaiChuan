@@ -24,6 +24,8 @@ public class ErrMsgFactory {
                 return "验证码错误";
             case 209:
                 return "该手机号码已经存在";
+            case 210:
+                return "旧密码不正确";
             default:
                 return "非常抱歉，发生错误：" + errNum;
         }

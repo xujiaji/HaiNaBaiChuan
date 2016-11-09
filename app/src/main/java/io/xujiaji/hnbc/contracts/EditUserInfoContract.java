@@ -16,7 +16,7 @@ public interface EditUserInfoContract {
         void requestChangeSex(int sex);
         void requestBirthday(Date birthday);
         void requestChangeEmail(String email);
-        void requestChangePassword(String password);
+        void requestChangePassword(String oldPwd, String newPwd);
     }
 
     interface View extends Contract.BaseView {

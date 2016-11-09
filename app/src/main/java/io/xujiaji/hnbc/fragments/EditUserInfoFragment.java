@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,8 +17,11 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.soundcloud.android.crop.Crop;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.zaaach.citypicker.CityPickerFragment;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -49,7 +53,8 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     RecyclerView rvUserInfo;
     @BindView(R.id.bottomSheet)
     BottomSheetLayout bottomSheet;
-    EditUserInfoAdapter adapter;
+    private EditUserInfoAdapter adapter;
+    private CityPickerFragment apf;
 
     public static EditUserInfoFragment newInstance() {
         return new EditUserInfoFragment();
@@ -95,7 +100,7 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
                         editInfo(R.string.edit_phone_number);
                         break;
                     case C.euii.CITY:
-                        editInfo(R.string.edit_city);
+                        editCity();
                         break;
                     case C.euii.BIRTHDAY:
                         editBirthday();
@@ -115,6 +120,22 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     }
 
     /**
+     * 修改城市
+     */
+    private void editCity() {
+        if (apf == null) {
+            apf = new CityPickerFragment();
+        }
+        apf.show(((AppCompatActivity)getActivity()).getSupportFragmentManager(), R.id.bottomSheet);
+        apf.setListener(new CityPickerFragment.CityListener() {
+            @Override
+            public void value(String city) {
+                presenter.requestChangeCity(city);
+            }
+        });
+    }
+
+    /**
      * 修改签名
      */
     private void editSign() {
@@ -124,7 +145,8 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        ToastUtil.getInstance().showLongT(sweetAlertDialog.getSign());
+                        sweetAlertDialog.dismissWithAnimation();
+                        presenter.requestChangeSign(sweetAlertDialog.getSign());
                     }
                 })
                 .show();
@@ -142,7 +164,7 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismissWithAnimation();
                         String[] pwd = sweetAlertDialog.getPassword();
-                        ToastUtil.getInstance().showLongT("旧密码：" + pwd[0] + "\n新密码：" + pwd[1]);
+                        presenter.requestChangePassword(pwd[0], pwd[1]);
                     }
                 }).show();
     }
@@ -173,7 +195,7 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismissWithAnimation();
-                        ToastUtil.getInstance().showLongT("性别：" + sweetAlertDialog.getSex());
+                        presenter.requestChangeSex(sweetAlertDialog.getSex());
                     }
                 }).show();
     }
@@ -181,7 +203,7 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     /**
      * 编辑昵称/手机号
      */
-    private void editInfo(int titleId) {
+    private void editInfo(final int titleId) {
         new SweetAlertDialog(getActivity(), SweetAlertDialog.EDIT_TYPE)
                 .setTitleText(getString(titleId))
                 .showCancelButton(true)
@@ -189,7 +211,17 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismissWithAnimation();
-                        ToastUtil.getInstance().showLongT(sweetAlertDialog.getEditText());
+                        switch (titleId) {
+                            case R.string.edit_nickname:
+                                presenter.requestChangeNickname(sweetAlertDialog.getEditText());
+                                break;
+                            case R.string.edit_phone_number:
+                                presenter.requestChangePhone(sweetAlertDialog.getEditText());
+                                break;
+                            case R.string.edit_email:
+                                presenter.requestChangeEmail(sweetAlertDialog.getEditText());
+                                break;
+                        }
                     }
                 })
                 .show();
@@ -223,93 +255,107 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     public void changeHeadPicSuccess() {
         ToastUtil.getInstance().showLongT(getString(R.string.update_head_success));
         adapter.update();
-        FragmentFactory.updatedHeadPic();
-        setUpdatedHeadPic(false);
+        FragmentFactory.updatedUser();
+        setUpdatedUser(false);
+    }
+
+    private void update() {
+        adapter.update();
+        setUpdatedUser(false);
+        FragmentFactory.updatedUser();
     }
 
     @Override
     public void changeHeadPicFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeNicknameSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_nickname_success));
+        update();
     }
 
     @Override
     public void changeNicknameFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changePhoneSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_phone_success));
+        update();
     }
 
     @Override
     public void changePhoneFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeSignSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_sign_success));
+        update();
     }
 
     @Override
     public void changeSignFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeCitySuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_city_success));
+        update();
     }
 
     @Override
     public void changeCityFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeSexSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_sex_success));
+        update();
     }
 
     @Override
     public void changeSexFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeBirthdaySuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_birthday_succes));
+        update();
     }
 
     @Override
     public void changeBirthdayFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changeEmailSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_email_success));
+        update();
     }
 
     @Override
     public void changeEmailFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
     public void changePasswordSuccess() {
-
+        ToastUtil.getInstance().showLongT(getString(R.string.update_password_succss));
+        update();
     }
 
     @Override
     public void changePasswordFail(String err) {
-
+        ToastUtil.getInstance().showLongT(err);
     }
 
     @Override
@@ -359,11 +405,18 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (apf != null) {
+            ((AppCompatActivity)getActivity()).getSupportFragmentManager().beginTransaction().remove(apf);
+        }
         BottomSheetImagePicker.getInstance().destroy();
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        ToastUtil.getInstance().showLongT(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+        try {
+            presenter.requestBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

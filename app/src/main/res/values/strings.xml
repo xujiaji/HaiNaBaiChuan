@@ -39,4 +39,12 @@
     <string name="edit_email">编辑邮箱</string>
     <string name="update_password">更新密码</string>
     <string name="update_sign">更新签名</string>
+    <string name="update_nickname_success">昵称更新成功</string>
+    <string name="update_phone_success">手机号更新成功！</string>
+    <string name="update_sign_success">签名更新成功！</string>
+    <string name="update_city_success">更新城市成功！</string>
+    <string name="update_sex_success">更新性别成功！</string>
+    <string name="update_birthday_succes">生日更新成功！</string>
+    <string name="update_email_success">邮箱更新成功！</string>
+    <string name="update_password_succss">密码更新成功！</string>
 </resources>

@@ -8,11 +8,42 @@ import static android.text.TextUtils.isEmpty;
 
 public class LoginCheck {
 
+    /**
+     * 检测签名
+     * @param sign
+     * @return
+     */
+    public static String checkSign(String sign) {
+        if (isEmpty(sign)) {
+            return "[Err]请输入签名！";
+        }
+        if (sign.length() > 60) {
+            return "[Err]签名不能超过60字！";
+        }
+        return null;
+    }
+
     public static String checkNickname(String nickname) {
         if (isEmpty(nickname)) {
             return "[Err]请输入昵称！";
         }
         return null;
+    }
+
+    /**
+     * 检测老旧密码，更新新密码
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    public static String checkChangePassword(String oldPwd, String newPwd) {
+        if (isEmpty(oldPwd)) {
+            return "[Err]老密码不能为空！";
+        }
+        if (isEmpty(newPwd)) {
+            return "[Err]新密码不能为空！";
+        }
+        return checkPassword(newPwd);
     }
 
     /**

@@ -157,8 +157,8 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     }
 
     @Override
-    protected void updateShowHeadPic() {
-        super.updateShowHeadPic();
+    protected void updateUserInfo() {
+        super.updateUserInfo();
         presenter.requestLoadHead(menu);
     }
 

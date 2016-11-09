@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import io.xujiaji.hnbc.contracts.UserInfoContract;
+import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;

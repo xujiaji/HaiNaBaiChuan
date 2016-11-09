@@ -10,6 +10,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
+import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.presenters.UserInfoPresenter;
 import io.xujiaji.hnbc.widget.PupList;
@@ -93,8 +94,8 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     }
 
     @Override
-    protected void updateShowHeadPic() {
-        super.updateShowHeadPic();
+    protected void updateUserInfo() {
+        super.updateUserInfo();
         presenter.requestUserInfo();
     }
 
@@ -110,6 +111,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     @Override
     public void exitLoginSuccess() {
         setDeleted(true);
+        FragmentFactory.updatedUser();
         MainActivity.startFragment(C.fragment.LOGIN);
         pupList = null;
     }

@@ -114,11 +114,11 @@ public class FragmentFactory {
     /**
      * 更新头像
      */
-    public static void updatedHeadPic() {
+    public static void updatedUser() {
         for (String key : MAIN_WIND_FRAG.keySet()) {
             BaseMainFragment fragment = MAIN_WIND_FRAG.get(key);
             if (fragment == null) continue;
-            fragment.setUpdatedHeadPic(true);
+            fragment.setUpdatedUser(true);
         }
     }
 }

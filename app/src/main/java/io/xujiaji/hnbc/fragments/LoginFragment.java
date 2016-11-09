@@ -16,6 +16,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
+import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.presenters.LoginPresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ToastUtil;
@@ -123,6 +124,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     public void callLoginSuccess() {
         onLogging(false);
         ToastUtil.getInstance().showLongT("登陆成功！");
+        FragmentFactory.updatedUser();
         setDeleted(true);
         MainActivity.startFragment(C.fragment.USER_INFO);
     }
@@ -130,6 +132,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     @Override
     public void callLoginFail(final String failMassage) {
         LogUtil.e3("");
+        onLogging(false);
         ToastUtil.getInstance().showLongT(failMassage);
     }
 
