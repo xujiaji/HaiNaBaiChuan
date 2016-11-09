@@ -17,7 +17,6 @@ public interface MainContract {
     }
 
     interface View extends Contract.BaseView {
-        void setupMenu();
         void menuOpen();
         void menuClose();
         void menuToggle();
