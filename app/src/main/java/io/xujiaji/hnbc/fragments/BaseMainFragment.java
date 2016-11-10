@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.view.ViewTreeObserver;
 
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.TransitionHelper;
 
@@ -12,7 +12,7 @@ import io.xujiaji.hnbc.utils.TransitionHelper;
  * Created by jiana on 16-11-5.
  */
 
-public abstract class BaseMainFragment<T extends Contract.BasePresenter> extends BaseFragment<T> {
+public abstract class BaseMainFragment<T extends BasePresenter> extends BaseFragment<T> {
     //是否是打开LoginFragment
     private boolean introAnimate = false;
     /**

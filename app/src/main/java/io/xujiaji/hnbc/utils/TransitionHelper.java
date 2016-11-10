@@ -46,10 +46,10 @@ public class TransitionHelper {
         if (dl != null) {
             objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 210);
         }
-        dl = getLayout(root, R.id.fab_right);
-        if (dl != null) {
-            objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 190);
-        }
+//        dl = getLayout(root, R.id.fab_right);
+//        if (dl != null) {
+//            objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 190);
+//        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
             objectAnimator = introAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 190);
@@ -236,10 +236,10 @@ public class TransitionHelper {
         if (dl != null) {
             valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 250, false);
         }
-        dl = getLayout(root, R.id.fab_right);
-        if (dl != null) {
-            valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
-        }
+//        dl = getLayout(root, R.id.fab_right);
+//        if (dl != null) {
+//            valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
+//        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
             valueAnimator = exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
@@ -282,10 +282,10 @@ public class TransitionHelper {
         if (dl != null) {
             continueOutToRight(dl, MOVE_Y_STEP * 2, 80);
         }
-        dl = getLayout(root, R.id.fab_right);
-        if (dl != null) {
-            continueOutToRight(dl, MOVE_Y_STEP * 2f, 40);
-        }
+//        dl = getLayout(root, R.id.fab_right);
+//        if (dl != null) {
+//            continueOutToRight(dl, MOVE_Y_STEP * 2f, 40);
+//        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {
             continueOutToRight(dl, MOVE_Y_STEP * 2f, 40);
@@ -347,10 +347,10 @@ public class TransitionHelper {
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2, 20f, 75, 250, false);
             oa = revertFromMenu(dl, 20f, 40, 2);
         }
-        dl = getLayout(root, R.id.fab_right);
-        if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
-            oa = revertFromMenu(dl, 20f, 20, 6);
-        }
+//        dl = getLayout(root, R.id.fab_right);
+//        if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
+//            oa = revertFromMenu(dl, 20f, 20, 6);
+//        }
         dl = getLayout(root, R.id.fab_container);
         if (dl != null) {//exitAnimate(dl, MOVE_Y_STEP * 2f, 20f, 45, 210, false);
             oa = revertFromMenu(dl, 20f, 20, 6);

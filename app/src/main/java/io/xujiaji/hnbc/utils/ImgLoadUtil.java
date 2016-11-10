@@ -18,6 +18,14 @@ public class ImgLoadUtil {
     private ImgLoadUtil() {
     }
 
+    public static void loadBitmap(Context context, ImageView img, String url) {
+        Glide.with(context)
+                .load(url)
+                .asBitmap()
+                .into(img);
+
+    }
+
     public static void load(Context context, ImageView img, String url) {
         Glide.with(context)
                 .load(url)

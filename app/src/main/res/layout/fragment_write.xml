@@ -24,7 +24,7 @@
             android:layout_height="?actionBarSize"
             android:background="@android:color/transparent"
             android:padding="12dp"
-            android:src="@drawable/ic_chevron_left_black_24dp" />
+            android:src="@drawable/ic_chevron_left_24dp" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilTitle"

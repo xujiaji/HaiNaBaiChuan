@@ -37,6 +37,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private TextView mContentTextView;
     private String mTitleText;
     private String mContentText;
+    private boolean mShowCanfirm = true;
     private boolean mShowCancel;
     private boolean mShowContent;
     private String mCancelText;
@@ -190,7 +191,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         setConfirmText(mConfirmText);
         changeAlertType(mAlertType, true);
         showCancelButton(mShowCancel);
-
+        showConfirmButton(mShowCanfirm);
     }
 
     private void restore () {
@@ -340,6 +341,15 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     public boolean isShowCancelButton () {
         return mShowCancel;
+    }
+
+
+    public SweetAlertDialog showConfirmButton (boolean isShow) {
+        mShowCanfirm = isShow;
+        if (mConfirmButton != null) {
+            mConfirmButton.setVisibility(mShowCanfirm ? View.VISIBLE : View.GONE);
+        }
+        return this;
     }
 
     public SweetAlertDialog showCancelButton (boolean isShow) {

@@ -37,11 +37,12 @@
     <dimen name="text_size_level6">12sp</dimen>
     <dimen name="app_bar_height">280dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="user_info_head_width">120dp</dimen>
+    <dimen name="user_info_head_width">100dp</dimen>
     <dimen name="user_info_height">290dp</dimen>
     <dimen name="pop_item_size">42dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="small_margin_min">4dp</dimen>
     <dimen name="item_edit_user_info_height">48dp</dimen>
+    <dimen name="login_width">300dp</dimen>
 
 </resources>

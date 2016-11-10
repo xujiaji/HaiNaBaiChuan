@@ -1,6 +1,8 @@
 package io.xujiaji.hnbc.presenters;
 
 import cn.bmob.v3.exception.BmobException;
+import io.xujiaji.hnbc.R;
+import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
@@ -14,40 +16,41 @@ import io.xujiaji.hnbc.utils.MD5Util;
  * Created by jiana on 16-11-5.
  */
 
-public class RegisterPresenter extends BasePresenter implements RegisterContract.Presenter{
-    private RegisterContract.View view;
+public class RegisterPresenter extends BasePresenter <RegisterContract.View> implements RegisterContract.Presenter{
     private String passwordSave;
     private User user = null;
     //密码确认
     private boolean pwdConfirm = false;
     public RegisterPresenter(RegisterContract.View view) {
         super(view);
-        this.view = view;
     }
 
 
     @Override
     public void start() {
+        super.start();
         user = new User();
         user.setSex(C.SEX_SECRET);
     }
 
     @Override
     public void end() {
-        view = null;
+        super.end();
         passwordSave = null;
         user = null;
     }
 
     @Override
     public void requestRegister() {
-        if (user.getEmail() != null &&
-                user.getNickname() != null &&
+        if (
+//                user.getEmail() != null &&
+//                user.getNickname() != null &&
                 user.getUsername() != null &&
-                user.getMobilePhoneNumber() != null &&
-                user.getEmail() != null &&
+//                user.getMobilePhoneNumber() != null &&
+//                user.getEmail() != null &&
                 passwordSave != null &&
                 pwdConfirm) {
+            user.setNickname(App.getAppContext().getString(R.string.secret_man));
             NetRequest.Instance().userRegister(user, new NetRequest.RequestListener<User>() {
                 @Override
                 public void success(User userGet) {

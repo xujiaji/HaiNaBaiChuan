@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.GenericHelper;
 
 /**
  * 项目中Fragment的基类
  */
-public abstract class BaseFragment<T extends Contract.BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
     protected T presenter;
 

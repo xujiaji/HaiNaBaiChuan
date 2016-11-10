@@ -12,22 +12,10 @@ import io.xujiaji.hnbc.utils.ToastUtil;
  * Created by jiana on 16-11-4.
  */
 
-public class LoginPresenter extends BasePresenter implements LoginContract.Presenter {
-    private LoginContract.View view;
+public class LoginPresenter extends BasePresenter <LoginContract.View> implements LoginContract.Presenter {
 
     public LoginPresenter(LoginContract.View view) {
         super(view);
-        this.view = view;
-    }
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void end() {
-        view = null;
     }
 
     @Override

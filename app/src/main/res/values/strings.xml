@@ -46,5 +46,14 @@
     <string name="update_sex_success">更新性别成功！</string>
     <string name="update_birthday_succes">生日更新成功！</string>
     <string name="update_email_success">邮箱更新成功！</string>
+    <string name="forgot_your_password">忘记密码?</string>
     <string name="update_password_succss">密码更新成功！</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="secret_man">神秘人</string>
+    <string name="fans">粉丝</string>
+    <string name="attention">关注</string>
+    <string name="collect">收藏</string>
+    <string name="send_dynamic">发布的动态</string>
+    <string name="badge_level">徽章和等级</string>
+    <string name="read_section">订阅的栏目</string>
 </resources>

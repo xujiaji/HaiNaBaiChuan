@@ -20,6 +20,7 @@
             android:id="@+id/imgAppIcon"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:visibility="gone"
             android:src="@mipmap/big_icon" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hello_world"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/theme_grey_white" />
     </LinearLayout>
 </RelativeLayout>

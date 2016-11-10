@@ -23,7 +23,6 @@
         <item name="elevation">1dp</item>
         <item name="pressedTranslationZ">0dp</item>
         <item name="android:layerType">hardware</item>
-        <item name="backgroundTint">@color/black</item>
         <item name="borderWidth">0dp</item>
         <item name="rippleColor">@color/fab_highlight</item>
         <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
@@ -63,5 +62,51 @@
     <style name="popupShowAnExit">
         <item name="android:windowEnterAnimation">@anim/popup_enter</item>
         <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+
+    <style name="userInfoUINumStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_level3</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="userInfoUINumNameStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_color_level_1_2</item>
+    </style>
+
+    <style name="userInfoUIVerticalLineStyle">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@color/text_color_level_1_2</item>
+    </style>
+
+    <style name="UserInfoUIClickStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/user_info_btn</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="userInfoBottomItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/menu_btn</item>
+        <item name="android:textSize">@dimen/text_size_level3</item>
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">24dp</item>
+        <item name="android:textColor">@color/text_color_level_2</item>
     </style>
 </resources>

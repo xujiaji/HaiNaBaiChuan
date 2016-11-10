@@ -10,14 +10,14 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.GenericHelper;
 
 /**
  * 项目中Activity的基类
  */
-public abstract class BaseActivity<T extends Contract.BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
     protected T presenter;
 
     @Override

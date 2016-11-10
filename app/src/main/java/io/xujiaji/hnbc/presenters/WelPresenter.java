@@ -11,11 +11,9 @@ import io.xujiaji.hnbc.utils.ImgLoadUtil;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.SharedPreferencesUtil;
 
-public class WelPresenter extends BasePresenter implements WelcomeContract.Presenter {
-    public WelcomeContract.View view;
+public class WelPresenter extends BasePresenter <WelcomeContract.View> implements WelcomeContract.Presenter {
     public WelPresenter(WelcomeContract.View view) {
         super(view);
-        this.view = view;
     }
 
     private void getNetImg() {
@@ -45,11 +43,8 @@ public class WelPresenter extends BasePresenter implements WelcomeContract.Prese
 
     @Override
     public void start() {
+        super.start();
         view.startAnim();
     }
 
-    @Override
-    public void end() {
-        view = null;
-    }
 }

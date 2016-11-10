@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import io.xujiaji.hnbc.contracts.UserInfoContract;
-import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
@@ -13,12 +12,10 @@ import io.xujiaji.hnbc.utils.ImgLoadUtil;
  * Created by jiana on 16-11-6.
  */
 
-public class UserInfoPresenter extends BasePresenter implements UserInfoContract.Presenter {
-    private UserInfoContract.View view = null;
+public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> implements UserInfoContract.Presenter {
 
     public UserInfoPresenter(UserInfoContract.View view) {
         super(view);
-        this.view = view;
     }
 
     @Override
@@ -45,7 +42,7 @@ public class UserInfoPresenter extends BasePresenter implements UserInfoContract
 
     @Override
     public void requestDisplayUserInfoBg(ImageView imgUserInfoBg, String url) {
-        ImgLoadUtil.load(imgUserInfoBg.getContext(), imgUserInfoBg, url);
+        ImgLoadUtil.loadBitmap(imgUserInfoBg.getContext(), imgUserInfoBg, url);
     }
 
     @Override
@@ -55,11 +52,7 @@ public class UserInfoPresenter extends BasePresenter implements UserInfoContract
 
     @Override
     public void start() {
+        super.start();
         requestUserInfo();
-    }
-
-    @Override
-    public void end() {
-        view = null;
     }
 }

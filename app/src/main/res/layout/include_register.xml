@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/fab_size"
-    tools:showIn="@layout/fragment_register">
+    android:paddingBottom="@dimen/fab_size">
 
     <io.xujiaji.hnbc.widget.TextViewNew
         android:layout_width="wrap_content"

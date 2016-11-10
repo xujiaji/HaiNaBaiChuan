@@ -11,12 +11,10 @@ import io.xujiaji.hnbc.model.data.DataFiller;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainPresenter extends BasePresenter implements MainContract.Presenter {
-    private MainContract.View view;
+public class MainPresenter extends BasePresenter <MainContract.View> implements MainContract.Presenter {
     private List<String> menuData;
     public MainPresenter(MainContract.View view) {
         super(view);
-        this.view = view;
         menuData = new ArrayList<>();
         menuData.add(App.getAppContext().getString(R.string.main_page));
         menuData.add(App.getAppContext().getString(R.string.self_info));
@@ -43,7 +41,7 @@ public class MainPresenter extends BasePresenter implements MainContract.Present
 
     @Override
     public void end() {
-        view = null;
+        super.end();
         menuData = null;
     }
 }

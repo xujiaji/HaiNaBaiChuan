@@ -14,12 +14,10 @@ import io.xujiaji.hnbc.model.net.NetRequest;
  * Created by jiana on 16-11-7.
  */
 
-public class EditUserInfoPresenter extends BasePresenter implements EditUserInfoContract.Presenter {
-    private EditUserInfoContract.View view;
+public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.View> implements EditUserInfoContract.Presenter {
 
     public EditUserInfoPresenter(EditUserInfoContract.View view) {
         super(view);
-        this.view = view;
     }
 
     @Override
@@ -194,16 +192,5 @@ public class EditUserInfoPresenter extends BasePresenter implements EditUserInfo
                 view.changePasswordFail(ErrMsgFactory.errMSG(err.getErrorCode()));
             }
         });
-    }
-
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void end() {
-        view = null;
     }
 }

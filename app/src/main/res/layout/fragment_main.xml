@@ -122,7 +122,9 @@
             android:layerType="hardware"
             android:src="@drawable/ic_mode_edit_black_24dp"
             app:backgroundTint="@color/theme_red"
-            app:rippleColor="@color/fab_highlight" />
+            app:rippleColor="@color/fab_highlight"
+            app:pressedTranslationZ="0dp"
+            app:elevation="0dp"/>
     </no.agens.depth.lib.DepthLayout>
 
     <io.xujiaji.hnbc.widget.SheetLayout

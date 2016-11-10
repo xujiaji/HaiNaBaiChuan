@@ -136,21 +136,22 @@ public class FunkyHeader extends ImageView {
 
     @Override
     protected void onDraw(final Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.save();
         path = getWavePath(width, height, 80, 0, 3);
         canvas.drawPath(path, paint);
         path = getWavePath(width, height, 110, 60, 4);
         viewBounds.set(0, 0, width, height);
         canvas.clipPath(path);
-        if (bitmap != null)
-            if (scaleType == ScaleType.CENTRE_CROP) {
-                scaleRect.set(x, y, x + requiredWidth, y + requiredHeight);
-                canvas.clipRect(scaleRect);
-                canvas.drawBitmap(bitmap, null, scaleRect, paint);
-            } else {
-                canvas.drawBitmap(bitmap, null, viewBounds, paint);
-            }
+
+        super.onDraw(canvas);
+
+//        if (bitmap != null)
+//            if (scaleType == ScaleType.CENTRE_CROP) {
+//                scaleRect.set(x, y, x + requiredWidth, y + requiredHeight);
+//                canvas.clipRect(scaleRect);
+//                canvas.drawBitmap(bitmap, null, scaleRect, paint);
+//            } else {
+//                canvas.drawBitmap(bitmap, null, viewBounds, paint);
+//            }
         canvas.clipRect(viewBounds, Region.Op.UNION);
         canvas.drawPath(path, paint);
         path = getWavePath(width, height, 110, 20, 3);

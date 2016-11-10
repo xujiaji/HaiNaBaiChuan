@@ -14,62 +14,122 @@
         android:layerType="hardware">
 
         <RelativeLayout
+            android:id="@+id/headLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/user_info_height"
-            android:background="@color/white"
-            android:layerType="hardware">
+            android:background="@color/white">
 
-            <ImageView
+            <io.xujiaji.hnbc.widget.FunkyHeader
                 android:id="@+id/imgUserInfoBg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:tint="@color/colorAccent" />
 
             <ImageView
                 android:id="@+id/imgHead"
                 android:layout_width="@dimen/user_info_head_width"
                 android:layout_height="@dimen/user_info_head_width"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="?actionBarSize"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="100dp"
                 android:src="@drawable/head" />
 
-            <io.xujiaji.hnbc.widget.TextViewNew
-                android:id="@+id/tvUsername"
-                style="@style/userInfoTextStyle"
-                android:layout_below="@+id/imgHead"
-                android:layout_marginTop="@dimen/small_margin"
-                android:text="\@account" />
 
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:id="@+id/tvNickname"
                 style="@style/userInfoTextStyle"
-                android:layout_below="@+id/tvUsername"
+                android:layout_alignTop="@+id/imgHead"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="@dimen/small_margin_min"
-                android:text="昵称" />
+                android:layout_toEndOf="@+id/imgHead"
+                android:maxLines="1"
+                android:text="昵称"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_level2" />
 
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:id="@+id/tvSign"
                 style="@style/userInfoTextStyle"
-                android:layout_below="@+id/tvNickname"
+                android:layout_below="@id/tvNickname"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="@dimen/small_margin_min"
+                android:layout_toEndOf="@+id/imgHead"
                 android:maxLines="3"
-                android:maxWidth="280dp"
+                android:maxWidth="260dp"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_size_level5" />
-
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/headLayout"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout style="@style/UserInfoUIClickStyle">
+
+                    <TextView
+                        android:text="9096"
+                        style="@style/userInfoUINumStyle" />
+
+                    <TextView
+                        android:text="@string/fans"
+                        style="@style/userInfoUINumNameStyle" />
+                </LinearLayout>
+
+                <View style="@style/userInfoUIVerticalLineStyle" />
+
+                <LinearLayout
+                    style="@style/UserInfoUIClickStyle">
+
+                    <TextView
+                        style="@style/userInfoUINumStyle"
+                        android:text="2" />
+
+                    <TextView
+                        style="@style/userInfoUINumNameStyle"
+                        android:text="@string/attention" />
+                </LinearLayout>
+                <View style="@style/userInfoUIVerticalLineStyle" />
+                <LinearLayout
+                    style="@style/UserInfoUIClickStyle">
+                    <TextView
+                        android:text="1782"
+                        style="@style/userInfoUINumStyle" />
+
+                    <TextView
+                        android:text="@string/collect"
+                        style="@style/userInfoUINumNameStyle"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <io.xujiaji.hnbc.widget.TextViewBoldNew
+                android:drawableStart="@drawable/ic_dynamic2"
+                android:text="@string/send_dynamic"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                style="@style/userInfoBottomItemStyle" />
+
+            <io.xujiaji.hnbc.widget.TextViewBoldNew
+                android:drawableStart="@drawable/ic_level"
+                style="@style/userInfoBottomItemStyle"
+                android:text="@string/badge_level"/>
+
+            <io.xujiaji.hnbc.widget.TextViewBoldNew
+                android:drawableStart="@drawable/ic_section"
+                style="@style/userInfoBottomItemStyle"
+                android:text="@string/read_section"/>
+
+
+        </LinearLayout>
+
     </no.agens.depth.lib.DepthLayout>
 
-    <no.agens.depth.lib.DepthLayout
-        android:id="@+id/dl2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/user_info_height"
-        android:background="@color/white"
-        android:layerType="hardware"
-        app:custom_elevation="1dp">
-
-    </no.agens.depth.lib.DepthLayout>
 
     <no.agens.depth.lib.DepthLayout
         android:id="@+id/fab_container"
@@ -86,26 +146,23 @@
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_chevron_left_black_24dp" />
-    </no.agens.depth.lib.DepthLayout>
+            android:src="@drawable/ic_chevron_left_24dp" />
 
-    <no.agens.depth.lib.DepthLayout
-        android:id="@+id/fab_right"
-        android:layout_width="wrap_content"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/status"
-        android:fitsSystemWindows="true"
-        android:layerType="hardware"
-        app:custom_elevation="1dp"
-        app:edge_color="#0000">
+        <io.xujiaji.hnbc.widget.TextViewBoldNew
+            android:id="@+id/tvUsername"
+            style="@style/userInfoTextStyle"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="\@account"
+            android:textColor="@color/white" />
 
         <ImageView
             android:id="@+id/more"
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_add_black_24dp" />
+            android:src="@drawable/ic_add_24dp" />
     </no.agens.depth.lib.DepthLayout>
 
 

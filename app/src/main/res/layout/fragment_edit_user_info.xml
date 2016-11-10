@@ -35,7 +35,7 @@
                 android:layout_width="?actionBarSize"
                 android:layout_height="?actionBarSize"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_chevron_left_black_24dp" />
+                android:src="@drawable/ic_chevron_left_24dp" />
 
             <io.xujiaji.hnbc.widget.TextViewNew
                 android:layout_width="wrap_content"

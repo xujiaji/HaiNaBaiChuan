@@ -2,7 +2,7 @@ package io.xujiaji.hnbc.fragments;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,12 +24,10 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
 
     @BindView(R.id.imgHead)
     ImageView imgHead;
-    @BindView(R.id.dl2)
-    RelativeLayout dl2;
     @BindView(R.id.imgUserInfoBg)
     ImageView imgUserInfoBg;
     @BindView(R.id.tvUsername)
-    TextViewNew tvUsername;
+    TextView tvUsername;
     @BindView(R.id.tvNickname)
     TextViewNew tvNickname;
     @BindView(R.id.tvSign)
@@ -105,7 +103,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         tvNickname.setText(user.getNickname());
         tvSign.setText(user.getSign());
         presenter.requestDisplayHeadPic(imgHead, user.getHeadPic());
-        presenter.requestDisplayUserInfoBg(imgUserInfoBg, "http://c.hiphotos.baidu.com/zhidao/pic/item/8c1001e93901213f1268ab8757e736d12f2e9516.jpg");
+        presenter.requestDisplayUserInfoBg(imgUserInfoBg, user.getHeadPic());
     }
 
     @Override

@@ -1,17 +1,16 @@
 package io.xujiaji.hnbc.fragments;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextPaint;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
@@ -33,10 +32,11 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     TextInputLayout passwordWrapper;
     @BindView(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
-    @BindView(R.id.google_progress)
-    GoogleProgressBar googleProgressBar;
+//    @BindView(R.id.google_progress)
+//    GoogleProgressBar googleProgressBar;
     @BindView(R.id.btnLogin)
-    FloatingActionButton btnLogin;
+    Button btnLogin;
+    private SweetAlertDialog dialog;
 
     /**
      * 当注册后来后设置这个值
@@ -69,6 +69,14 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
     protected void onInit() {
         super.onInit();
         initOtherLoginBold();
+    }
+
+    private void showDialog() {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText("正在登录");
+        dialog.showCancelButton(false);
+        dialog.showConfirmButton(false);
+        dialog.show();
     }
 
     /**
@@ -122,8 +130,9 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
 
     @Override
     public void callLoginSuccess() {
+        dialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+        dialog.setTitleText("登陆成功");
         onLogging(false);
-        ToastUtil.getInstance().showLongT("登陆成功！");
         FragmentFactory.updatedUser();
         setDeleted(true);
         MainActivity.startFragment(C.fragment.USER_INFO);
@@ -146,15 +155,20 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
         LogUtil.e3("isLogging = " + isLogging);
         if (isLogging) {
             btnLogin.setClickable(false);
-            btnLogin.setVisibility(View.GONE);
-            googleProgressBar.setVisibility(View.VISIBLE);
+            btnLogin.setTextColor(getResources().getColor(R.color.btn_long_normal));
+            showDialog();
+//            btnLogin.setVisibility(View.GONE);
+//            googleProgressBar.setVisibility(View.VISIBLE);
         } else {
-            googleProgressBar.postDelayed(new Runnable() {
+            btnLogin.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    googleProgressBar.setVisibility(View.GONE);
-                    btnLogin.setVisibility(View.VISIBLE);
+//                    googleProgressBar.setVisibility(View.GONE);
+//                    btnLogin.setVisibility(View.VISIBLE);
                     btnLogin.setClickable(true);
+                    btnLogin.setTextColor(getResources().getColor(R.color.btn_login_press));
+                    dialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                    dialog.dismissWithAnimation();
                 }
             }, 1000);
         }
@@ -171,4 +185,14 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
         return true;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            dialog = null;
+        }
+    }
 }

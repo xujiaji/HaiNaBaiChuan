@@ -1,15 +1,13 @@
 package io.xujiaji.hnbc.fragments;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
-import android.widget.RadioGroup;
-
-import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
+import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
@@ -27,22 +25,23 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
 
     @BindView(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
-    @BindView(R.id.nicknameWrapper)
-    TextInputLayout nicknameWrapper;
-    @BindView(R.id.phoneWrapper)
-    TextInputLayout phoneWrapper;
-    @BindView(R.id.emailWrapper)
-    TextInputLayout emailWrapper;
+    //    @BindView(R.id.nicknameWrapper)
+//    TextInputLayout nicknameWrapper;
+//    @BindView(R.id.phoneWrapper)
+//    TextInputLayout phoneWrapper;
+//    @BindView(R.id.emailWrapper)
+//    TextInputLayout emailWrapper;
     @BindView(R.id.passwordWrapper)
     TextInputLayout passwordWrapper;
     @BindView(R.id.passwordConfirmWrapper)
     TextInputLayout passwordConfirmWrapper;
-    @BindView(R.id.radio)
-    RadioGroup radioGroup;
+    //    @BindView(R.id.radio)
+//    RadioGroup radioGroup;
     @BindView(R.id.btnRegistered)
-    FloatingActionButton btnRegistered;
-    @BindView(R.id.google_progress)
-    GoogleProgressBar googleProgressBar;
+    Button btnRegistered;
+    //    @BindView(R.id.google_progress)
+//    GoogleProgressBar googleProgressBar;
+    private SweetAlertDialog dialog;
 
     @OnClick(R.id.btnRegistered)
     void onClick(View view) {
@@ -50,31 +49,43 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
         presenter.requestRegister();
     }
 
+    @OnClick(R.id.btnClose)
+    void onClickClose(View view) {
+        clickBack();
+    }
+
     @Override
     protected void onInit() {
         super.onInit();
-        radioGroup.check(R.id.rbSexSecret);
+//        radioGroup.check(R.id.rbSexSecret);
+    }
+
+    private void showDialog() {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText("正在注册");
+        dialog.showConfirmButton(false);
+        dialog.show();
     }
 
     @Override
     protected void onListener() {
         super.onListener();
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rbMan:
-                        presenter.sex(C.SEX_MAN);
-                        break;
-                    case R.id.rbWoman:
-                        presenter.sex(C.SEX_WOMAN);
-                        break;
-                    case R.id.rbSexSecret:
-                        presenter.sex(C.SEX_SECRET);
-                        break;
-                }
-            }
-        });
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.rbMan:
+//                        presenter.sex(C.SEX_MAN);
+//                        break;
+//                    case R.id.rbWoman:
+//                        presenter.sex(C.SEX_WOMAN);
+//                        break;
+//                    case R.id.rbSexSecret:
+//                        presenter.sex(C.SEX_SECRET);
+//                        break;
+//                }
+//            }
+//        });
     }
 
     public static RegisterFragment newInstance() {
@@ -83,6 +94,7 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
 
     @Override
     public void callRegisterSuccess(String username) {
+        dialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
         onRegister(false);
         ToastUtil.getInstance().showLongT("注册成功！\n去登陆吧！");
         LoginFragment lf = (LoginFragment) FragmentFactory.getFrag(C.fragment.LOGIN);
@@ -103,17 +115,17 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
 
     @Override
     public void errNickName(String err) {
-        nicknameWrapper.setError(err);
+//        nicknameWrapper.setError(err);
     }
 
     @Override
     public void errPhone(String err) {
-        phoneWrapper.setError(err);
+//        phoneWrapper.setError(err);
     }
 
     @Override
     public void errEmail(String err) {
-        emailWrapper.setError(err);
+//        emailWrapper.setError(err);
     }
 
     @Override
@@ -138,23 +150,23 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
         presenter.checkUsername(text.toString());
     }
 
-    @OnTextChanged(R.id.nickname)
-    public void nicknameChanged(CharSequence text) {
-        nicknameWrapper.setErrorEnabled(false);
-        presenter.checkNickname(text.toString());
-    }
+//    @OnTextChanged(R.id.nickname)
+//    public void nicknameChanged(CharSequence text) {
+////        nicknameWrapper.setErrorEnabled(false);
+//        presenter.checkNickname(text.toString());
+//    }
 
-    @OnTextChanged(R.id.phone)
-    public void phoneChanged(CharSequence text) {
-        phoneWrapper.setErrorEnabled(false);
-        presenter.checkPhone(text.toString());
-    }
+//    @OnTextChanged(R.id.phone)
+//    public void phoneChanged(CharSequence text) {
+////        phoneWrapper.setErrorEnabled(false);
+//        presenter.checkPhone(text.toString());
+//    }
 
-    @OnTextChanged(R.id.email)
-    public void emailChanged(CharSequence text) {
-        emailWrapper.setErrorEnabled(false);
-        presenter.checkEmail(text.toString());
-    }
+//    @OnTextChanged(R.id.email)
+//    public void emailChanged(CharSequence text) {
+////        emailWrapper.setErrorEnabled(false);
+//        presenter.checkEmail(text.toString());
+//    }
 
     @OnTextChanged(R.id.password)
     public void passwordChanged(CharSequence text) {
@@ -178,6 +190,16 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
         return true;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            dialog = null;
+        }
+    }
 
     /**
      * 是否正在注册中
@@ -186,12 +208,14 @@ public class RegisterFragment extends BaseMainFragment<RegisterPresenter> implem
         LogUtil.e3("isLogging = " + isRegister);
         if (isRegister) {
             btnRegistered.setClickable(false);
-            btnRegistered.setVisibility(View.GONE);
-            googleProgressBar.setVisibility(View.VISIBLE);
+            showDialog();
+//            btnRegistered.setVisibility(View.GONE);
+//            googleProgressBar.setVisibility(View.VISIBLE);
         } else {
-            googleProgressBar.setVisibility(View.GONE);
-            btnRegistered.setVisibility(View.VISIBLE);
+//            googleProgressBar.setVisibility(View.GONE);
+//            btnRegistered.setVisibility(View.VISIBLE);
             btnRegistered.setClickable(true);
+            dialog.dismissWithAnimation();
         }
     }
 }

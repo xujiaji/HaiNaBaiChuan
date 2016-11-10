@@ -17,8 +17,7 @@ import io.xujiaji.hnbc.utils.ImgLoadUtil;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainFragPresenter extends BasePresenter implements MainContract.MainFragPersenter  {
-    private MainContract.MainFragView view;
+public class MainFragPresenter extends BasePresenter <MainContract.MainFragView> implements MainContract.MainFragPersenter  {
     private Handler handler;
     private Runnable runnable = new Runnable() {
         private int x = 1;
@@ -36,18 +35,11 @@ public class MainFragPresenter extends BasePresenter implements MainContract.Mai
     };
     public MainFragPresenter(MainContract.MainFragView view) {
         super(view);
-        this.view = view;
-    }
-
-
-    @Override
-    public void start() {
-
     }
 
     @Override
     public void end() {
-        view = null;
+        super.end();
         runnable = null;
         handler = null;
     }
