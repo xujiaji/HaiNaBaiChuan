@@ -5,6 +5,16 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
     useLibrary 'org.apache.http.legacy'
+
+    signingConfigs {
+        key {
+            storeFile file("../xjj.jks")
+            storePassword KEYSTORE_PASSWORD
+            keyAlias "hainabaichuan"
+            keyPassword KEY_PASSWORD
+        }
+    }
+
     defaultConfig {
         applicationId "io.xujiaji.hnbc"
         minSdkVersion rootProject.minSdkVersion
@@ -18,6 +28,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes {
+        release {
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            signingConfig signingConfigs.key
+            minifyEnabled true
+            debuggable true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.key
+        }
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -35,7 +65,7 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-//    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    //    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
     compile "me.relex:circleindicator:$rootProject.circleindicatorVersion"
     compile "com.flaviofaria:kenburnsview:$rootProject.kenburnsviewVersion"
     compile "me.everything:overscroll-decor-android:$rootProject.overscrollVersion"
@@ -55,7 +85,8 @@ dependencies {
     compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
     compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-
+    compile 'com.facebook.android:facebook-android-sdk:4.17.0'
+    compile files('libs/open_sdk_r5509_lite.jar')
 }
 
 repositories {

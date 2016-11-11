@@ -203,6 +203,7 @@
 
 
         <LinearLayout
+            android:id="@+id/countryIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line"
@@ -224,6 +225,20 @@
                 android:id="@+id/btnLoginSina"
                 style="@style/FloatingActionButtonLoginStyle"
                 android:src="@drawable/ic_sina" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/countryOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countryIn"
+            android:gravity="right"
+            android:orientation="vertical">
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnLoginFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

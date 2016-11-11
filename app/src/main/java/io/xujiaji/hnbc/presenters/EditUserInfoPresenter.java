@@ -3,9 +3,7 @@ package io.xujiaji.hnbc.presenters;
 import java.io.File;
 import java.util.Date;
 
-import cn.bmob.v3.exception.BmobException;
 import io.xujiaji.hnbc.contracts.EditUserInfoContract;
-import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
@@ -29,8 +27,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
             }
 
             @Override
-            public void error(BmobException err) {
-                view.changeHeadPicFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+            public void error(String err) {
+                view.changeHeadPicFail(err);
             }
         });
     }
@@ -51,8 +49,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeNicknameFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeNicknameFail(err);
                     }
                 });
     }
@@ -73,8 +71,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changePhoneFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changePhoneFail(err);
                     }
                 });
     }
@@ -95,8 +93,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeSignFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeSignFail(err);
                     }
                 });
     }
@@ -112,8 +110,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeCityFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeCityFail(err);
                     }
                 });
     }
@@ -129,8 +127,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeSexFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeSexFail(err);
                     }
                 });
     }
@@ -146,8 +144,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeBirthdayFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeBirthdayFail(err);
                     }
                 });
     }
@@ -168,8 +166,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
                     }
 
                     @Override
-                    public void error(BmobException err) {
-                        view.changeEmailFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    public void error(String err) {
+                        view.changeEmailFail(err);
                     }
                 });
     }
@@ -188,8 +186,8 @@ public class EditUserInfoPresenter extends BasePresenter <EditUserInfoContract.V
             }
 
             @Override
-            public void error(BmobException err) {
-                view.changePasswordFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+            public void error(String err) {
+                view.changePasswordFail(err);
             }
         });
     }

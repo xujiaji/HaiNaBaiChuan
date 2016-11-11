@@ -16,7 +16,7 @@
         android:id="@+id/layoutWriteBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/white">
+        android:background="@color/colorAccent">
 
         <ImageButton
             android:id="@+id/btnLeftBack"
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/btnLeftBack"
+            android:textColorHint="@color/white"
             app:hintTextAppearance="@style/inputHint">
 
             <EditText
@@ -39,12 +40,12 @@
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
                 android:hint="@string/title_prompt"
+                android:textColorHint="@color/white"
                 android:minWidth="90dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textCursorDrawable="@drawable/color_cursor" />
         </android.support.design.widget.TextInputLayout>
     </RelativeLayout>

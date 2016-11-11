@@ -1,18 +1,23 @@
 package io.xujiaji.hnbc.presenters;
 
-import cn.bmob.v3.exception.BmobException;
+import android.app.Fragment;
+
+import com.facebook.AccessToken;
+import com.facebook.login.LoginResult;
+
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
-import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.ToastUtil;
 
 /**
  * Created by jiana on 16-11-4.
  */
 
-public class LoginPresenter extends BasePresenter <LoginContract.View> implements LoginContract.Presenter {
+public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
     public LoginPresenter(LoginContract.View view) {
         super(view);
@@ -39,12 +44,8 @@ public class LoginPresenter extends BasePresenter <LoginContract.View> implement
             }
 
             @Override
-            public void error(BmobException err) {
-                if (Integer.compare(101, err.getErrorCode()) == 0) {
-                    view.callLoginFail("用户名或密码不正确");
-                    return;
-                }
-                view.callLoginFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+            public void error(String err) {
+                view.callLoginFail(err);
             }
         });
     }
@@ -56,12 +57,63 @@ public class LoginPresenter extends BasePresenter <LoginContract.View> implement
 
     @Override
     public void requestQQ() {
-        ToastUtil.getInstance().showShortT("未知区域：QQ登录");
+        NetRequest.Instance().thirdLogin(((Fragment) view).getActivity()
+                , C.login.QQ
+                , new NetRequest.ThirdLoginLister<String>() {
+                    @Override
+                    public void thirdLoginSuccess() {
+                        view.showDialog();
+                    }
+
+                    @Override
+                    public void success(String s) {
+                        view.callLoginSuccess();
+                    }
+
+                    @Override
+                    public void error(String err) {
+                        view.callLoginFail(err);
+                    }
+                });
     }
 
     @Override
     public void requestWeiXin() {
         ToastUtil.getInstance().showShortT("未知区域：微信登录");
     }
+
+    @Override
+    public void requestFacebook(LoginResult loginResult) {
+        AccessToken accessToken = loginResult.getAccessToken();
+        NetRequest.Instance().facebookLogin(accessToken.getUserId(), MD5Util.getMD5(accessToken.getUserId()),
+                new NetRequest.RequestListener<User>() {
+                    @Override
+                    public void success(User user) {
+                        view.callLoginSuccess();
+                    }
+
+                    @Override
+                    public void error(String err) {
+                        view.callLoginFail(err);
+                    }
+                });
+
+    }
+
+//    @Override
+//    public void requestFacebook() {
+//        NetRequest.Instance().thirdLogin(((Fragment) view).getActivity(), C.login.FACEBOOK,
+//                new NetRequest.RequestListener<String>() {
+//                    @Override
+//                    public void success(String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void error(String err) {
+//
+//                    }
+//                });
+//    }
 
 }

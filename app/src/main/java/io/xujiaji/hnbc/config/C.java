@@ -176,4 +176,38 @@ public class C {
          */
         public static final int SIGN = 8;
     }
+
+    public static class login {
+        /**
+         * qq登陆
+         */
+        public static final String QQ = "qq";
+        /**
+         * 新浪登陆
+         */
+        public static final String SINA = "weibo";
+        /**
+         * 微信登陆
+         */
+        public static final String WEIXIN = "weixin";
+
+        public static final String FACEBOOK = "facebook";
+
+        public static class data {
+            public static final String PARAM_ACCESS_TOKEN = "access_token";
+            public static final String PARAM_EXPIRES_IN = "expires_in";
+            public static final String PARAM_OPEN_ID = "openid";
+            public static final String PARAM_NICKNAME = "nickname";
+            public static final String PARAM_CITY = "city";
+            public static final String PARAM_HEAD_PIC = "head_pic";
+            public static final String PARAM_GENDER = "gender";
+        }
+    }
+
+    /**
+     * sdk配置
+     */
+    public static class sdk {
+        public static final String QQ_APP_ID = "1105814896";
+    }
 }

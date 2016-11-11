@@ -93,7 +93,7 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         switch (view.getId()) {
             case R.id.menu:
                 if (!scrollRunning) {
-                    ((MainActivity) getActivity()).menuOpen();
+                    ((MainActivity) getActivity()).menuToggle();
                     return;
                 }
 

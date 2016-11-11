@@ -1,11 +1,9 @@
 package io.xujiaji.hnbc.presenters;
 
-import cn.bmob.v3.exception.BmobException;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
-import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
@@ -59,9 +57,9 @@ public class RegisterPresenter extends BasePresenter <RegisterContract.View> imp
                 }
 
                 @Override
-                public void error(BmobException err) {
+                public void error(String err) {
                     LogUtil.e3("err = " + err);
-                    view.callRegisterFail(ErrMsgFactory.errMSG(err.getErrorCode()));
+                    view.callRegisterFail(err);
                 }
             });
         } else {

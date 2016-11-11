@@ -23,6 +23,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beforeSetContentView();
         setContentView(getContentId());
         ButterKnife.bind(this);
         presenter = GenericHelper.initPresenter(this);
@@ -30,6 +31,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         onListener();
         initStatus();
         presenter.start();
+    }
+
+    protected void beforeSetContentView() {
+
     }
 
     private void initStatus() {

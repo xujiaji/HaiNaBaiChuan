@@ -8,6 +8,8 @@ import android.content.res.Configuration;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.facebook.FacebookSdk;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -35,6 +37,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     LinearLayout menu;
     private MenuHelper menuHelper;
     private ObjectAnimator translationOpen, translationClose;
+
+    @Override
+    protected void beforeSetContentView() {
+        super.beforeSetContentView();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+    }
 
     private AnimatorListenerAdapter animListener = new AnimatorListenerAdapter() {
         @Override
@@ -107,7 +115,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void menuToggle() {
         if (isMenuVisible) {
-            menuClose();
+            MainActivity.clickMenuItem(C.M_Menu.HOME);
         } else {
             menuOpen();
         }

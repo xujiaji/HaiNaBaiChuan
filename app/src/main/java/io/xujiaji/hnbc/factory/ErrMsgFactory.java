@@ -8,6 +8,8 @@ public class ErrMsgFactory {
 
     public static String errMSG(int errNum) {
         switch (errNum) {
+            case 101:
+                return "用户名或密码不正确";
             case 107:
                 return "时间格式不正确";
             case 202:

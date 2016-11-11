@@ -22,6 +22,8 @@ public class ImgLoadUtil {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
+                .placeholder(R.mipmap.fengjing)
+                .error(R.mipmap.fengjing)
                 .into(img);
 
     }

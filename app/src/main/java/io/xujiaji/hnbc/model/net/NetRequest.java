@@ -1,10 +1,16 @@
 package io.xujiaji.hnbc.model.net;
 
+import android.app.Activity;
 import android.content.Intent;
+
+import com.facebook.login.LoginManager;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -16,6 +22,8 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
+import io.xujiaji.hnbc.config.C;
+import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
@@ -74,11 +82,32 @@ public class NetRequest {
                 if (e == null) {
                     listener.success(user);
                 } else {
-                    listener.error(e);
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
     }
+
+    public void facebookLogin(final String username, final String password, final RequestListener<User> listener) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(MD5Util.getMD5(password));
+        user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    login(username, password, listener);
+                } else {
+                    if (Integer.compare(202, e.getErrorCode()) == 0) {
+                        login(username, password, listener);
+                        return;
+                    }
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+    }
+
 
     /**
      * 登录
@@ -94,10 +123,51 @@ public class NetRequest {
                 if (e == null) {
                     listener.success(user);
                 } else {
-                    listener.error(e);
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
+    }
+
+    /**
+     * 第三方登陆或注册
+     */
+    public void thirdLogin(Activity context, final String loginType, final ThirdLoginLister<String> listener) {
+        LoginSDKHelper
+                .getIntance()
+                .login(context, loginType)
+                .addListener(new LoginSDKHelper.ThirdLoginListener() {
+                    @Override
+                    public void loginSuccess(Map<String, String> data) {
+                        if (listener != null) {
+                            listener.thirdLoginSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void getUserInfoSuccess(Map<String, String> data) {
+
+                        BmobUser.BmobThirdUserAuth authInfo =
+                                new BmobUser.BmobThirdUserAuth(loginType,
+                                        data.get(C.login.data.PARAM_ACCESS_TOKEN),
+                                        data.get(C.login.data.PARAM_EXPIRES_IN),
+                                        MD5Util.getMD5(data.get(C.login.data.PARAM_OPEN_ID)));
+
+                        BmobUser.loginWithAuthData(authInfo, new LogInListener<JSONObject>() {
+                            @Override
+                            public void done(JSONObject userAuth, BmobException e) {
+                                listener.success(userAuth.toString());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void fail(String failMsg) {
+                        if (listener != null) {
+                            listener.error(failMsg);
+                        }
+                    }
+                });
     }
 
     /**
@@ -105,10 +175,12 @@ public class NetRequest {
      */
     public void exitLogin() {
         BmobUser.logOut();   //清除缓存用户对象
+        LoginManager.getInstance().logOut();
     }
 
     /**
      * 编辑签名
+     *
      * @param sign
      * @param listener
      */
@@ -121,7 +193,7 @@ public class NetRequest {
                 if (e == null) {
                     listener.success("");
                 } else {
-                    listener.error(e);
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
@@ -133,25 +205,25 @@ public class NetRequest {
         bmobFile.uploadblock(new UploadFileListener() {
             @Override
             public void done(BmobException e) {
-                if(e==null){
+                if (e == null) {
                     //bmobFile.getFileUrl()--返回的上传文件的完整地址
                     LogUtil.e3("上传文件成功:" + bmobFile.getFileUrl());
                     newUser.setHeadPic(bmobFile.getFileUrl());
                     BmobUser bmobUser = BmobUser.getCurrentUser();
-                    newUser.update(bmobUser.getObjectId(),new UpdateListener() {
+                    newUser.update(bmobUser.getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
-                            if(e==null){
+                            if (e == null) {
                                 listener.success(newUser.getHeadPic());
                                 LogUtil.e3("更新用户信息成功");
-                            }else{
-                                listener.error(e);
+                            } else {
+                                listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                                 LogUtil.e3("更新用户信息失败:" + e.getMessage());
                             }
                         }
                     });
-                }else{
-                    listener.error(e);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                     LogUtil.e3("上传头像失败：" + e.getMessage());
                 }
 
@@ -166,6 +238,7 @@ public class NetRequest {
 
     /**
      * 更新用户信息
+     *
      * @param type
      * @param info
      * @param listener
@@ -199,14 +272,14 @@ public class NetRequest {
                 throw new RuntimeException("UpdateType don't have " + type);
         }
         BmobUser bmobUser = BmobUser.getCurrentUser();
-        newUser.update(bmobUser.getObjectId(),new UpdateListener() {
+        newUser.update(bmobUser.getObjectId(), new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                if(e==null){
+                if (e == null) {
                     listener.success(newUser);
                     LogUtil.e3("更新用户信息成功");
-                }else{
-                    listener.error(e);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                     LogUtil.e3("更新用户信息失败:" + e.getMessage());
                 }
             }
@@ -215,6 +288,7 @@ public class NetRequest {
 
     /**
      * 更新密码
+     *
      * @param oldPwd
      * @param newPwd
      * @param listener
@@ -223,14 +297,15 @@ public class NetRequest {
         BmobUser.updateCurrentUserPassword(MD5Util.getMD5(oldPwd), MD5Util.getMD5(newPwd), new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                if(e==null){
+                if (e == null) {
                     listener.success(null);
-                }else{
-                    listener.error(e);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
     }
+
 
     /**
      * 更新类型
@@ -247,6 +322,11 @@ public class NetRequest {
 
     public interface RequestListener<T> {
         void success(T t);
-        void error(BmobException err);
+
+        void error(String err);
+    }
+
+    public interface ThirdLoginLister<T> extends RequestListener<T> {
+        void thirdLoginSuccess();
     }
 }

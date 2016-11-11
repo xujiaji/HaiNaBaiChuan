@@ -56,4 +56,7 @@
     <string name="send_dynamic">发布的动态</string>
     <string name="badge_level">徽章和等级</string>
     <string name="read_section">订阅的栏目</string>
+    <string name="login_success">登陆成功</string>
+    <string name="facebook_app_id">159623564504672</string>
+    <string name="fb_login_protocol_scheme">fb159623564504672</string>
 </resources>
