@@ -34,7 +34,7 @@ ext{
     buildToolsVersion = '25'
 
     //依赖库版本
-    supportLibraryVersion = '24.2.1'
+    supportLibraryVersion = '25.0.0'
     junitVersion='4.12'
     rxandroidVersion='1.2.1'
     rxjavaVersion='1.1.6'

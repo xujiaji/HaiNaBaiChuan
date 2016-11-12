@@ -84,7 +84,6 @@ dependencies {
     compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
     compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
     compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     compile 'com.facebook.android:facebook-android-sdk:4.17.0'
     compile files('libs/open_sdk_r5509_lite.jar')
 }
