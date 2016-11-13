@@ -89,6 +89,7 @@ public class EditorFragment extends BaseFragment<EditorPresenter> implements Edi
     }
 
     private void initToolbar() {
+        toolbar.setNavigationIcon(R.drawable.ic_chevron_left_24dp);
         toolbar.inflateMenu(R.menu.menu_editor_act);
         toolbar.inflateMenu(R.menu.menu_editor_frag);
         mActionSave = toolbar.getMenu().findItem(R.id.action_save);
@@ -191,6 +192,14 @@ public class EditorFragment extends BaseFragment<EditorPresenter> implements Edi
                 noSave();
             }
         });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.clickBack();
+            }
+        });
+
 
     }
 
