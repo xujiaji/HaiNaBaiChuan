@@ -73,4 +73,15 @@ public class Post extends BmobObject{
     public void setLikes(BmobRelation likes) {
         this.likes = likes;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", coverPicture='" + coverPicture + '\'' +
+                ", author=" + author +
+                ", likes=" + likes +
+                '}';
+    }
 }

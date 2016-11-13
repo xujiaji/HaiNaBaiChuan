@@ -4,8 +4,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import io.xujiaji.hnbc.model.entity.MainPersonMsg;
 import io.xujiaji.hnbc.model.entity.MainTag;
+import io.xujiaji.hnbc.model.entity.Post;
 
 /**
  * Created by jiana on 16-7-22.
@@ -36,8 +36,17 @@ public interface MainContract {
     interface MainFragPersenter extends Contract.BasePresenter {
         void autoScrollPager();
         List<MainTag> getTags();
-        List<MainPersonMsg> getPersonMsgs();
         void requestLoadHead(ImageView head);
+
+        /**
+         * 请求加载数据
+         */
+        void requestUpdateListData();
+
+        /**
+         * 请求加载更多数据
+         */
+        void requestLoadListData(int current);
     }
 
     interface MainFragView extends MainBaseFragView {
@@ -48,5 +57,33 @@ public interface MainContract {
         void currentPager(int position);
         int getPagerSize();
         int getPagerNowPosition();
+
+        /**
+         * 刷新列表数据成功
+         */
+        void updateListDateSuccess(List<Post> posts);
+
+        /**
+         * 刷新列表数据失败
+         * @param err
+         */
+        void updateListDateFail(String err);
+
+        /**
+         * 加载列表数据成功
+         * @param posts
+         */
+        void loadListDateSuccess(List<Post> posts);
+
+        /**
+         * 已经把数据加载完了
+         */
+        void loadListDateOver();
+
+        /**
+         * 加载数据失败了
+         * @param err
+         */
+        void loadListFail(String err);
     }
 }

@@ -32,10 +32,13 @@ import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MD5Util;
+import io.xujiaji.hnbc.utils.NetCheck;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.compressor.Compressor;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -79,6 +82,66 @@ public class NetRequest {
 
 
     /**
+     * 获取帖子数据集合
+     * @param size 获取的数据条数
+     * @return
+     */
+    public void pullPostList(int currentIndex, int size, final RequestListener<List<Post>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.setSkip(currentIndex);
+        query.setLimit(size);
+        //先判断是否有缓存
+//        boolean isCache = query.hasCachedResult(Post.class);
+//        if(isCache){
+//            query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);	// 先从缓存取数据，如果没有的话，再从网络取。
+//        }else{
+//            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
+//        }
+
+        query.findObjectsObservable(Post.class)
+                .map(new Func1<List<Post>, List<Post>>() {
+                    @Override
+                    public List<Post> call(List<Post> posts) {
+                        for (final Post post : posts) {
+                            String objectId = post.getAuthor().getObjectId();
+                            BmobQuery<User> query = new BmobQuery<>();
+                            query.addWhereEqualTo("objectId", objectId);
+                            query.findObjects(new FindListener<User>() {
+                                @Override
+                                public void done(List<User> object, BmobException e) {
+                                    if (e == null) {
+                                        if (object.size() > 0)
+                                            post.setAuthor(object.get(0));
+                                    }
+                                }
+                            });
+                        }
+                        return posts;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Post>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        LogUtil.e2(throwable.toString());
+                        listener.error(throwable.toString());
+                    }
+
+                    @Override
+                    public void onNext(List<Post> posts) {
+                        listener.success(posts);
+                    }
+                });
+    }
+
+    /**
      * 上传发表帖子
      *
      * @param coverPicture
@@ -86,6 +149,7 @@ public class NetRequest {
      * @param article
      */
     public void uploadArticle(String coverPicture, String title, String article, final RequestListener<String> listener) {
+        if (!checkNet(listener)) return;
         User user = BmobUser.getCurrentUser(User.class);
         if (user == null) {
             listener.error(App.getAppContext().getString(R.string.please_login));
@@ -115,6 +179,7 @@ public class NetRequest {
      * @param user
      */
     public void userRegister(User user, final RequestListener<User> listener) {
+        if (!checkNet(listener)) return;
         user.signUp(new SaveListener<User>() {
             @Override
             public void done(User user, BmobException e) {
@@ -128,6 +193,7 @@ public class NetRequest {
     }
 
     public void facebookLogin(final String username, final String password, final RequestListener<User> listener) {
+        if (!checkNet(listener)) return;
         User user = new User();
         user.setUsername(username);
         user.setPassword(MD5Util.getMD5(password));
@@ -156,6 +222,7 @@ public class NetRequest {
      * @param listener
      */
     public void login(String username, String password, final RequestListener<User> listener) {
+        if (!checkNet(listener)) return;
         BmobUser.loginByAccount(username, MD5Util.getMD5(password), new LogInListener<User>() {
             @Override
             public void done(User user, BmobException e) {
@@ -172,6 +239,7 @@ public class NetRequest {
      * 第三方登陆或注册
      */
     public void thirdLogin(Activity context, final String loginType, final ThirdLoginLister<String> listener) {
+        if (!checkNet(listener)) return;
         LoginSDKHelper
                 .getIntance()
                 .login(context, loginType)
@@ -245,6 +313,7 @@ public class NetRequest {
      * @param listener
      */
     public void uploadPic(File file, final UploadPicListener<String> listener) {
+        if (!checkNet(listener)) return;
         listener.compressingPic();
         Compressor.getDefault(App.getAppContext())
                 .compressToFileAsObservable(file)
@@ -287,6 +356,7 @@ public class NetRequest {
      * @param listener
      */
     public void uploadHeadPic(File file, final RequestListener<String> listener) {
+        if (!checkNet(listener)) return;
         final BmobFile bmobFile = new BmobFile(file);
         final User newUser = new User();
         bmobFile.uploadblock(new UploadFileListener() {
@@ -332,6 +402,7 @@ public class NetRequest {
      * @param <T>
      */
     public <T> void updateInfo(UpdateType type, T info, final RequestListener<User> listener) {
+        if (!checkNet(listener)) return;
         final User newUser = new User();
         switch (type) {
             case NICKNAME:
@@ -381,6 +452,7 @@ public class NetRequest {
      * @param listener
      */
     public void updatePassword(String oldPwd, String newPwd, final RequestListener<User> listener) {
+        if (!checkNet(listener)) return;
         BmobUser.updateCurrentUserPassword(MD5Util.getMD5(oldPwd), MD5Util.getMD5(newPwd), new UpdateListener() {
             @Override
             public void done(BmobException e) {
@@ -424,5 +496,14 @@ public class NetRequest {
 
     public interface ThirdLoginLister<T> extends RequestListener<T> {
         void thirdLoginSuccess();
+    }
+
+    private boolean checkNet(RequestListener listener) {
+        if (NetCheck.isConnected(App.getAppContext())){
+            return true;
+        } else {
+            listener.error(App.getAppContext().getString(R.string.please_check_network_status));
+            return false;
+        }
     }
 }

@@ -4,16 +4,21 @@ import android.app.FragmentManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,14 +29,17 @@ import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.adapters.MainPagerAdapter;
 import io.xujiaji.hnbc.adapters.MainRecyclerAdapter;
 import io.xujiaji.hnbc.contracts.MainContract;
+import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
 import io.xujiaji.hnbc.utils.MaterialRippleHelper;
 import io.xujiaji.hnbc.utils.ScreenUtils;
+import io.xujiaji.hnbc.utils.ToastUtil;
 import io.xujiaji.hnbc.widget.SheetLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import me.relex.circleindicator.CircleIndicator;
 
-public class MainFragment extends BaseMainFragment<MainFragPresenter> implements MainContract.MainFragView {
+public class MainFragment extends BaseMainFragment<MainFragPresenter> implements MainContract.MainFragView,
+        BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     /**
      * 底部布局到达顶部
      */
@@ -40,6 +48,10 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
      * 底部布局到达底部
      */
     public static final int BOTTOM_VIEW_STATUS_BOTTOM = 0;
+
+    public static final int PAGE_SIZE = 6;
+
+    private int mCurrentCounter = 0;
 
     private boolean fabContentOpen = false;
     @BindView(R.id.appbar)
@@ -62,6 +74,8 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     ImageView imgScrollInfo;
     @BindView(R.id.menu)
     ImageView menu;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
     private MainFragHandler handler;
     private Runnable runnableTop, runnableBottom;
     private boolean scrollRunning;//底部view是否正在滚动
@@ -72,7 +86,9 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     @BindView(R.id.bottom_sheet)
     SheetLayout mSheetLayout;
     private MainPagerAdapter mMainPagerAdapter;
-
+    private MainBottomRecyclerAdapter mMainBottomRecyclerAdapter;
+    private View notLoadingView;
+    private int delayMillis = 1000;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -178,7 +194,12 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         mainRecycler.setAdapter(new MainRecyclerAdapter(presenter.getTags()));
 
         mainBottomRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mainBottomRecycler.setAdapter(new MainBottomRecyclerAdapter(presenter.getPersonMsgs()));
+        swipeLayout.setOnRefreshListener(this);
+        mMainBottomRecyclerAdapter = new MainBottomRecyclerAdapter();
+        mMainBottomRecyclerAdapter.openLoadAnimation();
+        mMainBottomRecyclerAdapter.openLoadMore(PAGE_SIZE);
+        mMainBottomRecyclerAdapter.setOnLoadMoreListener(this);
+        mainBottomRecycler.setAdapter(mMainBottomRecyclerAdapter);
     }
 
     private void initViewPager() {
@@ -222,6 +243,7 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int dyDiff = 0;
+
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -353,6 +375,52 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     @Override
     public int getPagerNowPosition() {
         return mainViewPager.getCurrentItem();
+    }
+
+    @Override
+    public void updateListDateSuccess(List<Post> posts) {
+        mMainBottomRecyclerAdapter.setNewData(posts);
+        mMainBottomRecyclerAdapter.openLoadMore(PAGE_SIZE);
+        mMainBottomRecyclerAdapter.removeAllFooterView();
+        mCurrentCounter = PAGE_SIZE;
+        swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void updateListDateFail(String err) {
+        swipeLayout.setRefreshing(false);
+        ToastUtil.getInstance().showLongT(err);
+    }
+
+    @Override
+    public void loadListDateSuccess(List<Post> posts) {
+        mMainBottomRecyclerAdapter.addData(posts);
+        mCurrentCounter = mMainBottomRecyclerAdapter.getData().size();
+    }
+
+    @Override
+    public void loadListDateOver() {
+        mMainBottomRecyclerAdapter.loadComplete();
+        if (notLoadingView == null) {
+            notLoadingView = LayoutInflater.from(getActivity()).inflate(R.layout.not_loading, (ViewGroup) mainBottomRecycler.getParent(), false);
+        }
+        mMainBottomRecyclerAdapter.addFooterView(notLoadingView);
+    }
+
+    @Override
+    public void loadListFail(String err) {
+        mMainBottomRecyclerAdapter.showLoadMoreFailedView();
+        ToastUtil.getInstance().showLongT(err);
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.requestUpdateListData();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        presenter.requestLoadListData(mCurrentCounter);
     }
 
 
