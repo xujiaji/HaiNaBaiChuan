@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.contracts.WriteContract;
+import io.xujiaji.hnbc.contracts.EditorContract;
 import io.xujiaji.hnbc.model.entity.Write;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -49,11 +49,11 @@ public class WriteAdapter extends RecyclerView.Adapter {
 
     private List<Write.Content> contents;//显示内容
     private RecyclerView.ViewHolder previousOpenMenuHolder;//上一个打开菜单的holder
-    private WriteContract.View writeView;
+    private EditorContract.View writeView;
     private WeakReference<RecyclerView> wf;
     private Context context;
 
-    public WriteAdapter(WriteContract.View writeView) {
+    public WriteAdapter(EditorContract.View writeView) {
         contents = new ArrayList<>();
         this.writeView = writeView;
     }
@@ -113,7 +113,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
     }
 
     void addImg() {
-        writeView.openImgSelect();
+//        writeView.openImgSelect();
 //        Write.Content content = new Write.Content();
 //        content.setType(WRITE_IMG_TYPE);
 //        contents.add(content);
@@ -219,7 +219,7 @@ public class WriteAdapter extends RecyclerView.Adapter {
             }
             switch (view.getId()) {
                 case R.id.btnAddImg:
-                    mWriteAdapter.addImg();
+//                    mWriteAdapter.addImg();
                     break;
                 case R.id.btnAddText:
                     mWriteAdapter.addText();

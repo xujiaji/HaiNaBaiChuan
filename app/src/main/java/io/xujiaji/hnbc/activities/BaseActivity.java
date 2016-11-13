@@ -26,11 +26,17 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         beforeSetContentView();
         setContentView(getContentId());
         ButterKnife.bind(this);
-        presenter = GenericHelper.initPresenter(this);
+        try{
+            presenter = GenericHelper.initPresenter(this);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         onInit();
         onListener();
         initStatus();
-        presenter.start();
+        if (presenter != null) {
+            presenter.start();
+        }
     }
 
     protected void beforeSetContentView() {

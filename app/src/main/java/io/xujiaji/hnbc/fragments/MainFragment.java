@@ -133,9 +133,9 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
      */
     private void addWriteFragment() {
         FragmentManager manager = getFragmentManager();
-        String tag = WriteFragment.class.getSimpleName();
+        String tag = EditorFragment.class.getSimpleName();
         if (manager.findFragmentByTag(tag) == null) {
-            manager.beginTransaction().add(R.id.bottom_sheet, WriteFragment.newInstance(), tag).commit();
+            manager.beginTransaction().add(R.id.bottom_sheet, EditorFragment.newInstance(), tag).commit();
         }
     }
 

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/res/merged/debug/drawable-v21/crop__selectable_background.xml",
+        "source": "/home/jiana/workspace/android/DevelopersBackpack/crop/src/main/res/drawable-v21/crop__selectable_background.xml"
+    },
+    {
+        "merged": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable-v21/abc_btn_colored_material.xml"
+    }
+]

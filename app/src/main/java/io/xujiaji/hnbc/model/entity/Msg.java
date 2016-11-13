@@ -13,9 +13,21 @@ public class Msg {
      * 选择菜单
      */
     public static final int CHOOSE_MENU = 1;
+
+    /**
+     * 关闭编辑状态
+     */
+    public static final int CLICK_BACK = 2;
+
     public final int type;
     public final String fragment;
     public final int menuIndex;
+
+    public Msg(int type) {
+        this.type = type;
+        this.menuIndex = 0;
+        this.fragment = null;
+    }
 
     public Msg(int type, int menuIndex) {
         this.type = type;

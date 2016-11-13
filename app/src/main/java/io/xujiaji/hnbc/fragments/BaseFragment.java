@@ -27,13 +27,19 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        presenter = GenericHelper.initPresenter(this);
+        try{
+            presenter = GenericHelper.initPresenter(this);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         rootView = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, rootView);
         initStatus();
         onInit();
         onListener();
-        presenter.start();
+        if (presenter != null) {
+            presenter.start();
+        }
         return rootView;
     }
 

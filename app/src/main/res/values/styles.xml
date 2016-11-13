@@ -109,4 +109,13 @@
         <item name="android:drawablePadding">24dp</item>
         <item name="android:textColor">@color/text_color_level_2</item>
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorHighlight">@color/colorPrimary66</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor_light</item>
+    </style>
+
 </resources>

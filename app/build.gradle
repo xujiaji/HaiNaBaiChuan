@@ -60,6 +60,7 @@ dependencies {
     compile project(':dialog')
     compile project(':citypicker')
     testCompile "junit:junit:$rootProject.junitVersion"
+    compile 'com.android.support:support-v13:25.0.0'
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
@@ -80,11 +81,12 @@ dependencies {
         transitive = true;
     }
     compile "cn.finalteam:galleryfinal:$rootProject.galleryfinalVersion"
-    compile "com.jpardogo.googleprogressbar:library:$rootProject.googleprogressbarVersion"
     compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
     compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
     compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     compile 'com.facebook.android:facebook-android-sdk:4.17.0'
+    compile 'ren.qinc.edit:lib:0.0.3'
     compile files('libs/open_sdk_r5509_lite.jar')
 }
 

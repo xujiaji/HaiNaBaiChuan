@@ -21,15 +21,22 @@ import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
+import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.WelcomeActivity;
+import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
+import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.OtherUtils;
+import io.xujiaji.hnbc.utils.compressor.Compressor;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * 网络请求
@@ -65,6 +72,38 @@ public class NetRequest {
                     intent.putExtra("imgPath", list.get(i).getImgAddress());
                     context.startService(intent);
                     break;
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 上传发表帖子
+     *
+     * @param coverPicture
+     * @param title
+     * @param article
+     */
+    public void uploadArticle(String coverPicture, String title, String article, final RequestListener<String> listener) {
+        User user = BmobUser.getCurrentUser(User.class);
+        if (user == null) {
+            listener.error(App.getAppContext().getString(R.string.please_login));
+            return;
+        }
+        Post post = new Post();
+        post.setContent(article);
+        post.setTitle(title);
+        post.setCoverPicture(coverPicture);
+        post.setAuthor(user);
+        post.save(new SaveListener<String>() {
+
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    listener.success(s);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
@@ -199,6 +238,54 @@ public class NetRequest {
         });
     }
 
+    /**
+     * 上传图片
+     *
+     * @param file
+     * @param listener
+     */
+    public void uploadPic(File file, final UploadPicListener<String> listener) {
+        listener.compressingPic();
+        Compressor.getDefault(App.getAppContext())
+                .compressToFileAsObservable(file)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<File>() {
+                    @Override
+                    public void call(File file) {
+                        listener.compressedPicSuccess();
+                        final BmobFile bmobFile = new BmobFile(file);
+                        bmobFile.uploadblock(new UploadFileListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e == null) {
+                                    listener.success(bmobFile.getFileUrl());
+                                } else {
+                                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                                }
+                            }
+
+                            @Override
+                            public void onProgress(Integer value) {
+                                super.onProgress(value);
+                                listener.progress(value);
+                            }
+                        });
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        listener.error(throwable.toString());
+                    }
+                });
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param file
+     * @param listener
+     */
     public void uploadHeadPic(File file, final RequestListener<String> listener) {
         final BmobFile bmobFile = new BmobFile(file);
         final User newUser = new User();
@@ -324,6 +411,15 @@ public class NetRequest {
         void success(T t);
 
         void error(String err);
+    }
+
+    public interface ProgressListener<T> extends RequestListener<T> {
+        void progress(int i);
+    }
+
+    public interface UploadPicListener<T> extends ProgressListener<T> {
+        void compressingPic();
+        void compressedPicSuccess();
     }
 
     public interface ThirdLoginLister<T> extends RequestListener<T> {

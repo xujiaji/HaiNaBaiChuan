@@ -281,6 +281,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         EventBus.getDefault().post(new Msg(Msg.CHOOSE_MENU, menuIndex));
     }
 
+    public static void clickBack() {
+        EventBus.getDefault().post(new Msg(Msg.CLICK_BACK));
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMsgEvent(Msg msg) {
         switch (msg.type) {
@@ -290,6 +294,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case Msg.CHOOSE_MENU:
                 menuHelper.selectMenuItem(msg.menuIndex, getResources().getColor(R.color.colorPrimary));
                 menuItemStatus(msg.menuIndex);
+                break;
+            case Msg.CLICK_BACK:
+                onBackPressed();
                 break;
         }
     }

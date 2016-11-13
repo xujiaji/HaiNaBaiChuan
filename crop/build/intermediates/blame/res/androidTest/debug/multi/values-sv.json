@@ -1,0 +1,501 @@
+[
+    {
+        "outputFile": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-sv/values-sv.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 100,
+                    "endColumn": 105,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 105,
+                        "endOffset": 156
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 206,
+                    "endColumn": 107,
+                    "endOffset": 309
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 161,
+                        "endColumn": 107,
+                        "endOffset": 264
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 314,
+                    "endColumn": 122,
+                    "endOffset": 432
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 269,
+                        "endColumn": 122,
+                        "endOffset": 387
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 437,
+                    "endColumn": 102,
+                    "endOffset": 535
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 392,
+                        "endColumn": 102,
+                        "endOffset": 490
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 540,
+                    "endColumn": 110,
+                    "endOffset": 646
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 495,
+                        "endColumn": 110,
+                        "endOffset": 601
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 651,
+                    "endColumn": 84,
+                    "endOffset": 731
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 606,
+                        "endColumn": 84,
+                        "endOffset": 686
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 736,
+                    "endColumn": 101,
+                    "endOffset": 833
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 691,
+                        "endColumn": 101,
+                        "endOffset": 788
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 838,
+                    "endColumn": 112,
+                    "endOffset": 946
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 793,
+                        "endColumn": 112,
+                        "endOffset": 901
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 951,
+                    "endColumn": 75,
+                    "endOffset": 1022
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 906,
+                        "endColumn": 75,
+                        "endOffset": 977
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1027,
+                    "endColumn": 75,
+                    "endOffset": 1098
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 982,
+                        "endColumn": 75,
+                        "endOffset": 1053
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1103,
+                    "endColumn": 79,
+                    "endOffset": 1178
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1058,
+                        "endColumn": 79,
+                        "endOffset": 1133
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1183,
+                    "endColumn": 105,
+                    "endOffset": 1284
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1138,
+                        "endColumn": 105,
+                        "endOffset": 1239
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1289,
+                    "endColumn": 99,
+                    "endOffset": 1384
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1244,
+                        "endColumn": 99,
+                        "endOffset": 1339
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1389,
+                    "endColumn": 95,
+                    "endOffset": 1480
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1344,
+                        "endColumn": 95,
+                        "endOffset": 1435
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1485,
+                    "endColumn": 104,
+                    "endOffset": 1585
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1440,
+                        "endColumn": 104,
+                        "endOffset": 1540
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1590,
+                    "endColumn": 101,
+                    "endOffset": 1687
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1545,
+                        "endColumn": 101,
+                        "endOffset": 1642
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1692,
+                    "endColumn": 101,
+                    "endOffset": 1789
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1647,
+                        "endColumn": 101,
+                        "endOffset": 1744
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1794,
+                    "endColumn": 116,
+                    "endOffset": 1906
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1749,
+                        "endColumn": 116,
+                        "endOffset": 1861
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1911,
+                    "endColumn": 101,
+                    "endOffset": 2008
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1866,
+                        "endColumn": 101,
+                        "endOffset": 1963
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2013,
+                    "endColumn": 71,
+                    "endOffset": 2080
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/bundles/debug/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 100,
+                        "endColumn": 71,
+                        "endOffset": 167
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2085,
+                    "endColumn": 43,
+                    "endOffset": 2124
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/bundles/debug/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 172,
+                        "endColumn": 43,
+                        "endOffset": 211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2129,
+                    "endColumn": 73,
+                    "endOffset": 2198
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/bundles/debug/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 216,
+                        "endColumn": 73,
+                        "endOffset": 285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2203,
+                    "endColumn": 53,
+                    "endOffset": 2252
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/bundles/debug/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 290,
+                        "endColumn": 53,
+                        "endOffset": 339
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 2257,
+                    "endColumn": 53,
+                    "endOffset": 2306
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/bundles/debug/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 344,
+                        "endColumn": 53,
+                        "endOffset": 393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 2311,
+                    "endColumn": 78,
+                    "endOffset": 2385
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1968,
+                        "endColumn": 78,
+                        "endOffset": 2042
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 2390,
+                    "endColumn": 100,
+                    "endOffset": 2486
+                },
+                "from": {
+                    "file": "/home/jiana/workspace/android/DevelopersBackpack/crop/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/values-sv/values-sv.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 2047,
+                        "endColumn": 100,
+                        "endOffset": 2143
+                    }
+                }
+            }
+        ]
+    }
+]

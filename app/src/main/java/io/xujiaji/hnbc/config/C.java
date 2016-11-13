@@ -210,4 +210,18 @@ public class C {
     public static class sdk {
         public static final String QQ_APP_ID = "1105814896";
     }
+
+    /**
+     * SharedPreferences 存储key
+     */
+    public static class preference {
+        /**
+         * 文章
+         */
+        public static final String ARTICLE = "article";
+        /**
+         * 文章标题
+         */
+        public static final String ARTICLE_TITLE = "article_title";
+    }
 }
