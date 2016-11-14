@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -28,9 +29,11 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.adapters.MainPagerAdapter;
 import io.xujiaji.hnbc.adapters.MainRecyclerAdapter;
+import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
+import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MaterialRippleHelper;
 import io.xujiaji.hnbc.utils.ScreenUtils;
 import io.xujiaji.hnbc.utils.ToastUtil;
@@ -88,7 +91,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     private MainPagerAdapter mMainPagerAdapter;
     private MainBottomRecyclerAdapter mMainBottomRecyclerAdapter;
     private View notLoadingView;
-    private int delayMillis = 1000;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -240,6 +242,27 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
                 return false;
             }
         });
+
+        mainBottomRecycler.addOnItemTouchListener(new OnItemChildClickListener() {
+            @Override
+            public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                LogUtil.e2("position = " + i);
+                LogUtil.e3(view.toString());
+                switch (view.getId()) {
+                    case R.id.layoutBaseArticle:
+                        saveData(C.data.KEY_POST, baseQuickAdapter.getData().get(i));
+                        MainActivity.startFragment(C.fragment.READ_ARTICLE);
+                        break;
+                    case R.id.btnLike:
+                        ToastUtil.getInstance().showShortT("喜欢");
+                        break;
+                    case R.id.btnFollow:
+                        ToastUtil.getInstance().showShortT("关注");
+                        break;
+                }
+            }
+        });
+
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int dyDiff = 0;
@@ -409,7 +432,15 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
 
     @Override
     public void loadListFail(String err) {
-        mMainBottomRecyclerAdapter.showLoadMoreFailedView();
+        if (swipeLayout.isRefreshing()) {
+            swipeLayout.setRefreshing(false);
+        }
+        mainBottomRecycler.post(new Runnable() {
+            @Override
+            public void run() {
+                mMainBottomRecyclerAdapter.showLoadMoreFailedView();
+            }
+        });
         ToastUtil.getInstance().showLongT(err);
     }
 

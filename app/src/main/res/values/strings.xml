@@ -97,4 +97,5 @@
     <string name="now_releasing_article">正在发布帖子…</string>
     <string name="network_err">Simulation network error</string>
     <string name="please_check_network_status">请检查网络状态！</string>
+    <string name="jin">#</string>
 </resources>

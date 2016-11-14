@@ -8,6 +8,7 @@ import io.xujiaji.hnbc.fragments.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
 import io.xujiaji.hnbc.fragments.LoginFragment;
 import io.xujiaji.hnbc.fragments.MainFragment;
+import io.xujiaji.hnbc.fragments.ReadArticleFragment;
 import io.xujiaji.hnbc.fragments.RegisterFragment;
 import io.xujiaji.hnbc.fragments.UserInfoFragment;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -49,6 +50,9 @@ public class FragmentFactory {
                 break;
             case C.fragment.EDIT_USER_INFO:
                 newFragment = EditUserInfoFragment.newInstance();
+                break;
+            case C.fragment.READ_ARTICLE:
+                newFragment = ReadArticleFragment.newInstance();
                 break;
             default:
                 break;

@@ -79,6 +79,13 @@ public class C {
         public static final int SET = 4;
     }
 
+    public static class data {
+        /**
+         * 保存文章数据
+         */
+        public static final String KEY_POST = "post_key";
+    }
+
     /**
      * 首页fragment Key管理
      */
@@ -96,6 +103,12 @@ public class C {
          * 编辑个人信息
          */
         public static final String EDIT_USER_INFO = "EditUserInfoFragment";
+
+        /**
+         * key：阅读文章
+         */
+        public static final String READ_ARTICLE = "ReadArticleFragment";
+
         /**
          * key：登陆
          */

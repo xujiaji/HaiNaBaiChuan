@@ -32,6 +32,9 @@ public class MainBottomRecyclerAdapter extends BaseQuickAdapter<Post, BaseViewHo
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Post post) {
         baseViewHolder.setText(R.id.tvUserName, "@" + post.getAuthor().getNickname())
+                .addOnClickListener(R.id.layoutBaseArticle)
+                .addOnClickListener(R.id.btnLike)
+                .addOnClickListener(R.id.btnFollow)
                 .setText(R.id.tvTopContent, post.getCreatedAt())
                 .setText(R.id.tvBottomContent, post.getTitle());
 

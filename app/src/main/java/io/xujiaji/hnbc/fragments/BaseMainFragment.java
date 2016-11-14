@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.view.ViewTreeObserver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.TransitionHelper;
@@ -26,6 +29,37 @@ public abstract class BaseMainFragment<T extends BasePresenter> extends BaseFrag
 
     //是否更新过用户信息
     private boolean updatedUser = false;
+
+    //保存一些数据
+    private static Map<String, Object> dataSave = new HashMap<>(1);
+
+    /**
+     * 获取数据
+     * @param key
+     * @param <D>
+     * @return
+     */
+    public static <D> D getData(String key) {
+        Object obj = dataSave.get(key);
+        if (obj == null) {
+            return null;
+        } else {
+            return (D) obj;
+        }
+    }
+
+    public static void clearData() {
+        dataSave.clear();
+    }
+
+    /**
+     * 保存数据
+     * @param key
+     * @param obj
+     */
+    public static void saveData(String key, Object obj) {
+        dataSave.put(key, obj);
+    }
 
     AnimatorListenerAdapter showShadowListener = new AnimatorListenerAdapter() {
         @Override
