@@ -10,7 +10,7 @@ android {
         key {
             storeFile file("../xjj.jks")
             storePassword KEYSTORE_PASSWORD
-            keyAlias "hainabaichuan"
+            keyAlias KEY_ALIAS
             keyPassword KEY_PASSWORD
         }
     }
@@ -49,9 +49,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //view厚度视觉
     compile project(':depth')
+    //图片剪切
     compile project(':crop')
+    //sweet-alert-dialog
     compile project(':dialog')
+    //城市选择
     compile project(':citypicker')
     //QQ sdk
     compile files('libs/open_sdk_r5509_lite.jar')
@@ -62,27 +66,39 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    //    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    //viewpager指示器
     compile "me.relex:circleindicator:$rootProject.circleindicatorVersion"
+    //图片动态移动展示
     compile "com.flaviofaria:kenburnsview:$rootProject.kenburnsviewVersion"
+    //ios风格列表边缘过度效果
     compile "me.everything:overscroll-decor-android:$rootProject.overscrollVersion"
+    //绑定UI
     compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    //波纹效果
     compile "com.balysv:material-ripple:$rootProject.rippleVersion"
+    //Bmob数据后端
     compile "cn.bmob.android:bmob-sdk:$rootProject.bmobVersion"
+    //因Bmob数据后端而导入
     compile "cn.bmob.android:http-legacy:$rootProject.legacyVersion"
+    //图片加载框架
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    //抽象RecyclerView Adapter
     compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelperVersion"
+    //实现圆形动画展开另一个页面，如打开写作页面
     compile('com.github.ozodrukh:CircularReveal:1.3.1@aar') {
         transitive = true;
     }
-    compile "cn.finalteam:galleryfinal:$rootProject.galleryfinalVersion"
+    //消息传递
     compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+    //底部弹出试图
     compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
     compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
+    //material风格事件选择
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     //Facebook SDK
     compile 'com.facebook.android:facebook-android-sdk:4.17.0'
+    //EditText撤销和恢复
     compile 'ren.qinc.edit:lib:0.0.3'
 
     //内存泄露提示
