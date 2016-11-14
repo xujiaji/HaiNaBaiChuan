@@ -41,8 +41,8 @@
     <string name="email">邮箱</string>
     <string name="pwd">密码</string>
     <string name="login">登陆</string>
-    <string name="like">LIKE</string>
-    <string name="follow">FOLLOW</string>
+    <string name="like">喜欢</string>
+    <string name="follow">关注</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="other_login">其他登录方式</string>

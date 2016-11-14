@@ -38,7 +38,6 @@ import io.xujiaji.hnbc.utils.compressor.Compressor;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -91,6 +90,8 @@ public class NetRequest {
         BmobQuery<Post> query = new BmobQuery<>();
         query.setSkip(currentIndex);
         query.setLimit(size);
+        query.order("-createdAt");
+        query.include("author");
         //先判断是否有缓存
 //        boolean isCache = query.hasCachedResult(Post.class);
 //        if(isCache){
@@ -100,26 +101,26 @@ public class NetRequest {
 //        }
 
         query.findObjectsObservable(Post.class)
-                .map(new Func1<List<Post>, List<Post>>() {
-                    @Override
-                    public List<Post> call(List<Post> posts) {
-                        for (final Post post : posts) {
-                            String objectId = post.getAuthor().getObjectId();
-                            BmobQuery<User> query = new BmobQuery<>();
-                            query.addWhereEqualTo("objectId", objectId);
-                            query.findObjects(new FindListener<User>() {
-                                @Override
-                                public void done(List<User> object, BmobException e) {
-                                    if (e == null) {
-                                        if (object.size() > 0)
-                                            post.setAuthor(object.get(0));
-                                    }
-                                }
-                            });
-                        }
-                        return posts;
-                    }
-                })
+//                .map(new Func1<List<Post>, List<Post>>() {
+//                    @Override
+//                    public List<Post> call(List<Post> posts) {
+//                        for (final Post post : posts) {
+//                            String objectId = post.getAuthor().getObjectId();
+//                            BmobQuery<User> query = new BmobQuery<>();
+//                            query.addWhereEqualTo("objectId", objectId);
+//                            query.findObjects(new FindListener<User>() {
+//                                @Override
+//                                public void done(List<User> object, BmobException e) {
+//                                    if (e == null) {
+//                                        if (object.size() > 0)
+//                                            post.setAuthor(object.get(0));
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        return posts;
+//                    }
+//                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Post>>() {
