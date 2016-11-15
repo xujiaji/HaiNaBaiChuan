@@ -40,7 +40,7 @@ ext{
     rxjavaVersion='1.1.6'
     gsonVersion='2.7'
     reboundVersion='0.3.5'
-    circleindicatorVersion='1.2.1@aar'
+    bannerVersion='1.4.2'
     kenburnsviewVersion='1.0.7'
     overscrollVersion='1.0.3'
     butterknifeVersion='8.4.0'

@@ -3,13 +3,11 @@ package io.xujiaji.hnbc.fragments;
 import android.app.FragmentManager;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +15,9 @@ import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -27,19 +28,18 @@ import butterknife.OnClick;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
-import io.xujiaji.hnbc.adapters.MainPagerAdapter;
 import io.xujiaji.hnbc.adapters.MainRecyclerAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
+import io.xujiaji.hnbc.utils.GlideImageLoader;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MaterialRippleHelper;
 import io.xujiaji.hnbc.utils.ScreenUtils;
 import io.xujiaji.hnbc.utils.ToastUtil;
 import io.xujiaji.hnbc.widget.SheetLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
-import me.relex.circleindicator.CircleIndicator;
 
 public class MainFragment extends BaseMainFragment<MainFragPresenter> implements MainContract.MainFragView,
         BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
@@ -65,10 +65,8 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     ViewGroup dl3;
     @BindView(R.id.status)
     View status;
-    @BindView(R.id.mainViewPager)
-    ViewPager mainViewPager;
-    @BindView(R.id.mainIndicator)
-    CircleIndicator mainIndicator;
+    @BindView(R.id.banner)
+    Banner banner;
     @BindView(R.id.mainRecycler)
     RecyclerView mainRecycler;
     @BindView(R.id.mainBottomRecycler)
@@ -88,7 +86,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     private int bottomViewNowStatus;
     @BindView(R.id.bottom_sheet)
     SheetLayout mSheetLayout;
-    private MainPagerAdapter mMainPagerAdapter;
     private MainBottomRecyclerAdapter mMainBottomRecyclerAdapter;
     private View notLoadingView;
 
@@ -168,10 +165,20 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         handler = new MainFragHandler(this);
         MaterialRippleHelper.ripple(imgScrollInfo);
         initStatusHeight();
-        initViewPager();
+        initBanner();
         initRecycler();
         initSheetLayout();
         presenter.requestLoadHead(menu);
+    }
+
+    /**
+     * 初始化广告图片
+     */
+    private void initBanner() {
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置banner样式
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
     }
 
     @Override
@@ -204,12 +211,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         mainBottomRecycler.setAdapter(mMainBottomRecyclerAdapter);
     }
 
-    private void initViewPager() {
-        mMainPagerAdapter = new MainPagerAdapter(getActivity());
-        mainViewPager.setAdapter(mMainPagerAdapter);
-        mainIndicator.setViewPager(mainViewPager);
-        presenter.autoScrollPager();
-    }
 
     private void initStatusHeight() {
         int statusHeight = ScreenUtils.getStatusHeight(getActivity());
@@ -228,20 +229,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
 
     @Override
     protected void onListener() {
-        mainViewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        presenter.stop();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        presenter.autoScrollPager();
-                        break;
-                }
-                return false;
-            }
-        });
 
         mainBottomRecycler.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
@@ -290,6 +277,13 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
                 if (dy > 0) {
                     contentLayoutToTop();
                 }
+            }
+        });
+
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                presenter.requestOpenBannerLink(getActivity(), position - 1);
             }
         });
     }
@@ -384,20 +378,18 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         }
     }
 
-
     @Override
-    public void currentPager(int position) {
-        mainViewPager.setCurrentItem(position, true);
+    public void pullBannerDataSuccess(List<String> titles, List<String> images) {
+        //设置图片集合
+        banner.setImages(images);
+        banner.setBannerTitles(titles);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
     }
 
     @Override
-    public int getPagerSize() {
-        return mMainPagerAdapter.getCount();
-    }
-
-    @Override
-    public int getPagerNowPosition() {
-        return mainViewPager.getCurrentItem();
+    public void pullBannerDataFail(String err) {
+        ToastUtil.getInstance().showShortT(err);
     }
 
     @Override

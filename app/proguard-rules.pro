@@ -110,6 +110,10 @@
 -keep class org.eclipse.mat.** { *; }
 -keep class com.squareup.leakcanary.** { *; }
 
+# banner 的混淆代码
+-keep class com.youth.banner.** {
+    *;
+ }
 
 
 #-keep public class * extends android.app.Fragment

@@ -1,5 +1,6 @@
 package io.xujiaji.hnbc.contracts;
 
+import android.content.Context;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -34,8 +35,18 @@ public interface MainContract {
 
 
     interface MainFragPersenter extends Contract.BasePresenter {
-        void autoScrollPager();
         List<MainTag> getTags();
+
+        /**
+         * 请求加载广告数据
+         */
+        void requestBannerData();
+
+        /**
+         * 请求打开链接
+         */
+        void requestOpenBannerLink(Context context, int position);
+
         void requestLoadHead(ImageView head);
 
         /**
@@ -54,10 +65,10 @@ public interface MainContract {
         void contentLayoutToTopListener(boolean start);
         void contentLayoutToDown();
         void contentLayoutToDownListener(boolean start);
-        void currentPager(int position);
-        int getPagerSize();
-        int getPagerNowPosition();
 
+        void pullBannerDataSuccess(List<String> titles, List<String> images);
+
+        void pullBannerDataFail(String err);
         /**
          * 刷新列表数据成功
          */

@@ -66,8 +66,8 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    //viewpager指示器
-    compile "me.relex:circleindicator:$rootProject.circleindicatorVersion"
+    //图片轮播
+    compile "com.youth.banner:banner:$rootProject.bannerVersion"
     //图片动态移动展示
     compile "com.flaviofaria:kenburnsview:$rootProject.kenburnsviewVersion"
     //ios风格列表边缘过度效果

@@ -1,8 +1,11 @@
 package io.xujiaji.hnbc.presenters;
 
-import android.os.Handler;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
@@ -10,6 +13,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.fragments.MainFragment;
 import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.entity.BannerData;
 import io.xujiaji.hnbc.model.entity.MainTag;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
@@ -20,23 +24,9 @@ import io.xujiaji.hnbc.utils.ImgLoadUtil;
  * Created by jiana on 16-7-22.
  */
 public class MainFragPresenter extends BasePresenter <MainContract.MainFragView> implements MainContract.MainFragPersenter  {
-    private Handler handler;
     //是否已经加载完所有数据
     private boolean loadOver = false;
-    private Runnable runnable = new Runnable() {
-        private int x = 1;
-        private int nowIndex = 0;
-        @Override
-        public void run() {
-            nowIndex = view.getPagerNowPosition();
-            if (nowIndex >= view.getPagerSize() - 1 || nowIndex <= 0) {
-                x = -x;
-            }
-            nowIndex += x;
-            view.currentPager(nowIndex);
-            handler.postDelayed(this, 2000);
-        }
-    };
+    private List<BannerData> bannerDataList = null;
     public MainFragPresenter(MainContract.MainFragView view) {
         super(view);
     }
@@ -45,24 +35,47 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
     public void start() {
         super.start();
         requestUpdateListData();
+        requestBannerData();
     }
 
     @Override
     public void end() {
         super.end();
-        runnable = null;
-        handler = null;
-    }
-
-    @Override
-    public void autoScrollPager() {
-        handler = new Handler();
-        handler.postDelayed(runnable, 2000);
+        bannerDataList = null;
     }
 
     @Override
     public List<MainTag> getTags() {
         return DataFiller.getTagsData();
+    }
+
+    @Override
+    public void requestBannerData() {
+        NetRequest.Instance().pullBannerData(new NetRequest.RequestListener<List<BannerData>>() {
+            @Override
+            public void success(List<BannerData> bannerDatas) {
+                bannerDataList = bannerDatas;
+                List<String> titles = new ArrayList<String>();
+                List<String> images = new ArrayList<String>();
+                for (BannerData bd : bannerDatas) {
+                    titles.add(bd.getTitle());
+                    images.add(bd.getPicUrl());
+                }
+                view.pullBannerDataSuccess(titles, images);
+            }
+
+            @Override
+            public void error(String err) {
+                view.pullBannerDataFail(err);
+            }
+        });
+    }
+
+    @Override
+    public void requestOpenBannerLink(Context context, int position) {
+        Uri uri = Uri.parse(bannerDataList.get(position).getLinkTo());
+        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(it);
     }
 
     @Override
@@ -115,7 +128,4 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
     }
 
 
-    public void stop() {
-        handler.removeCallbacks(runnable);
-    }
 }

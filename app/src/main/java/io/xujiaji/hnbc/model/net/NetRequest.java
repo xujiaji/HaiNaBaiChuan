@@ -26,6 +26,7 @@ import io.xujiaji.hnbc.activities.WelcomeActivity;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
+import io.xujiaji.hnbc.model.entity.BannerData;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
@@ -79,6 +80,25 @@ public class NetRequest {
         });
     }
 
+    /**
+     * 获取广告信息
+     * @param listener
+     */
+    public void pullBannerData(final RequestListener<List<BannerData>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<BannerData> query = new BmobQuery<>();
+        query.findObjects(new FindListener<BannerData>() {
+            @Override
+            public void done(List<BannerData> list, BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+
+    }
 
     /**
      * 获取帖子数据集合
