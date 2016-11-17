@@ -21,7 +21,10 @@ import io.xujiaji.hnbc.widget.TextViewNew;
  */
 
 public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implements UserInfoContract.View {
-
+    /**
+     * 是否是自己
+     */
+    public static boolean SelfSwitch = true;
     @BindView(R.id.imgHead)
     ImageView imgHead;
     @BindView(R.id.imgUserInfoBg)
@@ -36,12 +39,24 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     ImageView menu;
     @BindView(R.id.more)
     ImageView more;
+    @BindView(R.id.tvFans)
+    TextView tvFans;
+    @BindView(R.id.tvFocus)
+    TextView tvFocus;
+    @BindView(R.id.tvCollect)
+    TextView tvCollect;
     private PupList pupList;
 
     @Override
     protected void onInit() {
         super.onInit();
         boldText();
+    }
+
+    @Override
+    public void introAnimate() {
+        super.introAnimate();
+        presenter.requestUserInfo();
     }
 
     /**
@@ -99,6 +114,13 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
 
     @Override
     public void displayUser(User user) {
+        if (SelfSwitch) {
+            more.setVisibility(View.VISIBLE);
+            more.setClickable(true);
+        } else {
+            more.setVisibility(View.INVISIBLE);
+            more.setClickable(false);
+        }
         tvUsername.setText("@" + user.getUsername());
         tvNickname.setText(user.getNickname());
         tvSign.setText(user.getSign());
@@ -115,6 +137,21 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     }
 
     @Override
+    public void showFansNum(String num) {
+        tvFans.setText(num);
+    }
+
+    @Override
+    public void showFocusNum(String num) {
+        tvFocus.setText(num);
+    }
+
+    @Override
+    public void showCollectNum(String num) {
+        tvCollect.setText(num);
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.fragment_user_info;
     }
@@ -124,6 +161,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         if (super.clickBack()) {
             return true;
         }
+        SelfSwitch = true;
         MainActivity.clickMenuItem(C.M_Menu.HOME);
         return true;
     }

@@ -126,6 +126,35 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
             }
         });
     }
+    @Override
+    public void requestLike(Post post) {
+        NetRequest.Instance().likeComment(post, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.likePostSuccess();
+            }
+
+            @Override
+            public void error(String err) {
+                view.likePostFail(err);
+            }
+        });
+    }
+
+    @Override
+    public void requestFollow(User user) {
+        NetRequest.Instance().followUser(user, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.followUserSuccess();
+            }
+
+            @Override
+            public void error(String err) {
+                view.followUserFail(err);
+            }
+        });
+    }
 
 
 }

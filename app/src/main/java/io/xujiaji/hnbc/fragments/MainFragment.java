@@ -236,20 +236,36 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
                 LogUtil.e2("position = " + i);
                 LogUtil.e3(view.toString());
                 switch (view.getId()) {
+                    case R.id.tvUserName:
+                        //跳转到用户信息查看
+                        goLookUser(baseQuickAdapter, i);
+                        break;
+                    case R.id.imgHead:
+                        //跳转到用户信息查看
+                        goLookUser(baseQuickAdapter, i);
+                        break;
                     case R.id.layoutBaseArticle:
                         saveData(C.data.KEY_POST, baseQuickAdapter.getData().get(i));
                         MainActivity.startFragment(C.fragment.READ_ARTICLE);
                         break;
                     case R.id.btnLike:
-                        ToastUtil.getInstance().showShortT("喜欢");
+                        Post post = (Post) baseQuickAdapter.getData().get(i);
+                        presenter.requestLike(post);
                         break;
                     case R.id.btnFollow:
-                        ToastUtil.getInstance().showShortT("关注");
+                        Post postF = (Post) baseQuickAdapter.getData().get(i);
+                        presenter.requestFollow(postF.getAuthor());
                         break;
                 }
             }
-        });
 
+            private void goLookUser(BaseQuickAdapter baseQuickAdapter, int i){
+                Post post = (Post) baseQuickAdapter.getData().get(i);
+                saveData(C.data.KEY_USER, post.getAuthor());
+                UserInfoFragment.SelfSwitch = false;
+                MainActivity.startFragment(C.fragment.USER_INFO);
+            }
+        });
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int dyDiff = 0;
@@ -434,6 +450,26 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
             }
         });
         ToastUtil.getInstance().showLongT(err);
+    }
+
+    @Override
+    public void likePostSuccess() {
+        ToastUtil.getInstance().showShortT(R.string.like_cuccess);
+    }
+
+    @Override
+    public void likePostFail(String err) {
+        ToastUtil.getInstance().showShortT(err);
+    }
+
+    @Override
+    public void followUserSuccess() {
+        ToastUtil.getInstance().showShortT(R.string.follow_success);
+    }
+
+    @Override
+    public void followUserFail(String err) {
+        ToastUtil.getInstance().showShortT(err);
     }
 
     @Override

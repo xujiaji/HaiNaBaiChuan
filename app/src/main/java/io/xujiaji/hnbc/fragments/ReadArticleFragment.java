@@ -232,6 +232,26 @@ public class ReadArticleFragment extends BaseMainFragment<ReadArticlePresenter> 
     }
 
     @Override
+    public void likePostSuccess() {
+
+    }
+
+    @Override
+    public void likePostFail(String err) {
+
+    }
+
+    @Override
+    public void followUserSuccess() {
+
+    }
+
+    @Override
+    public void followUserFail(String err) {
+
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.fragment_read_acticle;
     }

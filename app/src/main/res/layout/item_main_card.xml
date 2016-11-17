@@ -17,7 +17,6 @@
         android:orientation="vertical">
 
         <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/layoutBaseArticle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
@@ -37,6 +36,7 @@
                     android:id="@+id/imgHead"
                     android:layout_width="@dimen/main_head_height"
                     android:layout_height="@dimen/main_head_height"
+                    android:clickable="true"
                     android:src="@drawable/head" />
 
                 <TextView
@@ -47,6 +47,7 @@
                     android:layout_toEndOf="@+id/imgHead"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:clickable="true"
                     android:text="\@"
                     android:textColor="@color/text_color_level_2" />
 
@@ -64,6 +65,7 @@
                     android:textColor="@color/text_color_level_3" />
 
                 <LinearLayout
+                    android:id="@+id/layoutBaseArticle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvTopContent"

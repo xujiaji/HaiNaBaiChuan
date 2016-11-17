@@ -75,7 +75,8 @@
                 <LinearLayout style="@style/UserInfoUIClickStyle">
 
                     <TextView
-                        android:text="9096"
+                        android:id="@+id/tvFans"
+                        android:text="0"
                         style="@style/userInfoUINumStyle" />
 
                     <TextView
@@ -89,8 +90,9 @@
                     style="@style/UserInfoUIClickStyle">
 
                     <TextView
+                        android:id="@+id/tvFocus"
                         style="@style/userInfoUINumStyle"
-                        android:text="2" />
+                        android:text="0" />
 
                     <TextView
                         style="@style/userInfoUINumNameStyle"
@@ -100,7 +102,8 @@
                 <LinearLayout
                     style="@style/UserInfoUIClickStyle">
                     <TextView
-                        android:text="1782"
+                        android:id="@+id/tvCollect"
+                        android:text="0"
                         style="@style/userInfoUINumStyle" />
 
                     <TextView

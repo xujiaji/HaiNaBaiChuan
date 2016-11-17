@@ -84,6 +84,11 @@ public class C {
          * 保存文章数据
          */
         public static final String KEY_POST = "post_key";
+
+        /**
+         * 保存用户信息
+         */
+        public static final String KEY_USER = "user_info";
     }
 
     /**

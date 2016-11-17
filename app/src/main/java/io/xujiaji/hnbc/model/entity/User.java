@@ -3,6 +3,7 @@ package io.xujiaji.hnbc.model.entity;
 import java.util.Date;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by jiana on 16-11-4.
@@ -16,6 +17,15 @@ public class User extends BmobUser{
     private String sign;
     private String headPic;
     private String city;
+    private BmobRelation followPerson;
+
+    public BmobRelation getFollowPerson() {
+        return followPerson;
+    }
+
+    public void setFollowPerson(BmobRelation followPerson) {
+        this.followPerson = followPerson;
+    }
 
     public String getCity() {
         return city;

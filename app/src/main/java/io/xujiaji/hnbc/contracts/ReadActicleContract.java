@@ -34,6 +34,15 @@ public interface ReadActicleContract {
         void requestPostData();
 
         /**
+         * 请求喜欢文章
+         */
+        void requestLike(Post post);
+        /**
+         * 请求跟随
+         */
+        void requestFollow(User user);
+
+        /**
          * 添加评论
          * @param comment
          */
@@ -76,6 +85,23 @@ public interface ReadActicleContract {
          * @param err
          */
         void replyCommentFail(String err);
+
+        /**
+         * 喜欢文章成功
+         */
+        void likePostSuccess();
+        void likePostFail(String err);
+
+        /**
+         * 跟随某人成功
+         */
+        void followUserSuccess();
+
+        /**
+         * 跟随某人失败
+         * @param err
+         */
+        void followUserFail(String err);
 
     }
 }

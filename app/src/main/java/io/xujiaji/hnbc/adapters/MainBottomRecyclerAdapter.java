@@ -35,6 +35,8 @@ public class MainBottomRecyclerAdapter extends BaseQuickAdapter<Post, BaseViewHo
                 .addOnClickListener(R.id.layoutBaseArticle)
                 .addOnClickListener(R.id.btnLike)
                 .addOnClickListener(R.id.btnFollow)
+                .addOnClickListener(R.id.imgHead)
+                .addOnClickListener(R.id.tvUserName)
                 .setText(R.id.tvTopContent, post.getCreatedAt())
                 .setText(R.id.tvBottomContent, post.getTitle());
 

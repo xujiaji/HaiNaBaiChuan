@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.xujiaji.hnbc.model.entity.MainTag;
 import io.xujiaji.hnbc.model.entity.Post;
+import io.xujiaji.hnbc.model.entity.User;
 
 /**
  * Created by jiana on 16-7-22.
@@ -58,6 +59,15 @@ public interface MainContract {
          * 请求加载更多数据
          */
         void requestLoadListData(int current);
+
+        /**
+         * 请求喜欢文章
+         */
+        void requestLike(Post post);
+        /**
+         * 请求跟随
+         */
+        void requestFollow(User user);
     }
 
     interface MainFragView extends MainBaseFragView {
@@ -96,5 +106,24 @@ public interface MainContract {
          * @param err
          */
         void loadListFail(String err);
+
+
+        /**
+         * 喜欢文章成功
+         */
+        void likePostSuccess();
+        void likePostFail(String err);
+
+        /**
+         * 跟随某人成功
+         */
+        void followUserSuccess();
+
+        /**
+         * 跟随某人失败
+         * @param err
+         */
+        void followUserFail(String err);
+
     }
 }

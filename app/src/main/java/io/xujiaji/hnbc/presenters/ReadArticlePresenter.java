@@ -74,6 +74,36 @@ public class ReadArticlePresenter extends BasePresenter<ReadActicleContract.View
     }
 
     @Override
+    public void requestLike(Post post) {
+        NetRequest.Instance().likeComment(post, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.likePostSuccess();
+            }
+
+            @Override
+            public void error(String err) {
+                view.likePostFail(err);
+            }
+        });
+    }
+
+    @Override
+    public void requestFollow(User user) {
+        NetRequest.Instance().followUser(user, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.followUserSuccess();
+            }
+
+            @Override
+            public void error(String err) {
+                view.followUserFail(err);
+            }
+        });
+    }
+
+    @Override
     public void addComment(String comment) {
         if (post == null) {
             view.addCommentFail(App.getAppContext().getString(R.string.current_not_article));

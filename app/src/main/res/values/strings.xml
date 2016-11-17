@@ -107,4 +107,6 @@
     <string name="current_not_article">当前没有文章</string>
     <string name="comment_area">评论区</string>
     <string name="reply_comment_success">回复评论成功！</string>
+    <string name="like_cuccess">喜欢上了</string>
+    <string name="follow_success">已关注</string>
 </resources>

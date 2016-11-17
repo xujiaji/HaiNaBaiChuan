@@ -17,7 +17,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -86,7 +88,138 @@ public class NetRequest {
         });
     }
 
+    /**
+     * 请求获取用户粉丝数量
+     */
+    public void requestFansNum(final RequestListener<String> listener) {
+        BmobQuery<User> query = new BmobQuery<User>();
+//        query.addQueryKeys("followPerson");
+        query.count(User.class, new CountListener() {
+            @Override
+            public void done(Integer integer, BmobException e) {
+                if (e == null) {
+                    listener.success(Integer.toString(integer));
+                } else {
+                    listener.success("0");
+                }
+            }
+        });
+    }
 
+    /**
+     * 请求获取用户关注其他用户数量
+     */
+    public void requestFocusNum(User user, final RequestListener<String> listener) {
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereRelatedTo("followPerson", new BmobPointer(user.getObjectId()));
+        query.count(User.class, new CountListener() {
+            @Override
+            public void done(Integer integer, BmobException e) {
+                if (e == null) {
+                    listener.success(Integer.toString(integer));
+                } else {
+                    listener.success("0");
+                }
+            }
+        });
+    }
+
+    /**
+     * 请求获取用户喜欢的文章数量
+     */
+    public void requestCollectNum() {
+
+    }
+
+    /**
+     * 跟随该用户
+     *
+     * @param user
+     * @param listener
+     */
+    public void followUser(final User user, final RequestListener<String> listener) {
+        final User currentUser = BmobUser.getCurrentUser(User.class);
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereEqualTo("followPerson", new BmobPointer(user));
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if (e != null) return;
+                for (User u : list) {
+                    if (u.getObjectId().equals(currentUser.getObjectId())) {
+                        listener.error("已经关注过了哦！");
+                        return;
+                    }
+                }
+                startFollowRequest(user, listener);
+            }
+        });
+
+    }
+
+    private void startFollowRequest(User user, final RequestListener<String> listener) {
+        final User currentUser = BmobUser.getCurrentUser(User.class);
+        BmobRelation relation = new BmobRelation();
+        relation.add(user);
+        currentUser.setFollowPerson(relation);
+        currentUser.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    listener.success(null);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+    }
+
+    /**
+     * 喜欢文章
+     *
+     * @param post
+     * @param listener
+     */
+    public void likeComment(final Post post, final RequestListener<String> listener) {
+        LogUtil.e3(post.getTitle() + ";" + post.getObjectId());
+        final User user = BmobUser.getCurrentUser(User.class);
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereRelatedTo("likes", new BmobPointer(post));
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if (e != null) return;
+                for (User u : list) {
+                    if (u.getObjectId().equals(user.getObjectId())) {
+                        listener.error("已经添加过喜欢");
+                        return;
+                    }
+                }
+                startLikeRequest(post, listener);
+            }
+        });
+
+    }
+
+    private void startLikeRequest(Post post, final RequestListener<String> listener) {
+        final User user = BmobUser.getCurrentUser(User.class);
+        //将当前用户添加到Post表中的likes字段值中，表明当前用户喜欢该帖子
+        BmobRelation relation = new BmobRelation();
+        //将当前用户添加到多对多关联中
+        relation.add(user);
+        //多对多关联指向`post`的`likes`字段
+        post.setLikes(relation);
+        post.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    listener.success(null);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+    }
 
     /**
      * 添加评论
@@ -100,10 +233,10 @@ public class NetRequest {
         comment.save(new SaveListener<String>() {
 
             @Override
-            public void done(String objectId,BmobException e) {
-                if(e==null){
+            public void done(String objectId, BmobException e) {
+                if (e == null) {
                     listener.success(App.getAppContext().getString(R.string.add_comment_success));
-                }else{
+                } else {
                     listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
@@ -123,9 +256,9 @@ public class NetRequest {
         reply.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
-                if(e==null){
+                if (e == null) {
                     listener.success(null);
-                }else{
+                } else {
                     listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
@@ -134,6 +267,7 @@ public class NetRequest {
 
     /**
      * 获取所有回复
+     *
      * @param comments
      * @param listener
      */
@@ -167,13 +301,14 @@ public class NetRequest {
                     @Override
                     public void onNext(List<Reply> replies) {
                         replyList.addAll(replies);
-                        nowNum ++;
+                        nowNum++;
                         if (Integer.compare(numTotal, nowNum) == 0) {
                             listener.success(replyList);
                         }
                     }
                 });
     }
+
     private int nowNum = 0;
 
     /**
