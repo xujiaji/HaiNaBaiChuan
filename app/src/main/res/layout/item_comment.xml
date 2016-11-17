@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/btnReply"
+        android:layout_width="@dimen/comment_head_width"
+        android:layout_height="@dimen/comment_head_width"
+        android:src="@drawable/ic_reply"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"/>
+
+
+    <ImageView
+        android:id="@+id/imgHead"
+        android:layout_width="@dimen/comment_head_width"
+        android:layout_height="@dimen/comment_head_width"
+        android:src="@drawable/head"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/small_margin"/>
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:id="@+id/tvNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="我是谁"
+        android:textSize="@dimen/text_size_level6"
+        android:layout_toEndOf="@id/imgHead"
+        android:textColor="@color/text_color_level_2"
+        android:includeFontPadding="false"
+        android:layout_alignTop="@id/imgHead"/>
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多少楼-2016-11-17"
+        android:textSize="@dimen/text_size_level7"
+        android:layout_toEndOf="@id/imgHead"
+        android:includeFontPadding="false"
+        android:textColor="@color/text_color_level_3"
+        android:layout_below="@id/tvNickname"/>
+
+    <io.xujiaji.hnbc.widget.TextViewNew
+        android:id="@+id/tvComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="评论测试是谁"
+        android:textSize="@dimen/text_size_level5"
+        android:includeFontPadding="false"
+        android:textColor="@color/text_color_level_2"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_below="@id/imgHead"/>
+
+    <View
+        android:layout_below="@id/tvComment"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/comment_line"/>
+</RelativeLayout>

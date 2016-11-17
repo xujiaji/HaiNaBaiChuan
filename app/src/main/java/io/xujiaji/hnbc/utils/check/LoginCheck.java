@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc.model.check;
+package io.xujiaji.hnbc.utils.check;
 
 import static android.text.TextUtils.isEmpty;
 

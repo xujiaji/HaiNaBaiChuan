@@ -50,6 +50,23 @@
             </android.support.v4.widget.NestedScrollView>
 
         </android.support.design.widget.CoordinatorLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_comment_add"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/btnAddComment"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_gravity="center_vertical"
+                android:text="@string/add_comment"/>
+        </LinearLayout>
+
     </no.agens.depth.lib.DepthLayout>
 
     <include layout="@layout/include_status" />

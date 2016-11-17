@@ -60,7 +60,7 @@ dependencies {
     //QQ sdk
     compile files('libs/open_sdk_r5509_lite.jar')
     testCompile "junit:junit:$rootProject.junitVersion"
-    compile 'com.android.support:support-v13:25.0.0'
+//    compile 'com.android.support:support-v13:25.0.0'
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
@@ -94,21 +94,32 @@ dependencies {
     //底部弹出试图
     compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
     compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
-    //material风格事件选择
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    //material风格时间选择
+    compile "com.wdullaer:materialdatetimepicker:$rootProject.materialdatetimepicker"
     //Facebook SDK
-    compile 'com.facebook.android:facebook-android-sdk:4.17.0'
+    compile "com.facebook.android:facebook-android-sdk:$rootProject.facebookVersion"
     //EditText撤销和恢复
-    compile 'ren.qinc.edit:lib:0.0.3'
+    compile "ren.qinc.edit:lib:$rootProject.editVersion"
 
     //内存泄露提示
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
 
     //崩溃异常提示
-    compile 'me.drakeet.library:crashwoodpecker:2.1.1'
-
+    compile "me.drakeet.library:crashwoodpecker:$rootProject.crashwoodpeckerVersion"
+    //使用请求框架retrofit搭配okhttp、gson和rxjava
+    compile ("com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version") {
+        exclude group: 'com.squareup.okhttp3'
+    }
+    compile ("com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version") {
+        exclude group: 'com.google.code.gson'
+        exclude group: 'com.squareup.okhttp3'
+    }
+    compile ("com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version") {
+        exclude group: 'io.reactivex'
+        exclude group: 'com.squareup.okhttp3'
+    }
 }
 
 repositories {

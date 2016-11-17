@@ -2,6 +2,8 @@ package io.xujiaji.hnbc.model.check;
 
 import org.junit.Test;
 
+import io.xujiaji.hnbc.utils.check.LoginCheck;
+
 /**
  * Created by jiana on 16-11-5.
  */

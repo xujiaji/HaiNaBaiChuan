@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Date;
 
 import io.xujiaji.hnbc.contracts.EditUserInfoContract;
-import io.xujiaji.hnbc.model.check.LoginCheck;
+import io.xujiaji.hnbc.utils.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 

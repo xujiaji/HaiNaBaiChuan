@@ -40,7 +40,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.contracts.EditorContract;
 import io.xujiaji.hnbc.factory.PerformEditable;
-import io.xujiaji.hnbc.model.check.Check;
+import io.xujiaji.hnbc.utils.check.Check;
 import io.xujiaji.hnbc.model.data.PreferenceData;
 import io.xujiaji.hnbc.presenters.EditorPresenter;
 import io.xujiaji.hnbc.utils.FileUtils;

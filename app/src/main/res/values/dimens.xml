@@ -3,6 +3,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="activity_horizontal_margin_max">32dp</dimen>
+    <dimen name="activity_vertical_margin_max">32dp</dimen>
+
     <dimen name="card_padding">14dp</dimen>
 
     <dimen name="card_padding_top">10dp</dimen>
@@ -35,6 +38,7 @@
     <dimen name="text_size_level4">16sp</dimen>
     <dimen name="text_size_level5">14sp</dimen>
     <dimen name="text_size_level6">12sp</dimen>
+    <dimen name="text_size_level7">10sp</dimen>
     <dimen name="app_bar_height">280dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="user_info_head_width">100dp</dimen>
@@ -44,5 +48,6 @@
     <dimen name="small_margin_min">4dp</dimen>
     <dimen name="item_edit_user_info_height">48dp</dimen>
     <dimen name="login_width">300dp</dimen>
+    <dimen name="comment_head_width">30dp</dimen>
 
 </resources>

@@ -53,4 +53,10 @@ ext{
     galleryfinalVersion='1.4.8.7'
     googleprogressbarVersion='1.1.0'
     bottomsheetVersion='1.5.2'
+    facebookVersion='4.17.0'
+    materialdatetimepicker='2.5.0'
+    editVersion='0.0.3'
+    leakcanaryVersion='1.5'
+    crashwoodpeckerVersion='2.1.1'
+    retrofit2Version='2.1.0'
 }

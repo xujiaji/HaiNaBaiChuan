@@ -4,6 +4,8 @@ import java.util.List;
 
 import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.Post;
+import io.xujiaji.hnbc.model.entity.Reply;
+import io.xujiaji.hnbc.model.entity.User;
 
 /**
  * Created by jiana on 16-11-14.
@@ -20,10 +22,24 @@ public interface ReadActicleContract {
         void requestCommentsData(String postId);
 
         /**
+         * 获取所有评论的回复
+         * @param comments
+         */
+        void requestCommentsReply(List<Comment> comments);
+
+        /**
          * 请求文章数据
          * @param
          */
         void requestPostData();
+
+        /**
+         * 添加评论
+         * @param comment
+         */
+        void addComment(String comment);
+
+        void addReply(User replyUser, Comment comment, String content);
     }
 
     interface View extends Contract.BaseView {
@@ -35,9 +51,31 @@ public interface ReadActicleContract {
 
         /**
          * 显示评论
-         * @param comments
          */
-        void showComment(List<Comment> comments);
+        void showComment(List<Comment> comments, List<Reply> replyList);
+
+
+        /**
+         * 添加评论成功
+         */
+        void addCommentSuccess();
+
+        /**
+         * 添加评论失败
+         * @param err
+         */
+        void addCommentFail(String err);
+
+        /**
+         * 回复评论成功
+         */
+        void replyCommentSuccess();
+
+        /**
+         * 回复评论失败
+         * @param err
+         */
+        void replyCommentFail(String err);
 
     }
 }

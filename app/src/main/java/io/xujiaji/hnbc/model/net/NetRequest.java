@@ -8,6 +8,7 @@ import com.facebook.login.LoginManager;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
@@ -27,7 +29,9 @@ import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;
 import io.xujiaji.hnbc.model.entity.BannerData;
+import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.Post;
+import io.xujiaji.hnbc.model.entity.Reply;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
 import io.xujiaji.hnbc.service.DownLoadWelPicService;
@@ -36,9 +40,11 @@ import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.NetCheck;
 import io.xujiaji.hnbc.utils.OtherUtils;
 import io.xujiaji.hnbc.utils.compressor.Compressor;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -80,8 +86,133 @@ public class NetRequest {
         });
     }
 
+
+
+    /**
+     * 添加评论
+     */
+    public void addComment(Post post, String content, final RequestListener<String> listener) {
+        User user = BmobUser.getCurrentUser(User.class);
+        final Comment comment = new Comment();
+        comment.setContent(content);
+        comment.setPost(post);
+        comment.setUser(user);
+        comment.save(new SaveListener<String>() {
+
+            @Override
+            public void done(String objectId,BmobException e) {
+                if(e==null){
+                    listener.success(App.getAppContext().getString(R.string.add_comment_success));
+                }else{
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+
+        });
+    }
+
+    /**
+     * 回复评论
+     */
+    public void replyComment(User replyUser, Comment comment, String content, final RequestListener listener) {
+        Reply reply = new Reply();
+        reply.setSpeakUser(BmobUser.getCurrentUser(User.class));
+        reply.setComment(comment);
+        reply.setContent(content);
+        reply.setReplyUser(replyUser);
+        reply.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if(e==null){
+                    listener.success(null);
+                }else{
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取所有回复
+     * @param comments
+     * @param listener
+     */
+    public void getCommentReply(final List<Comment> comments, final RequestListener<List<Reply>> listener) {
+        final List<Reply> replyList = new ArrayList<>();
+        final int numTotal = comments.size();
+        nowNum = 0;
+        Observable.from(comments)
+                .flatMap(new Func1<Comment, Observable<List<Reply>>>() {
+                    @Override
+                    public Observable<List<Reply>> call(Comment comment) {
+                        BmobQuery<Reply> query = new BmobQuery<Reply>();
+                        query.addWhereEqualTo("comment", new BmobPointer(comment));
+                        query.include("speakUser,replyUser");
+                        return query.findObjectsObservable(Reply.class);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Reply>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Reply> replies) {
+                        replyList.addAll(replies);
+                        nowNum ++;
+                        if (Integer.compare(numTotal, nowNum) == 0) {
+                            listener.success(replyList);
+                        }
+                    }
+                });
+    }
+    private int nowNum = 0;
+
+    /**
+     * 获取文章的评论
+     */
+    public void getPostComment(String postId, final RequestListener<List<Comment>> listener) {
+        BmobQuery<Comment> query = new BmobQuery<>();
+        Post post = new Post();
+        post.setObjectId(postId);
+        query.addWhereEqualTo("post", new BmobPointer(post));
+        query.include("user");
+        query.order("-createdAt");
+        query.findObjects(new FindListener<Comment>() {
+            @Override
+            public void done(List<Comment> list, BmobException e) {
+                if (e == null) {
+//                    for (final Comment comment : list) {
+//                        map.put(comment, null);
+//                        BmobQuery<Reply> query = new BmobQuery<>();
+//                        query.addWhereEqualTo("comment", new BmobPointer(comment));
+//                        query.include("speakUser,replyUser");
+//                        query.findObjects(new FindListener<Reply>() {
+//                            @Override
+//                            public void done(List<Reply> list, BmobException e) {
+//                                if (e == null) {
+//                                    map.put(comment, list);
+//                                }
+//                            }
+//                        });
+//                    }
+                    listener.success(list);
+                }
+            }
+        });
+    }
+
     /**
      * 获取广告信息
+     *
      * @param listener
      */
     public void pullBannerData(final RequestListener<List<BannerData>> listener) {
@@ -102,6 +233,7 @@ public class NetRequest {
 
     /**
      * 获取帖子数据集合
+     *
      * @param size 获取的数据条数
      * @return
      */
@@ -512,6 +644,7 @@ public class NetRequest {
 
     public interface UploadPicListener<T> extends ProgressListener<T> {
         void compressingPic();
+
         void compressedPicSuccess();
     }
 
@@ -520,7 +653,7 @@ public class NetRequest {
     }
 
     private boolean checkNet(RequestListener listener) {
-        if (NetCheck.isConnected(App.getAppContext())){
+        if (NetCheck.isConnected(App.getAppContext())) {
             return true;
         } else {
             listener.error(App.getAppContext().getString(R.string.please_check_network_status));

@@ -1,5 +1,6 @@
 package io.xujiaji.hnbc.factory;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class FragmentFactory {
     /**
      * 统一管理MainActivity中所有Fragment
      */
-    public static final Map<String, BaseMainFragment> MAIN_WIND_FRAG = new HashMap<>(FRAGMENT_NUM);
+    public static final Map<String, WeakReference<BaseMainFragment>> MAIN_WIND_FRAG = new HashMap<>(FRAGMENT_NUM);
 
     /**
      * 在主页展示的Fragment工厂
@@ -57,7 +58,7 @@ public class FragmentFactory {
             default:
                 break;
         }
-        MAIN_WIND_FRAG.put(key, newFragment);
+        MAIN_WIND_FRAG.put(key, new WeakReference<BaseMainFragment>(newFragment));
         return newFragment;
     }
 
@@ -89,7 +90,7 @@ public class FragmentFactory {
      * @return
      */
     public static BaseMainFragment getFrag(String key) {
-        return MAIN_WIND_FRAG.get(key);
+        return getOrCreate(key);
     }
 
     /**
@@ -98,12 +99,12 @@ public class FragmentFactory {
      * @return
      */
     public static BaseMainFragment getOrCreate(String key) {
-        BaseMainFragment baseMainFragment = MAIN_WIND_FRAG.get(key);
-        if (baseMainFragment == null) {
+        WeakReference<BaseMainFragment> wr = MAIN_WIND_FRAG.get(key);
+        if (wr == null || wr.get() == null) {
             LogUtil.e3("通过" + key + "没有获取到对应Fragment，将会创建一个新的");
-            baseMainFragment = newFragment(key);
+            newFragment(key);
         }
-        return baseMainFragment;
+        return MAIN_WIND_FRAG.get(key).get();
     }
 
     /**
@@ -120,9 +121,9 @@ public class FragmentFactory {
      */
     public static void updatedUser() {
         for (String key : MAIN_WIND_FRAG.keySet()) {
-            BaseMainFragment fragment = MAIN_WIND_FRAG.get(key);
-            if (fragment == null) continue;
-            fragment.setUpdatedUser(true);
+            WeakReference<BaseMainFragment> wr = MAIN_WIND_FRAG.get(key);
+            if (wr == null || wr.get() == null) continue;
+            wr.get().setUpdatedUser(true);
         }
     }
 }

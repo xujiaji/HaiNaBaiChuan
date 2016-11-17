@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.model.check.Check;
+import io.xujiaji.hnbc.utils.check.Check;
 
 
 /**

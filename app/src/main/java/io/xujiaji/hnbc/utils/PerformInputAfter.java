@@ -21,7 +21,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import io.xujiaji.hnbc.model.check.Check;
+import io.xujiaji.hnbc.utils.check.Check;
 
 
 /**

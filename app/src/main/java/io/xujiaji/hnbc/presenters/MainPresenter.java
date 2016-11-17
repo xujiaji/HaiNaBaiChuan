@@ -36,7 +36,25 @@ public class MainPresenter extends BasePresenter <MainContract.View> implements 
 
     @Override
     public void start() {
-
+//        ApiNet.phoneNumAttrApiInstance().search("10000", "f3e2cd2caa8f1eb446078eb63edf3f87")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<PhoneNumAttr>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable throwable) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(PhoneNumAttr phoneNumAttr) {
+//
+//                    }
+//                });
     }
 
     @Override

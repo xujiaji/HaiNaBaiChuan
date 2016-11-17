@@ -18,6 +18,8 @@
     <color name="theme_grey_shallow">#8B8B8D</color>
     <color name="theme_black">#0C0D0E</color>
 
+    <color name="comment_line">#c7c7c7</color>
+
     <color name="light_grey">#8C9CA4</color>
     <color name="white">#FFFFFF</color>
     <color name="divider_color">#DBDBDB</color>

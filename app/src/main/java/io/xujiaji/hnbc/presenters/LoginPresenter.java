@@ -7,7 +7,7 @@ import com.facebook.login.LoginResult;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
-import io.xujiaji.hnbc.model.check.LoginCheck;
+import io.xujiaji.hnbc.utils.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.MD5Util;

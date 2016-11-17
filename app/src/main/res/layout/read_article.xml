@@ -14,9 +14,17 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#999"
+        android:layout_height="48dp"
         android:gravity="center"
-        android:text="评论区" />
+        android:text="@string/comment_area"
+        android:textColor="@color/text_color_level_3"
+        android:textSize="@dimen/text_size_level6"
+        android:background="@drawable/shape_comment_info_bg"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollHorizontally="false"
+        android:paddingBottom="48dp"/>
 </LinearLayout>

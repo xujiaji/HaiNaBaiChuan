@@ -98,4 +98,13 @@
     <string name="network_err">Simulation network error</string>
     <string name="please_check_network_status">请检查网络状态！</string>
     <string name="jin">#</string>
+    
+    <string name="key_phone_number_attribute">f3e2cd2caa8f1eb446078eb63edf3f87</string>
+    <string name="maohao">\@</string>
+    <string name="add_comment">添加评论</string>
+    <string name="send">发送</string>
+    <string name="add_comment_success">评论发表成功</string>
+    <string name="current_not_article">当前没有文章</string>
+    <string name="comment_area">评论区</string>
+    <string name="reply_comment_success">回复评论成功！</string>
 </resources>

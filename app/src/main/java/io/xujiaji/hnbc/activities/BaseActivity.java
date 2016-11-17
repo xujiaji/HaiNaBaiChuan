@@ -13,6 +13,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.GenericHelper;
+import io.xujiaji.hnbc.utils.LeakUtil;
 
 /**
  * 项目中Activity的基类
@@ -71,5 +72,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         presenter.end();
+        LeakUtil.fixInputMethodManagerLeak(this);
     }
 }
