@@ -3,11 +3,11 @@
 /.idea/libraries
 /build
 
+
 /app/build/
 /crop/build/
 /dialog/build/
 /citypicker/build/
-/gradle.properties
 /xjj.jks
 
 将删除 app/src/main/ic_launcher-web.png
