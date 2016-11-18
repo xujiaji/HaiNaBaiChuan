@@ -14,3 +14,6 @@
 /gradle.properties
 /xjj.jks
 
+将删除 app/src/main/ic_launcher-web.png
+将删除 citypicker/libs/
+将删除 depth/libs/
