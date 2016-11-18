@@ -1,8 +1,5 @@
 package io.xujiaji.hnbc.utils;
 
-import android.view.View;
-import android.view.ViewGroup;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,29 +42,4 @@ public class ActivityUtils {
         }
     }
 
-    public static void initSatus(View view) {
-        int statusHeight = ScreenUtils.getStatusHeight(view.getContext());
-        ViewGroup.LayoutParams statusParams = view.getLayoutParams();
-        statusParams.height = statusHeight;
-        view.setLayoutParams(statusParams);
-    }
-
-    private static long lastClickTime;
-    public static boolean isFastClick() {
-        return isFastClick(false);
-    }
-
-    public static boolean isFastClick(boolean isPrompt) {
-        long time = System.currentTimeMillis();
-        long timeD = time - lastClickTime;
-        if (timeD < 2000) {
-            if (isPrompt) {
-                ToastUtil.getInstance().showShortT("重复点击！");
-            }
-            return true;
-        } else {
-            lastClickTime = time;
-            return false;
-        }
-    }
 }

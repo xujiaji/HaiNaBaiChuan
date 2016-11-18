@@ -9,10 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/citypicker" />
-            <option value="$PROJECT_DIR$/crop" />
-            <option value="$PROJECT_DIR$/depth" />
-            <option value="$PROJECT_DIR$/dialog" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
