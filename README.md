@@ -1,6 +1,14 @@
 # HaiNaBaiChuan
 包含Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信息修改等功能
 
+# UI界面展示
+||||
+|-|-|-|
+|![首页1](display/home_page_1.png)| ![首页2](display/home_page_2.png)| ![首页3](display/home_page_3.png) |
+|![阅读1](display/read_article_page_2.png)|![登陆1](display/login_page_1.png)|[浏览更多图片>>](display/display.md)<hr>[查看Gif图片>>](display/running.gif)|
+
+
+
 
 # License
 ```
