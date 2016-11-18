@@ -91,9 +91,12 @@ public class NetRequest {
     /**
      * 请求获取用户粉丝数量
      */
-    public void requestFansNum(final RequestListener<String> listener) {
+    public void requestFansNum(User user, final RequestListener<String> listener) {
         BmobQuery<User> query = new BmobQuery<User>();
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId", user.getObjectId());
 //        query.addQueryKeys("followPerson");
+        query.addWhereMatchesQuery("followPerson", "_User", innerQuery);
         query.count(User.class, new CountListener() {
             @Override
             public void done(Integer integer, BmobException e) {
@@ -111,7 +114,7 @@ public class NetRequest {
      */
     public void requestFocusNum(User user, final RequestListener<String> listener) {
         BmobQuery<User> query = new BmobQuery<>();
-        query.addWhereRelatedTo("followPerson", new BmobPointer(user.getObjectId()));
+        query.addWhereRelatedTo("followPerson", new BmobPointer(user));
         query.count(User.class, new CountListener() {
             @Override
             public void done(Integer integer, BmobException e) {
@@ -127,8 +130,22 @@ public class NetRequest {
     /**
      * 请求获取用户喜欢的文章数量
      */
-    public void requestCollectNum() {
-
+    public void requestCollectNum(User user, final RequestListener<String> listener) {
+        BmobQuery<Post> query = new BmobQuery<>();
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId", user.getObjectId());
+//        query.addQueryKeys("followPerson");
+        query.addWhereMatchesQuery("likes", "_User", innerQuery);
+        query.count(Post.class, new CountListener() {
+            @Override
+            public void done(Integer integer, BmobException e) {
+                if (e == null) {
+                    listener.success(Integer.toString(integer));
+                } else {
+                    listener.success("0");
+                }
+            }
+        });
     }
 
     /**
@@ -138,6 +155,8 @@ public class NetRequest {
      * @param listener
      */
     public void followUser(final User user, final RequestListener<String> listener) {
+        if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         final User currentUser = BmobUser.getCurrentUser(User.class);
         BmobQuery<User> query = new BmobQuery<>();
         query.addWhereEqualTo("followPerson", new BmobPointer(user));
@@ -181,6 +200,8 @@ public class NetRequest {
      * @param listener
      */
     public void likeComment(final Post post, final RequestListener<String> listener) {
+        if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         LogUtil.e3(post.getTitle() + ";" + post.getObjectId());
         final User user = BmobUser.getCurrentUser(User.class);
         BmobQuery<User> query = new BmobQuery<>();
@@ -225,6 +246,8 @@ public class NetRequest {
      * 添加评论
      */
     public void addComment(Post post, String content, final RequestListener<String> listener) {
+        if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         User user = BmobUser.getCurrentUser(User.class);
         final Comment comment = new Comment();
         comment.setContent(content);
@@ -248,6 +271,8 @@ public class NetRequest {
      * 回复评论
      */
     public void replyComment(User replyUser, Comment comment, String content, final RequestListener listener) {
+        if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         Reply reply = new Reply();
         reply.setSpeakUser(BmobUser.getCurrentUser(User.class));
         reply.setComment(comment);
@@ -272,6 +297,7 @@ public class NetRequest {
      * @param listener
      */
     public void getCommentReply(final List<Comment> comments, final RequestListener<List<Reply>> listener) {
+        if (!checkNet(listener)) return;
         final List<Reply> replyList = new ArrayList<>();
         final int numTotal = comments.size();
         nowNum = 0;
@@ -315,6 +341,7 @@ public class NetRequest {
      * 获取文章的评论
      */
     public void getPostComment(String postId, final RequestListener<List<Comment>> listener) {
+        if (!checkNet(listener)) return;
         BmobQuery<Comment> query = new BmobQuery<>();
         Post post = new Post();
         post.setObjectId(postId);
@@ -438,6 +465,7 @@ public class NetRequest {
      */
     public void uploadArticle(String coverPicture, String title, String article, final RequestListener<String> listener) {
         if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         User user = BmobUser.getCurrentUser(User.class);
         if (user == null) {
             listener.error(App.getAppContext().getString(R.string.please_login));
@@ -602,6 +630,7 @@ public class NetRequest {
      */
     public void uploadPic(File file, final UploadPicListener<String> listener) {
         if (!checkNet(listener)) return;
+        if (!checkLoginStatus(listener)) return;
         listener.compressingPic();
         Compressor.getDefault(App.getAppContext())
                 .compressToFileAsObservable(file)
@@ -787,6 +816,22 @@ public class NetRequest {
         void thirdLoginSuccess();
     }
 
+    /**
+     * 检测是否登陆
+     */
+    public boolean checkLoginStatus(RequestListener listener) {
+        if (BmobUser.getCurrentUser(User.class) == null) {
+            listener.error("您没有登陆哦！");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检测网络
+     * @param listener
+     * @return
+     */
     private boolean checkNet(RequestListener listener) {
         if (NetCheck.isConnected(App.getAppContext())) {
             return true;

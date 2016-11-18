@@ -39,7 +39,7 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
         } else {
             user = BaseMainFragment.getData(C.data.KEY_USER);
             if (user != null) {
-                if (user.getObjectId().equals(DataFiller.getLocalUser().getObjectId())) {
+                if (DataFiller.getLocalUser() != null && user.getObjectId().equals(DataFiller.getLocalUser().getObjectId())) {
                     UserInfoFragment.SelfSwitch = true;
                 }
                 view.displayUser(user);
@@ -74,7 +74,17 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
 
     @Override
     public void requestFansNum(User user) {
+        NetRequest.Instance().requestFansNum(user, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.showFansNum(s);
+            }
 
+            @Override
+            public void error(String err) {
+
+            }
+        });
     }
 
     @Override
@@ -94,6 +104,17 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
 
     @Override
     public void requestCollectNum(User user) {
+        NetRequest.Instance().requestCollectNum(user, new NetRequest.RequestListener<String>() {
+            @Override
+            public void success(String s) {
+                view.showCollectNum(s);
+            }
+
+            @Override
+            public void error(String err) {
+
+            }
+        });
 
     }
 }

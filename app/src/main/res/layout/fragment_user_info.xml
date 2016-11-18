@@ -123,10 +123,10 @@
                 style="@style/userInfoBottomItemStyle"
                 android:text="@string/badge_level"/>
 
-            <io.xujiaji.hnbc.widget.TextViewBoldNew
-                android:drawableStart="@drawable/ic_section"
-                style="@style/userInfoBottomItemStyle"
-                android:text="@string/read_section"/>
+            <!--<io.xujiaji.hnbc.widget.TextViewBoldNew-->
+                <!--android:drawableStart="@drawable/ic_section"-->
+                <!--style="@style/userInfoBottomItemStyle"-->
+                <!--android:text="@string/read_section"/>-->
 
 
         </LinearLayout>
