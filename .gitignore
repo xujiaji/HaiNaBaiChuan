@@ -2,7 +2,7 @@
 /.idea/workspace.xml
 /.idea/libraries
 /build
-
+/gradle.properties
 
 /app/build/
 /crop/build/
@@ -10,7 +10,7 @@
 /citypicker/build/
 /xjj.jks
 
+将删除 .gradle/
 将删除 app/src/main/ic_launcher-web.png
 将删除 citypicker/libs/
 将删除 depth/libs/
-将删除 .gradle/
