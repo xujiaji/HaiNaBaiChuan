@@ -24,9 +24,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.presenters.BasePresenter;
-import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.GenericHelper;
 
 /**
@@ -49,7 +47,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         }
         rootView = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, rootView);
-        initStatus();
         onInit();
         onListener();
         if (presenter != null) {
@@ -58,12 +55,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         return rootView;
     }
 
-    private void initStatus() {
-        View status = ButterKnife.findById(rootView, R.id.status);
-        if (status != null) {
-            ActivityUtils.initSatus(status);
-        }
-    }
 
 
     /**
