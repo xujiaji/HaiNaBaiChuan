@@ -1,5 +1,4 @@
 *.iml
-/local.properties
 /.idea/workspace.xml
 /.idea/libraries
 /build
@@ -14,3 +13,4 @@
 将删除 app/src/main/ic_launcher-web.png
 将删除 citypicker/libs/
 将删除 depth/libs/
+将删除 .gradle/
