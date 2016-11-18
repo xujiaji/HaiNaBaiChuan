@@ -10,9 +10,30 @@
 
 
 ======================================================================
-    Library crop "android-crop"
+    project picture compressor "Compressor"
+    author: zetbaitsu
+    link: https://github.com/zetbaitsu/Compressor
+    change: copy library code in to the project.
+-------------------------------------------------
+    Copyright (c) 2016 Zetra.
+
+
+
+======================================================================
+    project markdown "MarkdownEditors"
+    author: 沈钦赐
+    link: https://github.com/qinci/MarkdownEditors
+    change: Get useful code:markdown,markdown edit ui...
+            select a picture to upload first, ui change to EditorFragment
+-------------------------------------------------
+    Copyright 2016. SHENQINCI(沈钦赐)<946736079@qq.com>
+
+
+======================================================================
+    project crop "android-crop"
     author: jdamcd
     link: https://github.com/jdamcd/android-crop
+    change: project -> library. delete positioning function. CityPickerActivity -> CityPickerFragment
 -------------------------------------------------
     This project is based on the AOSP camera image cropper via android-cropimage.
     Copyright 2016 SoundCloud
@@ -23,9 +44,6 @@
     author: zaaach
     link: https://github.com/zaaach/CityPicker
 -------------------------------------------------
-
-
-
 
 
    Licensed under the Apache License, Version 2.0 (the "License");
