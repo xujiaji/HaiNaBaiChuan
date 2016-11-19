@@ -2,7 +2,7 @@
 Extract the MVP from the project
 
 # XMVP UML
-![XMPV_UML](mvp.svg)
+![XMPV_UML](mvp.png)
 
 # How to use?
 ### step1:define a contract

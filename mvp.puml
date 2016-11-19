@@ -32,14 +32,16 @@ class MainPresenter<MainContract.View> {
 class DataFill {
     + static String getText()
 }
+note bottom: Modle
 
 interface Presenter{
     void requestTextData()
 }
+note bottom:Presenter
 interface View {
     void showText(String text)
 }
-
+note bottom:View
 
 MainPresenter .left.> DataFill
 MainPresenter -down-> interface View
