@@ -1,4 +1,4 @@
-package io.xujiaji.xmvp;
+package io.xujiaji.sample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -34,7 +34,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
     protected T presenter;
 
-    protected View rootView;
+    private View rootView;
     private Unbinder unbinder;
 
     @Nullable

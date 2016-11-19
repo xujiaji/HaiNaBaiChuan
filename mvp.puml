@@ -1,0 +1,52 @@
+@startuml
+
+abstract class BaseActivity <T extend BasePresenter> {
+    # T presenter
+    # void beforeSetContentView()
+    # void onInit()
+    # void onListener()
+    # abstract int getContentId()
+}
+
+'abstract class BaseFragment <T extend BasePresenter> {
+'    # T presenter;
+'    - View rootView;
+'    # void onListener()
+'    # abstract int getLayoutId()
+'    # void onInit()
+'    # View getRootView()
+'}
+
+class BasePresenter<T extends Contract.BaseView> {
+    # T view;
+    + void start()
+    + void end()
+}
+
+class MainActivity {
+}
+
+class MainPresenter<MainContract.View> {
+}
+
+class DataFill {
+    + static String getText()
+}
+
+interface Presenter{
+    void requestTextData()
+}
+interface View {
+    void showText(String text)
+}
+
+
+MainPresenter .left.> DataFill
+MainPresenter -down-> interface View
+MainPresenter -up-|> BasePresenter
+MainPresenter ..|> Presenter
+MainActivity -right|> BaseActivity
+MainActivity -left-> MainPresenter
+MainActivity .left.|> interface View
+
+@enduml

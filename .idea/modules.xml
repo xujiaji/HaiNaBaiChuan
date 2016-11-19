@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HaiNaBaiChuan.iml" filepath="$PROJECT_DIR$/HaiNaBaiChuan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XMVPLibrary/XMVPLibrary.iml" filepath="$PROJECT_DIR$/XMVPLibrary/XMVPLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
