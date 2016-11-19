@@ -13,29 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.xujiaji.hnbc.app;
-
-import android.app.Application;
-import android.content.Context;
-import android.graphics.Typeface;
-
+package io.xujiaji.xmvp.contracts;
 
 /**
- * application类
+ * Created by jiana on 16-7-22.
  */
-public class App extends Application {
-    private static final String EXTRA_FONT = "fonts/mini_simple.ttf";
-    private static Context mContext;
-    private static Typeface extraFont = null;
+public interface Contract {
+    interface BasePresenter {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mContext = this.getApplicationContext();
     }
 
+    interface BaseView {
 
-    public static Context getAppContext() {
-        return mContext;
     }
+
 }

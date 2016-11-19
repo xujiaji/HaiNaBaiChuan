@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.xujiaji.hnbc.presenters;
+package io.xujiaji.xmvp.presenters;
 
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.xmvp.contracts.Contract;
 
 /**
  * Created by jiana on 16-11-4.

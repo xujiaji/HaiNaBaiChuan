@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc.utils;
+package io.xujiaji.xmvp.utils;
 
 import java.util.Timer;
 import java.util.TimerTask;

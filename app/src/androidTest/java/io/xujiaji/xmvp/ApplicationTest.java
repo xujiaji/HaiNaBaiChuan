@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc;
+package io.xujiaji.xmvp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

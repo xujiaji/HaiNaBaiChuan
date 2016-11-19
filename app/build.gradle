@@ -4,10 +4,9 @@ apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
-    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "io.xujiaji.hnbc"
+        applicationId "io.xujiaji.xmvp"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1

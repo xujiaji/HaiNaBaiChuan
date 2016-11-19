@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.xujiaji.hnbc.fragments;
+package io.xujiaji.xmvp.view.base;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -24,8 +24,8 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.xujiaji.hnbc.presenters.BasePresenter;
-import io.xujiaji.hnbc.utils.GenericHelper;
+import io.xujiaji.xmvp.presenters.BasePresenter;
+import io.xujiaji.xmvp.utils.GenericHelper;
 
 /**
  * 项目中Fragment的基类

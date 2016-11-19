@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.xujiaji.hnbc.activities;
+package io.xujiaji.xmvp.view.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
-import io.xujiaji.hnbc.presenters.BasePresenter;
-import io.xujiaji.hnbc.utils.GenericHelper;
+import io.xujiaji.xmvp.presenters.BasePresenter;
+import io.xujiaji.xmvp.utils.GenericHelper;
 
 /**
  * 项目中Activity的基类
@@ -48,15 +48,26 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+    /**
+     * 需要在SetContentView之前做的操作
+     */
     protected void beforeSetContentView() {
-
     }
 
-
-
+    /**
+     * 在这里面进行初始化
+     */
     protected void onInit() {}
+
+    /**
+     * 这里面写监听事件
+     */
     protected void onListener() {}
 
+    /**
+     * 获取布局的id
+     * @return
+     */
     protected abstract int getContentId();
 
     @Override

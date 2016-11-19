@@ -13,17 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.xujiaji.hnbc.contracts;
+package io.xujiaji.xmvp.app;
+
+import android.app.Application;
+import android.content.Context;
+
 
 /**
- * Created by jiana on 16-7-22.
+ * application类
  */
-public interface Contract {
-    interface BasePresenter {
+public class App extends Application {
+    private static Context mContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mContext = this.getApplicationContext();
     }
 
-    interface BaseView {
 
+    public static Context getAppContext() {
+        return mContext;
     }
-
 }
