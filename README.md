@@ -35,10 +35,18 @@ public class DataFill {
 > example: MainPresenter.java
 
 ``` java
-public class MainPresenter extends BasePresenter <MainContract.View> implements MainContract.Presenter {
+public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
+
     public MainPresenter(MainContract.View view) {
         super(view);
     }
+
+    @Override
+    public void start() {
+        super.start();
+        requestTextData();
+    }
+
     @Override
     public void requestTextData() {
         String textData = DataFill.getText();
