@@ -11,7 +11,7 @@ https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-de
 |![首页1](display/home_page_1.png)| ![首页2](display/home_page_2.png)| ![首页3](display/home_page_3.png) |
 |![阅读1](display/read_article_page_2.png)|![登陆1](display/login_page_1.png)|[浏览更多图片>>](display/display.md)<hr>[查看Gif图片>>](display/running.gif)|
 
-## 所有功能
+## 进度
 - [ ] 查看粉丝信息界面。
 - [ ] 等级徽章界面和功能。
 - [ ] 首页中间的小功能：手机号码归属地、历史上的今天、天气预报等等。
@@ -20,7 +20,8 @@ https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-de
 - [x] 设置界面和查看清除缓存功能。
 - [x] 我的发布界面和数据的获取展示。
 - [x] 喜欢/收藏的文章界面和数据的获取展示。
-- [x] 登陆功能：Facebook登录、QQ登录、海纳百川注册账号登录。
+- [x] 登陆功能
+ - [x] Facebook登录、QQ登录、海纳百川注册账号登录。
 - [x] 注册功能，海纳百川账号注册。
 - [x] 修改人物信息：头像、昵称、性别、手机、邮箱、城市、生日、密码、签名，完成所有UI操作和功能。
 - [x] 退出登录功能。
