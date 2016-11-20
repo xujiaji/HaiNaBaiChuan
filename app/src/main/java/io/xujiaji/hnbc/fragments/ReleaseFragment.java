@@ -39,7 +39,7 @@ public class ReleaseFragment extends BaseRefreshFragment<Post, ReleasePresenter>
     @Override
     protected void onInit() {
         super.onInit();
-        ActivityUtils.initBar(toolbar, R.string.collect);//初始化标题
+        ActivityUtils.initBar(toolbar, R.string.my_release);//初始化标题
         swipeLayout.setRefreshing(true);
     }
 
