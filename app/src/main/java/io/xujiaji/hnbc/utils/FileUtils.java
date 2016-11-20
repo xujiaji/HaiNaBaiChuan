@@ -26,7 +26,12 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import java.io.File;
+import java.text.DecimalFormat;
+
 import io.xujiaji.hnbc.app.App;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * 文件管理工具类
@@ -162,4 +167,103 @@ public class FileUtils {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+    enum SizeType {
+        B, KB, MB, GB, TB
+    }
+
+    /**
+     * 转换获取的文件单位
+     *
+     * @param size 获取的文件大小，单位（byte）
+     * @param type 需要转换到哪个大小单位
+     * @return 返回转换后的值
+     */
+    public static double formatSize(long size, SizeType type) {
+        double formatSized = 0;
+        switch (type) {
+            case B:
+                formatSized = size;
+                break;
+            case KB:
+                formatSized = size / 1024.0;
+                break;
+            case MB:
+                formatSized = size / 1024.0 / 1024.0;
+                break;
+            case GB:
+                formatSized = size / 1024.0 / 1024.0 / 1024.0;
+                break;
+            case TB:
+                formatSized = size / 1024.0 / 1024.0 / 1024.0 / 1024.0;
+                break;
+        }
+        return formatSized;
+    }
+
+    /**
+     * 自动判断因该转换的单位
+     *
+     * @param size 大小
+     * @return 转换后的大小
+     */
+    public static String formatSize(long size) {
+        if (size == 0L) {
+            return "0B";
+        }
+        DecimalFormat df = new DecimalFormat("#.00");
+        if (size < 1024) {
+            return df.format(formatSize(size, SizeType.B)) + "B";
+        }
+        if (size < 1024 * 1024) {
+            return df.format(formatSize(size, SizeType.KB)) + "KB";
+        }
+        if (size < 1024 * 1024 * 1024) {
+            return df.format(formatSize(size, SizeType.MB)) + "MB";
+        }
+
+        if (size >= 1024 * 1024 * 1024) {
+            double formatSized = formatSize(size, SizeType.GB);
+            if (formatSized >= 1024) {
+                return df.format(formatSized / 1024) + "TB";
+            }
+            return df.format(formatSized) + "GB";
+        }
+        return null;
+    }
+
+
+    public static File[] getAllCacheFile() {
+        String packagePath = "/data/data/" + App.getAppContext().getPackageName();
+        File[] files = new File[5];
+        files[0] = App.getAppContext().getExternalCacheDir();
+        files[1] = new File(packagePath + "/app_webview");
+        files[2] = new File(packagePath + "/cache");
+        files[3] = new File(packagePath + "/code_cache");
+        files[4] = new File(packagePath + "/files");
+        return files;
+    }
+
+
+    /**
+     * rxjava递归查询
+     * @param f
+     * @return
+     */
+    public static Observable<File> listFiles(File f){
+        if(f.isDirectory()){
+            return Observable.from(f.listFiles()).flatMap(new Func1<File, Observable<File>>() {
+                @Override
+                public Observable<File> call(File file) {
+                    return listFiles(file);
+                }
+            });
+        } else {
+            return Observable.just(f).filter(new Func1<File, Boolean>() {
+                @Override
+                public Boolean call(File file) {
+                    return file.exists() && file.canRead();
+                }
+            });
+        }
+    }
 }

@@ -61,6 +61,10 @@ public abstract class BaseRefreshFragment<X, T extends BasePresenter> extends Ba
      */
     @Override
     public void updateListSuccess(List<X> datas) {
+        if (isHidden()) {
+            swipeLayout.setRefreshing(false);
+            return;
+        }
         mAdapter.setNewData(datas);
         mAdapter.openLoadMore(PAGE_SIZE);
         mAdapter.removeAllFooterView();
@@ -73,6 +77,10 @@ public abstract class BaseRefreshFragment<X, T extends BasePresenter> extends Ba
      */
     @Override
     public void updateListFail(String err) {
+        if (isHidden()) {
+            swipeLayout.setRefreshing(false);
+            return;
+        }
         swipeLayout.setRefreshing(false);
         ToastUtil.getInstance().showLongT(err);
     }
@@ -82,6 +90,9 @@ public abstract class BaseRefreshFragment<X, T extends BasePresenter> extends Ba
      */
     @Override
     public void loadListDataSuccess(List<X> datas) {
+        if (isHidden()) {
+            return;
+        }
         mAdapter.addData(datas);
         mCurrentCounter = mAdapter.getData().size();
     }
@@ -93,6 +104,9 @@ public abstract class BaseRefreshFragment<X, T extends BasePresenter> extends Ba
      */
     @Override
     public void loadListDataFail(String err) {
+        if (isHidden()) {
+            return;
+        }
         if (swipeLayout.isRefreshing()) {
             swipeLayout.setRefreshing(false);
         }

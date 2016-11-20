@@ -39,10 +39,9 @@ import io.xujiaji.hnbc.utils.ImgLoadUtil;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainFragPresenter extends BasePresenter <MainContract.MainFragView> implements MainContract.MainFragPersenter  {
-    //是否已经加载完所有数据
-    private boolean loadOver = false;
+public class MainFragPresenter extends BasePresenter<MainContract.MainFragView> implements MainContract.MainFragPersenter {
     private List<BannerData> bannerDataList = null;
+
     public MainFragPresenter(MainContract.MainFragView view) {
         super(view);
     }
@@ -109,7 +108,6 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
         NetRequest.Instance().pullPostList(0, MainFragment.PAGE_SIZE, new NetRequest.RequestListener<List<Post>>() {
             @Override
             public void success(List<Post> posts) {
-                loadOver = false;
                 view.updateListSuccess(posts);
             }
 
@@ -126,22 +124,19 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
             @Override
             public void success(List<Post> posts) {
                 if (posts == null || posts.size() == 0) {
-                    loadOver = true;
                     view.loadListDateOver();
                 } else {
-                    loadOver = false;
                     view.loadListDataSuccess(posts);
                 }
             }
 
             @Override
             public void error(String err) {
-                if (!loadOver) {
-                    view.loadListDataFail(err);
-                }
+                view.loadListDataFail(err);
             }
         });
     }
+
     @Override
     public void requestLike(Post post) {
         NetRequest.Instance().likeComment(post, new NetRequest.RequestListener<String>() {
