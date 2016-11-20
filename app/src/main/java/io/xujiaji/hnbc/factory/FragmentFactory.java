@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
+import io.xujiaji.hnbc.fragments.ReleaseFragment;
+import io.xujiaji.hnbc.fragments.SetFragment;
 import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.CollectFragment;
 import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
@@ -73,6 +75,12 @@ public class FragmentFactory {
                 break;
             case C.fragment.COLLECT:
                 newFragment = CollectFragment.newInstance();
+                break;
+            case C.fragment.RELEASE:
+                newFragment = ReleaseFragment.newInstance();
+                break;
+            case C.fragment.SET:
+                newFragment = SetFragment.newInstance();
                 break;
             default:
                 break;

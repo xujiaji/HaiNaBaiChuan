@@ -19,6 +19,7 @@ package io.xujiaji.hnbc.model.net;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.facebook.login.LoginManager;
 
@@ -408,6 +409,34 @@ public class NetRequest {
             }
         });
 
+    }
+
+    /**
+     * 获取该用户发布的帖子
+     * @param currentIndex
+     * @param size
+     * @param listener
+     */
+    public void pullReleasePost(int currentIndex, int size, final RequestListener<List<Post>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.addWhereEqualTo("author", BmobUser.getCurrentUser());    // 查询当前用户的所有帖子
+        query.setSkip(currentIndex);
+        query.setLimit(size);
+        query.order("-updatedAt");
+        query.include("author");// 希望在查询帖子信息的同时也把发布人的信息查询出来
+        query.findObjects(new FindListener<Post>() {
+
+            @Override
+            public void done(List<Post> list,BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+
+        });
     }
 
     /**

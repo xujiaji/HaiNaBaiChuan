@@ -13,10 +13,10 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.config.C;
-import io.xujiaji.hnbc.contracts.CollectContract;
+import io.xujiaji.hnbc.contracts.ReleaseContract;
 import io.xujiaji.hnbc.fragments.base.BaseRefreshFragment;
 import io.xujiaji.hnbc.model.entity.Post;
-import io.xujiaji.hnbc.presenters.CollectPresenter;
+import io.xujiaji.hnbc.presenters.ReleasePresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 
 /**
@@ -24,7 +24,7 @@ import io.xujiaji.hnbc.utils.ActivityUtils;
  * 收藏
  */
 
-public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter> implements CollectContract.View {
+public class ReleaseFragment extends BaseRefreshFragment<Post, ReleasePresenter> implements ReleaseContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.mainBottomRecycler)
@@ -32,8 +32,8 @@ public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter>
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout swipeLayout;
 
-    public static CollectFragment newInstance() {
-        return new CollectFragment();
+    public static ReleaseFragment newInstance() {
+        return new ReleaseFragment();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter>
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_collect;
+        return R.layout.fragment_release;
     }
 
     @Override

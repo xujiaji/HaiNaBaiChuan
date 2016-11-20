@@ -48,7 +48,7 @@ public interface MainContract {
 
 
 
-    interface MainFragPersenter extends Contract.BasePresenter {
+    interface MainFragPersenter extends RefreshContract.Presenter {
         List<MainTag> getTags();
 
         /**
@@ -62,16 +62,6 @@ public interface MainContract {
         void requestOpenBannerLink(Context context, int position);
 
         void requestLoadHead(ImageView head);
-
-        /**
-         * 请求加载数据
-         */
-        void requestUpdateListData();
-
-        /**
-         * 请求加载更多数据
-         */
-        void requestLoadListData(int current);
 
         /**
          * 请求喜欢文章

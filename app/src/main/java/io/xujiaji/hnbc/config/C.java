@@ -145,11 +145,11 @@ public class C {
         /**
          * key：发布
          */
-        public static final String RELEASE = "release";
+        public static final String RELEASE = "ReleaseFragment";
         /**
          * key：设置
          */
-        public static final String SET = "set";
+        public static final String SET = "SetFragment";
 
     }
 

@@ -155,7 +155,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void clickCollect() {
         LogUtil.e3("clickCollect()");
-        LogUtil.e3("presenter.checkLocalUser() = " + presenter.checkLocalUser());
         if (presenter.checkLocalUser()) {
             goToFragment(C.fragment.COLLECT);
         } else {
@@ -165,12 +164,22 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void clickRelease() {
-
+        LogUtil.e3("clickRelease()");
+        if (presenter.checkLocalUser()) {
+            goToFragment(C.fragment.RELEASE);
+        } else {
+            goToFragment(C.fragment.LOGIN);
+        }
     }
 
     @Override
     public void clickSet() {
-
+        LogUtil.e3("clickRelease()");
+        if (presenter.checkLocalUser()) {
+            goToFragment(C.fragment.SET);
+        } else {
+            goToFragment(C.fragment.LOGIN);
+        }
     }
 
     @Override
