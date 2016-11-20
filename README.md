@@ -32,8 +32,8 @@ https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-de
  - [x] UI展示
  - [x] 发布的文章数据的获取填充
 - [x] 我的喜欢/收藏
- - [ ] 文章界面
- - [ ] 我的收藏文章数据的获取填充
+ - [x] 文章界面
+ - [x] 我的收藏文章数据的获取填充
 - [ ] 登陆功能
  - [x] Facebook登录
  - [x] QQ登录
