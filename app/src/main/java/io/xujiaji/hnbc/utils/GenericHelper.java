@@ -33,8 +33,24 @@ public class GenericHelper {
         if(type == null || !(type instanceof ParameterizedType)) return null;
         ParameterizedType parameterizedType = (ParameterizedType) type;
         Type[] types = parameterizedType.getActualTypeArguments();
-        if(types == null || types.length == 0) return null;
-        return (Class<T>) types[0];
+        for (Type t : types) {
+            if (isPresenter(t)) {
+                return (Class<T>) t;
+            }
+        }
+
+        return null;
+//        if(types == null || types.length == 0) return null;
+//        return (Class<T>) types[0];
+    }
+
+    private static boolean isPresenter(Type t) {
+        Class<?> aClass = (Class<?>) t;
+        Class<?>[] classes = aClass.getInterfaces();
+        for (Class<?> c : classes) {
+            return c == Contract.BasePresenter.class || isPresenter(c);
+        }
+        return false;
     }
 
     public static  <T> T initPresenter(Object obj) {
