@@ -22,7 +22,7 @@ import android.widget.ImageView;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
-import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.UserInfoFragment;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.User;

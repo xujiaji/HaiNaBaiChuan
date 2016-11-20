@@ -27,6 +27,7 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.presenters.UserInfoPresenter;
 import io.xujiaji.hnbc.widget.PupList;

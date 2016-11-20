@@ -17,6 +17,8 @@ package io.xujiaji.hnbc.contracts;
 
 import com.facebook.login.LoginResult;
 
+import io.xujiaji.hnbc.contracts.base.Contract;
+
 /**
  * Created by jiana on 16-11-4.
  */
@@ -30,7 +32,7 @@ public interface LoginContract {
         void requestFacebook(LoginResult loginResult);
     }
 
-    interface View extends MainContract.MainBaseFragView {
+    interface View extends Contract.BaseView {
         void showDialog();
         void nameFormatError(String err);
         void passwordFormatError(String err);

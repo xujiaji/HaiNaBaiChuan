@@ -17,6 +17,8 @@ package io.xujiaji.hnbc.contracts;
 
 import java.util.Date;
 
+import io.xujiaji.hnbc.contracts.base.Contract;
+
 /**
  * Created by jiana on 16-11-7.
  */

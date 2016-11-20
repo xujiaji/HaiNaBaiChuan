@@ -21,7 +21,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.contracts.base.Contract;
 
 /**
  * Created by qibin on 2015/11/15.
@@ -33,8 +33,24 @@ public class GenericHelper {
         if(type == null || !(type instanceof ParameterizedType)) return null;
         ParameterizedType parameterizedType = (ParameterizedType) type;
         Type[] types = parameterizedType.getActualTypeArguments();
-        if(types == null || types.length == 0) return null;
-        return (Class<T>) types[0];
+        for (Type t : types) {
+            if (isPresenter(t)) {
+                return (Class<T>) t;
+            }
+        }
+
+        return null;
+//        if(types == null || types.length == 0) return null;
+//        return (Class<T>) types[0];
+    }
+
+    private static boolean isPresenter(Type t) {
+        Class<?> aClass = (Class<?>) t;
+        Class<?>[] classes = aClass.getInterfaces();
+        for (Class<?> c : classes) {
+            return c == Contract.BasePresenter.class || isPresenter(c);
+        }
+        return false;
     }
 
     public static  <T> T initPresenter(Object obj) {

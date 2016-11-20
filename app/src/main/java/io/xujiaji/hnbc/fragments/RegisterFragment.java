@@ -29,6 +29,7 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.presenters.RegisterPresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ToastUtil;

@@ -49,6 +49,7 @@ import io.xujiaji.hnbc.adapters.EditUserInfoAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.EditUserInfoContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.presenters.EditUserInfoPresenter;
 import io.xujiaji.hnbc.utils.BottomSheetImagePicker;
 import io.xujiaji.hnbc.utils.FileUtils;

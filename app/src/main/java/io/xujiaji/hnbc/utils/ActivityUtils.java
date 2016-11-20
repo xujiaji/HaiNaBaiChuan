@@ -1,10 +1,17 @@
 package io.xujiaji.hnbc.utils;
 
+import android.support.annotation.StringRes;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import io.xujiaji.hnbc.R;
 
 /**
  * Activity工具类
@@ -44,6 +51,21 @@ public class ActivityUtils {
             return true;
         }
     }
+
+
+    /**
+     * 初始化Toolbar，添加返回按钮，set title
+     * @param toolbar
+     */
+    public static void initBar(Toolbar toolbar, @StringRes int title) {
+        toolbar.setNavigationIcon(R.drawable.ic_chevron_left_24dp);
+        TextView titleView = (TextView) LayoutInflater.from(toolbar.getContext()).inflate(R.layout.text_view_new_title, null);
+        titleView.setText(title);
+        Toolbar.LayoutParams params = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        toolbar.addView(titleView, params);
+    }
+
 
     public static void initSatus(View view) {
         int statusHeight = ScreenUtils.getStatusHeight(view.getContext());

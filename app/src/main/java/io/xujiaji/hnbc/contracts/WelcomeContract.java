@@ -18,6 +18,8 @@ package io.xujiaji.hnbc.contracts;
 
 import android.widget.ImageView;
 
+import io.xujiaji.hnbc.contracts.base.Contract;
+
 /**
  * 管理welcome的view和presenter的契约
  */
