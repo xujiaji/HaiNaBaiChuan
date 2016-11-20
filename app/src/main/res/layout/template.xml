@@ -28,12 +28,6 @@
         android:fitsSystemWindows="true"
         android:layerType="hardware">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
-            app:indicator_drawable_selected="@color/transparent"
-            app:indicator_drawable_unselected="@color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_viewpager_height" />
     </no.agens.depth.lib.DepthLayout>
 
 
@@ -45,24 +39,10 @@
         android:layerType="hardware"
         app:edge_color="#0000">
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:layout_alignParentBottom="true"
-            android:padding="6dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/head" />
     </no.agens.depth.lib.DepthLayout>
 
     <include layout="@layout/include_status" />
 
-    <ImageView
-        android:id="@+id/actionbar_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appbar"
-        android:background="#00ff00" />
 
     <no.agens.depth.lib.DepthLayout
         android:id="@+id/dl2"
@@ -73,14 +53,6 @@
         android:layerType="hardware"
         app:custom_elevation="1dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mainRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:clipToPadding="false"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin" />
     </no.agens.depth.lib.DepthLayout>
 
 
@@ -93,20 +65,6 @@
         android:layerType="hardware"
         app:custom_elevation="2dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imgScrollInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_scroll_top" />
-
-            <include layout="@layout/refresh_recyclerview" />
-        </LinearLayout>
     </no.agens.depth.lib.DepthLayout>
 
     <no.agens.depth.lib.DepthLayout
@@ -122,26 +80,7 @@
         app:edge_color="@color/fab"
         app:is_circle="true">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layerType="hardware"
-            android:src="@drawable/ic_mode_edit_black_24dp"
-            app:backgroundTint="@color/theme_red"
-            app:elevation="0dp"
-            app:pressedTranslationZ="0dp"
-            app:rippleColor="@color/fab_highlight" />
     </no.agens.depth.lib.DepthLayout>
 
-    <io.xujiaji.hnbc.widget.SheetLayout
-        android:id="@+id/bottom_sheet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:elevation="2dp"
-        app:ft_color="@color/theme_red"
-        app:ft_container_gravity="center" />
 
 </no.agens.depth.lib.DepthRendrer>

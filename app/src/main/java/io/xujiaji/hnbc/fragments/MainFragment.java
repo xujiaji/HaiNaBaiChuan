@@ -23,13 +23,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -57,8 +57,8 @@ import io.xujiaji.hnbc.utils.ToastUtil;
 import io.xujiaji.hnbc.widget.SheetLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
-public class MainFragment extends BaseMainFragment<MainFragPresenter> implements MainContract.MainFragView,
-        BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> implements MainContract.MainFragView {
+
     /**
      * 底部布局到达顶部
      */
@@ -102,8 +102,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
     private int bottomViewNowStatus;
     @BindView(R.id.bottom_sheet)
     SheetLayout mSheetLayout;
-    private MainBottomRecyclerAdapter mMainBottomRecyclerAdapter;
-    private View notLoadingView;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -178,6 +176,7 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
 
     @Override
     protected void onInit() {
+        super.onInit();
         handler = new MainFragHandler(this);
         MaterialRippleHelper.ripple(imgScrollInfo);
         initStatusHeight();
@@ -185,6 +184,21 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         initRecycler();
         initSheetLayout();
         presenter.requestLoadHead(menu);
+    }
+
+    @Override
+    protected BaseQuickAdapter<Post, BaseViewHolder> getAdapter() {
+        return new MainBottomRecyclerAdapter();
+    }
+
+    @Override
+    protected SwipeRefreshLayout getSwipeLayout() {
+        return swipeLayout;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mainBottomRecycler;
     }
 
     /**
@@ -217,14 +231,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         mainRecycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         OverScrollDecoratorHelper.setUpOverScroll(mainRecycler, OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL);
         mainRecycler.setAdapter(new MainRecyclerAdapter(presenter.getTags()));
-
-        mainBottomRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        swipeLayout.setOnRefreshListener(this);
-        mMainBottomRecyclerAdapter = new MainBottomRecyclerAdapter();
-        mMainBottomRecyclerAdapter.openLoadAnimation();
-        mMainBottomRecyclerAdapter.openLoadMore(PAGE_SIZE);
-        mMainBottomRecyclerAdapter.setOnLoadMoreListener(this);
-        mainBottomRecycler.setAdapter(mMainBottomRecyclerAdapter);
     }
 
 
@@ -424,49 +430,6 @@ public class MainFragment extends BaseMainFragment<MainFragPresenter> implements
         ToastUtil.getInstance().showShortT(err);
     }
 
-    @Override
-    public void updateListDateSuccess(List<Post> posts) {
-        mMainBottomRecyclerAdapter.setNewData(posts);
-        mMainBottomRecyclerAdapter.openLoadMore(PAGE_SIZE);
-        mMainBottomRecyclerAdapter.removeAllFooterView();
-        mCurrentCounter = PAGE_SIZE;
-        swipeLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void updateListDateFail(String err) {
-        swipeLayout.setRefreshing(false);
-        ToastUtil.getInstance().showLongT(err);
-    }
-
-    @Override
-    public void loadListDateSuccess(List<Post> posts) {
-        mMainBottomRecyclerAdapter.addData(posts);
-        mCurrentCounter = mMainBottomRecyclerAdapter.getData().size();
-    }
-
-    @Override
-    public void loadListDateOver() {
-        mMainBottomRecyclerAdapter.loadComplete();
-        if (notLoadingView == null) {
-            notLoadingView = LayoutInflater.from(getActivity()).inflate(R.layout.not_loading, (ViewGroup) mainBottomRecycler.getParent(), false);
-        }
-        mMainBottomRecyclerAdapter.addFooterView(notLoadingView);
-    }
-
-    @Override
-    public void loadListFail(String err) {
-        if (swipeLayout.isRefreshing()) {
-            swipeLayout.setRefreshing(false);
-        }
-        mainBottomRecycler.post(new Runnable() {
-            @Override
-            public void run() {
-                mMainBottomRecyclerAdapter.showLoadMoreFailedView();
-            }
-        });
-        ToastUtil.getInstance().showLongT(err);
-    }
 
     @Override
     public void likePostSuccess() {

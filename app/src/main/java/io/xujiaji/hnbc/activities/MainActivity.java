@@ -154,7 +154,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void clickCollect() {
-
+        LogUtil.e3("clickCollect()");
+        LogUtil.e3("presenter.checkLocalUser() = " + presenter.checkLocalUser());
+        if (presenter.checkLocalUser()) {
+            goToFragment(C.fragment.COLLECT);
+        } else {
+            goToFragment(C.fragment.LOGIN);
+        }
     }
 
     @Override

@@ -141,7 +141,7 @@ public class C {
         /**
          * key：收藏
          */
-        public static final String COLLECT = "collect";
+        public static final String COLLECT = "CollectFragment";
         /**
          * key：发布
          */

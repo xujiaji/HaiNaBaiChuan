@@ -21,6 +21,7 @@ import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.CollectFragment;
 import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
 import io.xujiaji.hnbc.fragments.LoginFragment;
 import io.xujiaji.hnbc.fragments.MainFragment;
@@ -37,7 +38,7 @@ public class FragmentFactory {
     /**
      * 主页Fragment数量
      */
-    private static final int FRAGMENT_NUM = 8;
+    private static final int FRAGMENT_NUM = 9;
 
     /**
      * 统一管理MainActivity中所有Fragment
@@ -69,6 +70,9 @@ public class FragmentFactory {
                 break;
             case C.fragment.READ_ARTICLE:
                 newFragment = ReadArticleFragment.newInstance();
+                break;
+            case C.fragment.COLLECT:
+                newFragment = CollectFragment.newInstance();
                 break;
             default:
                 break;

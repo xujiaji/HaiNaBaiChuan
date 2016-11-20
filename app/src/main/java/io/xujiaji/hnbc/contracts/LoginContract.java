@@ -30,7 +30,7 @@ public interface LoginContract {
         void requestFacebook(LoginResult loginResult);
     }
 
-    interface View extends MainContract.MainBaseFragView {
+    interface View extends Contract.BaseView {
         void showDialog();
         void nameFormatError(String err);
         void passwordFormatError(String err);

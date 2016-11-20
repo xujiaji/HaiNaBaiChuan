@@ -110,12 +110,12 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
             @Override
             public void success(List<Post> posts) {
                 loadOver = false;
-                view.updateListDateSuccess(posts);
+                view.updateListSuccess(posts);
             }
 
             @Override
             public void error(String err) {
-                view.updateListDateFail(err);
+                view.updateListFail(err);
             }
         });
     }
@@ -130,14 +130,14 @@ public class MainFragPresenter extends BasePresenter <MainContract.MainFragView>
                     view.loadListDateOver();
                 } else {
                     loadOver = false;
-                    view.loadListDateSuccess(posts);
+                    view.loadListDataSuccess(posts);
                 }
             }
 
             @Override
             public void error(String err) {
                 if (!loadOver) {
-                    view.loadListFail(err);
+                    view.loadListDataFail(err);
                 }
             }
         });

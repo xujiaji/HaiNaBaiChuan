@@ -44,10 +44,6 @@ public interface MainContract {
         void clickSet();
     }
 
-    interface MainBaseFragView extends Contract.BaseView {
-
-    }
-
 
 
     interface MainFragPersenter extends Contract.BasePresenter {
@@ -85,7 +81,7 @@ public interface MainContract {
         void requestFollow(User user);
     }
 
-    interface MainFragView extends MainBaseFragView {
+    interface MainFragView extends RefreshContract.View<Post> {
         void contentLayoutToTop();
         void contentLayoutToTopListener(boolean start);
         void contentLayoutToDown();
@@ -94,34 +90,6 @@ public interface MainContract {
         void pullBannerDataSuccess(List<String> titles, List<String> images);
 
         void pullBannerDataFail(String err);
-        /**
-         * 刷新列表数据成功
-         */
-        void updateListDateSuccess(List<Post> posts);
-
-        /**
-         * 刷新列表数据失败
-         * @param err
-         */
-        void updateListDateFail(String err);
-
-        /**
-         * 加载列表数据成功
-         * @param posts
-         */
-        void loadListDateSuccess(List<Post> posts);
-
-        /**
-         * 已经把数据加载完了
-         */
-        void loadListDateOver();
-
-        /**
-         * 加载数据失败了
-         * @param err
-         */
-        void loadListFail(String err);
-
 
         /**
          * 喜欢文章成功
