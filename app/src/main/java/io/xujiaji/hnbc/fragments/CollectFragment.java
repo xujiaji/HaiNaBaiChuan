@@ -40,6 +40,7 @@ public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter>
     protected void onInit() {
         super.onInit();
         ActivityUtils.initBar(toolbar, R.string.collect);//初始化标题
+        swipeLayout.setRefreshing(true);
     }
 
     @Override

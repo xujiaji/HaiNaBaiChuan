@@ -411,6 +411,51 @@ public class NetRequest {
     }
 
     /**
+     * 获取收藏/喜欢的帖子
+     * @param currentIndex
+     * @param size
+     * @param listener
+     */
+    public void pullCollectPost(int currentIndex, int size, final RequestListener<List<Post>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<Post> query = new BmobQuery<>();
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId", BmobUser.getCurrentUser().getObjectId());
+        query.addWhereMatchesQuery("likes", "_User", innerQuery);
+        query.setSkip(currentIndex);
+        query.setLimit(size);
+        query.order("-createdAt");
+        query.include("author");
+        query.findObjects(new FindListener<Post>() {
+            @Override
+            public void done(List<Post> list, BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+    }
+    /*
+        BmobQuery<Post> query = new BmobQuery<>();
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId", user.getObjectId());
+        query.addWhereMatchesQuery("likes", "_User", innerQuery);
+        query.count(Post.class, new CountListener() {
+            @Override
+            public void done(Integer integer, BmobException e) {
+                if (e == null) {
+                    listener.success(Integer.toString(integer));
+                } else {
+                    listener.success("0");
+                }
+            }
+        });
+
+     */
+
+    /**
      * 获取帖子数据集合
      *
      * @param size 获取的数据条数
@@ -431,7 +476,17 @@ public class NetRequest {
 //            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
 //        }
 
-        query.findObjectsObservable(Post.class)
+        query.findObjects(new FindListener<Post>() {
+            @Override
+            public void done(List<Post> list, BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+//        query.findObjectsObservable(Post.class)
 //                .map(new Func1<List<Post>, List<Post>>() {
 //                    @Override
 //                    public List<Post> call(List<Post> posts) {
@@ -452,25 +507,25 @@ public class NetRequest {
 //                        return posts;
 //                    }
 //                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Post>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        LogUtil.e2(throwable.toString());
-                        listener.error(throwable.toString());
-                    }
-
-                    @Override
-                    public void onNext(List<Post> posts) {
-                        listener.success(posts);
-                    }
-                });
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<List<Post>>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable throwable) {
+//                        LogUtil.e2(throwable.toString());
+//                        listener.error(throwable.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Post> posts) {
+//                        listener.success(posts);
+//                    }
+//                });
     }
 
     /**

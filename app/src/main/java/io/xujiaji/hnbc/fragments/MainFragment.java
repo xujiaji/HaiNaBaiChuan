@@ -69,10 +69,6 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
      */
     public static final int BOTTOM_VIEW_STATUS_BOTTOM = 0;
 
-    public static final int PAGE_SIZE = 6;
-
-    private int mCurrentCounter = 0;
-
     private boolean fabContentOpen = false;
     @BindView(R.id.appbar)
     ViewGroup appbar;
@@ -185,6 +181,7 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
         initRecycler();
         initSheetLayout();
         presenter.requestLoadHead(menu);
+        swipeLayout.setRefreshing(true);
     }
 
     @Override
@@ -450,16 +447,6 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     @Override
     public void followUserFail(String err) {
         ToastUtil.getInstance().showShortT(err);
-    }
-
-    @Override
-    public void onRefresh() {
-        presenter.requestUpdateListData();
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        presenter.requestLoadListData(mCurrentCounter);
     }
 
 
