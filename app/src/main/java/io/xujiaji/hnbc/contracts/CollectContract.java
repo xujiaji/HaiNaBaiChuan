@@ -1,5 +1,6 @@
 package io.xujiaji.hnbc.contracts;
 
+import io.xujiaji.hnbc.contracts.base.RefreshContract;
 import io.xujiaji.hnbc.model.entity.Post;
 
 /**

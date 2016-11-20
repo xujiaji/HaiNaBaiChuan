@@ -39,6 +39,7 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.LoginContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.net.LoginSDKHelper;
 import io.xujiaji.hnbc.presenters.LoginPresenter;
 import io.xujiaji.hnbc.utils.LogUtil;

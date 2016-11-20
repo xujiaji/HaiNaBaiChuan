@@ -17,6 +17,7 @@ package io.xujiaji.hnbc.contracts;
 
 import java.util.List;
 
+import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.Reply;

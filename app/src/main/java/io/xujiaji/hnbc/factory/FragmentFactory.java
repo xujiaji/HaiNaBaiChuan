@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
-import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.CollectFragment;
 import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
 import io.xujiaji.hnbc.fragments.LoginFragment;

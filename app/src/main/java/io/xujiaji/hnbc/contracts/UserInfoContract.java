@@ -18,6 +18,7 @@ package io.xujiaji.hnbc.contracts;
 import android.content.Context;
 import android.widget.ImageView;
 
+import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.model.entity.User;
 
 /**

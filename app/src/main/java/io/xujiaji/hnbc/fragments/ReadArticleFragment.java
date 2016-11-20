@@ -38,6 +38,7 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.ExpandableCommentItemAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.ReadActicleContract;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.CommentFill;
 import io.xujiaji.hnbc.model.entity.Post;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.xujiaji.hnbc.fragments;
+package io.xujiaji.hnbc.fragments.base;
 
 import android.app.Fragment;
 import android.os.Bundle;

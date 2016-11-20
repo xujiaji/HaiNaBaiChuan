@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.xujiaji.hnbc.fragments;
+package io.xujiaji.hnbc.fragments.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

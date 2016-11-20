@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc.fragments;
+package io.xujiaji.hnbc.fragments.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.contracts.RefreshContract;
+import io.xujiaji.hnbc.contracts.base.RefreshContract;
 import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ToastUtil;

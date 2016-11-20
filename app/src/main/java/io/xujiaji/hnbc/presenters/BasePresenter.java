@@ -16,7 +16,7 @@
 
 package io.xujiaji.hnbc.presenters;
 
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.contracts.base.Contract;
 
 /**
  * Created by jiana on 16-11-4.

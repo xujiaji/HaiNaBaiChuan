@@ -47,6 +47,7 @@ import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.adapters.MainRecyclerAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
+import io.xujiaji.hnbc.fragments.base.BaseRefreshFragment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.presenters.MainFragPresenter;
 import io.xujiaji.hnbc.utils.GlideImageLoader;

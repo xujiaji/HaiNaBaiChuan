@@ -14,6 +14,7 @@ import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.adapters.MainBottomRecyclerAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.CollectContract;
+import io.xujiaji.hnbc.fragments.base.BaseRefreshFragment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.presenters.CollectPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;

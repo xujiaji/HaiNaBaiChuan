@@ -1,4 +1,4 @@
-package io.xujiaji.hnbc.contracts;
+package io.xujiaji.hnbc.contracts.base;
 
 import java.util.List;
 

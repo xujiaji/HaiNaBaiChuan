@@ -21,7 +21,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-import io.xujiaji.hnbc.contracts.Contract;
+import io.xujiaji.hnbc.contracts.base.Contract;
 
 /**
  * Created by qibin on 2015/11/15.

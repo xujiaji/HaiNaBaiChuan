@@ -34,7 +34,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
-import io.xujiaji.hnbc.fragments.BaseMainFragment;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.Msg;
 import io.xujiaji.hnbc.presenters.MainPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
