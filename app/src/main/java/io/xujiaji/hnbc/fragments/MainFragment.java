@@ -487,4 +487,12 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
         }
         return false;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        banner.stopAutoPlay();
+        banner.removeAllViews();
+        banner = null;
+    }
 }

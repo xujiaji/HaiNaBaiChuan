@@ -26,7 +26,8 @@ https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-de
  - [ ] UI
  - [ ] 数据搜索填充
 - [ ] 设置界面
- - [x] 查看清除缓存操作和功能
+ - [x] 查看缓存、清除缓存操作和功能
+ - [ ] 关于 
  - [ ] 其他，待确定。
 - [x] 我的发布
  - [x] UI展示
