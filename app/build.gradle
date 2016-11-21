@@ -22,7 +22,11 @@ dependencies {
     testCompile "junit:junit:$rootProject.junitVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
     //绑定UI
     compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    compile "thereisnospon.codeview:codeview:$rootProject.codeviewVersion"
+    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rvHolderVersion"
 }
