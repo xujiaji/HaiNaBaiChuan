@@ -15,39 +15,43 @@
  */
 
 package io.xujiaji.xmvp.utils;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import io.xujiaji.xmvp.contracts.Contract;
 
+
 /**
  * Created by qibin on 2015/11/15.
  */
 public class GenericHelper {
 
-    /**
-     * 获取泛型类，也就是BasePresenter的子类
-     * @param klass
-     * @param <T>
-     * @return
-     */
     public static <T> Class<T> getViewClass(Class<?> klass) {
         Type type = klass.getGenericSuperclass();
         if(type == null || !(type instanceof ParameterizedType)) return null;
         ParameterizedType parameterizedType = (ParameterizedType) type;
         Type[] types = parameterizedType.getActualTypeArguments();
-        if(types == null || types.length == 0) return null;
-        return (Class<T>) types[0];
+        for (Type t : types) {
+            if (isPresenter(t)) {
+                return (Class<T>) t;
+            }
+        }
+
+        return null;
+//        if(types == null || types.length == 0) return null;
+//        return (Class<T>) types[0];
     }
 
-    /**
-     * 初始化presenter
-     * @param obj
-     * @param <T>
-     * @return
-     */
+    private static boolean isPresenter(Type t) {
+        Class<?> aClass = (Class<?>) t;
+        Class<?>[] classes = aClass.getInterfaces();
+        for (Class<?> c : classes) {
+            return c == Contract.BasePresenter.class || isPresenter(c);
+        }
+        return false;
+    }
+
     public static  <T> T initPresenter(Object obj) {
         try {
             Class<?> currentClass = obj.getClass();
@@ -61,11 +65,6 @@ public class GenericHelper {
     }
 
 
-    /**
-     * 获取继承"Contract.BaseView"的接口类
-     * @param currentClass
-     * @return
-     */
     public static Class<?> getViewInterface(Class currentClass) {
         Class<?>[] classes = currentClass.getInterfaces();
         for (Class<?> c : classes) {
