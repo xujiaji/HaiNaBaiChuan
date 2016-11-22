@@ -1,5 +1,9 @@
 # HaiNaBaiChuan
-包含Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信息修改等功能
+Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信息修改等功能。
+# XMVP
+将项目中使用的XMVP提取出来方便以后使用。
+[该项目的XMVP分支](https://github.com/xujiaji/HaiNaBaiChuan/tree/XMVP)
+[浏览APP](https://github.com/xujiaji/HaiNaBaiChuan/releases)
 
 # debug apk下载：
 https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-debug.apk
