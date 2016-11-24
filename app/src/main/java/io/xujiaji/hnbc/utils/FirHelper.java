@@ -150,7 +150,9 @@ public class FirHelper {
     }
 
     public void destroy() {
-        context.unregisterReceiver(receiver);
+        if (receiver != null) {
+            context.unregisterReceiver(receiver);
+        }
         context = null;
         ProgressDialogUtil.destroy();
         helper = null;

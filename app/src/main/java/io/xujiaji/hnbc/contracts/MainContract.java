@@ -33,6 +33,7 @@ public interface MainContract {
     interface Presenter extends Contract.BasePresenter {
         List<String> getMenuData();
         boolean checkLocalUser();
+        User getUser();
     }
 
     interface View extends Contract.BaseView {

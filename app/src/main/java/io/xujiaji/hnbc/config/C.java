@@ -120,6 +120,11 @@ public class C {
         public static final String USER_INFO = "UserInfoFragment";
 
         /**
+         * 用户列表
+         */
+        public static final String USER_LIST = "UserListFragment";
+
+        /**
          * 编辑个人信息
          */
         public static final String EDIT_USER_INFO = "EditUserInfoFragment";

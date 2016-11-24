@@ -47,7 +47,7 @@ public abstract class BaseMainFragment<T extends BasePresenter> extends BaseFrag
     private boolean updatedUser = false;
 
     //保存一些数据
-    private static Map<String, Object> dataSave = new HashMap<>(1);
+    private static Map<String, Object> dataSave = new HashMap<>(2);
 
     /**
      * 获取数据

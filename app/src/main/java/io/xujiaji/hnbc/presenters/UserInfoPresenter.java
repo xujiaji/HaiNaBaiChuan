@@ -39,6 +39,7 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
     public UserInfoPresenter(UserInfoContract.View view) {
         super(view);
     }
+    private User user;
 
     @Override
     public void requestExitLogin() {
@@ -49,7 +50,6 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
 
     @Override
     public void requestUserInfo() {
-        User user = null;
         if (UserInfoFragment.SelfSwitch) {
             user = DataFiller.getLocalUser();
             view.displayUser(user);
@@ -132,6 +132,15 @@ public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> imp
 
             }
         });
+    }
 
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public void end() {
+        super.end();
+        user = null;
     }
 }
