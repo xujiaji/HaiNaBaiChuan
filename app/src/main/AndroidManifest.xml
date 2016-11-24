@@ -25,6 +25,8 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon, android:theme">
 
+        <meta-data android:value="3df6d406748332c63c28c06d5efa5c2f" android:name="BUG_HD_SDK_GENERAL_KEY" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -42,8 +44,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
-        <service android:name=".service.DownLoadWelPicService" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -63,7 +63,7 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -80,7 +80,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
+        <service android:name=".service.DownLoadWelPicService" />
+        <service android:name=".service.UpdateService"/>
     </application>
 
 </manifest>

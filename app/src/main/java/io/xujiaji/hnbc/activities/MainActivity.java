@@ -38,6 +38,7 @@ import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.Msg;
 import io.xujiaji.hnbc.presenters.MainPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
+import io.xujiaji.hnbc.utils.FirHelper;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MenuHelper;
 import io.xujiaji.hnbc.utils.ToastUtil;
@@ -80,6 +81,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         addFragment(currentFragment, R.id.fragment_container);
         menuHelper = new MenuHelper();
         menuHelper.createMenu(menu, presenter.getMenuData());
+        FirHelper.getInstance().checkUpdate(this);
 //        NetRequest.Instance().uploadHeadPic(new File("/storage/emulated/0/Download/trim.jpg"));
 //        NetRequest.Instance().editSign("求仁而得仁，又何怨 发愤忘食，乐以忘忧，不知老之将至 敬鬼神而远之 子罕言利，与命，与仁", new NetRequest.RequestListener<String>() {
 //            @Override
@@ -290,6 +292,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirHelper.getInstance().destroy();
     }
 
     /**

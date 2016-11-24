@@ -491,8 +491,10 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        banner.stopAutoPlay();
-        banner.removeAllViews();
-        banner = null;
+        if (banner != null) {
+            banner.stopAutoPlay();
+            banner.removeAllViews();
+            banner = null;
+        }
     }
 }

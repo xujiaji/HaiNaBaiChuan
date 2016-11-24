@@ -1,8 +1,17 @@
 # HaiNaBaiChuan
 包含Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信息修改等功能
 
-# debug apk下载：
-https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-debug.apk
+欢迎大家issues，对各种bug、不爽之处进行吐槽！
+
+欢迎star、fork
+
+# 海纳百川 debug apk下载：
+> 下载地址
+
+http://fir.im/hainabaichuan
+> 二维码下载
+
+![下载](display/下载.png)
 
 # UI界面展示
 

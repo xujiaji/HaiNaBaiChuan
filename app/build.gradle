@@ -20,7 +20,7 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     buildTypes {
@@ -120,11 +120,16 @@ dependencies {
         exclude group: 'io.reactivex'
         exclude group: 'com.squareup.okhttp3'
     }
+
+    //fir内测平台
+    compile 'im.fir:fir-sdk:latest.integration@aar'
 }
 
 repositories {
     mavenCentral()
-
+    maven {
+        url "http://maven.bughd.com/public"
+    }
     maven {
         url "https://jitpack.io"
     }
