@@ -18,8 +18,6 @@
 package io.xujiaji.hnbc.model.net;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
 
 import com.facebook.login.LoginManager;
 
@@ -54,7 +52,6 @@ import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.Reply;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.entity.Wel;
-import io.xujiaji.hnbc.service.DownLoadWelPicService;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MD5Util;
 import io.xujiaji.hnbc.utils.NetCheck;
@@ -97,9 +94,6 @@ public class NetRequest {
                 LogUtil.e3("list.size() = " + list.size());
                 for (int i = 0; i < list.size(); i++) {
                     LogUtil.e3(list.get(i).toString());
-                    Intent intent = new Intent(context, DownLoadWelPicService.class);
-                    intent.putExtra("imgPath", list.get(i).getImgAddress());
-                    context.startService(intent);
                     break;
                 }
             }
