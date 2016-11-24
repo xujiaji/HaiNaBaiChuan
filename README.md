@@ -8,8 +8,17 @@ Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信
 
 [浏览APP](https://github.com/xujiaji/HaiNaBaiChuan/releases)
 
-# debug apk下载：
-https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-debug.apk
+欢迎大家issues，对各种bug、不爽之处进行吐槽！
+
+欢迎star、fork
+
+# 海纳百川 debug apk下载：
+> 下载地址
+
+http://fir.im/hainabaichuan
+> 二维码下载
+
+![下载](display/下载.png)
 
 # UI界面展示
 
@@ -33,7 +42,8 @@ https://github.com/xujiaji/HaiNaBaiChuan/releases/download/hnbc_test0.0.1/app-de
  - [ ] UI
  - [ ] 数据搜索填充
 - [ ] 设置界面
- - [x] 查看清除缓存操作和功能
+ - [x] 查看缓存、清除缓存操作和功能
+ - [ ] 关于 
  - [ ] 其他，待确定。
 - [x] 我的发布
  - [x] UI展示
