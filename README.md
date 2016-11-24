@@ -1,16 +1,14 @@
 # HaiNaBaiChuan
 Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信息修改等功能。
-# XMVP
-
-> 将项目中使用的XMVP提取出来方便以后使用。
-
-[该项目的XMVP分支](https://github.com/xujiaji/HaiNaBaiChuan/tree/XMVP)
-
-[浏览APP](https://github.com/xujiaji/HaiNaBaiChuan/releases)
 
 欢迎大家issues，对各种bug、不爽之处进行吐槽！
 
 欢迎star、fork
+
+# XMVP [在该项目的XMVP分支](https://github.com/xujiaji/HaiNaBaiChuan/tree/XMVP)
+> 将项目中使用的XMVP提取出来方便以后使用。
+
+[浏览XMVP sample APP](https://github.com/xujiaji/HaiNaBaiChuan/releases)
 
 # 海纳百川 debug apk下载：
 > 下载地址
