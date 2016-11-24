@@ -23,6 +23,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.entity.User;
 
 /**
  * Created by jiana on 16-7-22.
@@ -47,6 +48,11 @@ public class MainPresenter extends BasePresenter <MainContract.View> implements 
     @Override
     public boolean checkLocalUser() {
         return DataFiller.getLocalUser() != null;
+    }
+
+    @Override
+    public User getUser() {
+        return DataFiller.getLocalUser();
     }
 
 

@@ -121,6 +121,39 @@ public class NetRequest {
         });
     }
 
+
+    /**
+     * 请求获取用户粉丝
+     */
+    public void requestFans(User user, final RequestListener<List<User>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<User> query = new BmobQuery<User>();
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId", user.getObjectId());
+//        query.addQueryKeys("followPerson");
+        query.addWhereMatchesQuery("followPerson", "_User", innerQuery);
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
+                }
+            }
+        });
+//        query.count(User.class, new CountListener() {
+//            @Override
+//            public void done(Integer integer, BmobException e) {
+//                if (e == null) {
+//                    listener.success(Integer.toString(integer));
+//                } else {
+//                    listener.success("0");
+//                }
+//            }
+//        });
+    }
+
     /**
      * 请求获取用户关注其他用户数量
      */
@@ -134,6 +167,25 @@ public class NetRequest {
                     listener.success(Integer.toString(integer));
                 } else {
                     listener.success("0");
+                }
+            }
+        });
+    }
+
+    /**
+     * 请求获取用户关注其他用户
+     */
+    public void requestFocus(User user, final RequestListener<List<User>> listener) {
+        if (!checkNet(listener)) return;
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereRelatedTo("followPerson", new BmobPointer(user));
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if (e == null) {
+                    listener.success(list);
+                } else {
+                    listener.error(ErrMsgFactory.errMSG(e.getErrorCode()));
                 }
             }
         });
@@ -439,11 +491,11 @@ public class NetRequest {
      * @param size
      * @param listener
      */
-    public void pullCollectPost(int currentIndex, int size, final RequestListener<List<Post>> listener) {
+    public void pullCollectPost(String userId, int currentIndex, int size, final RequestListener<List<Post>> listener) {
         if (!checkNet(listener)) return;
         BmobQuery<Post> query = new BmobQuery<>();
         BmobQuery<User> innerQuery = new BmobQuery<>();
-        innerQuery.addWhereEqualTo("objectId", BmobUser.getCurrentUser().getObjectId());
+        innerQuery.addWhereEqualTo("objectId", userId);
         query.addWhereMatchesQuery("likes", "_User", innerQuery);
         query.setSkip(currentIndex);
         query.setLimit(size);

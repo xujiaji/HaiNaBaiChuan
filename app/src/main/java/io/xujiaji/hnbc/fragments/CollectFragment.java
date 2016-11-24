@@ -1,5 +1,6 @@
 package io.xujiaji.hnbc.fragments;
 
+import android.support.annotation.StringRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,6 @@ public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter>
     @Override
     protected void onInit() {
         super.onInit();
-        ActivityUtils.initBar(toolbar, R.string.my_collect);//初始化标题
         swipeLayout.setRefreshing(true);
     }
 
@@ -80,8 +80,17 @@ public class CollectFragment extends BaseRefreshFragment<Post, CollectPresenter>
         if (super.clickBack()) {
             return true;
         }
-        MainActivity.clickMenuItem(C.M_Menu.HOME);
+        setDeleted(true);
+        if (presenter.isMe()) {
+            MainActivity.clickMenuItem(C.M_Menu.HOME);
+        } else {
+            MainActivity.startFragment(C.fragment.USER_INFO);
+        }
         return true;
     }
 
+    @Override
+    public void showTitle(@StringRes int title) {
+        ActivityUtils.initBar(toolbar, title);//初始化标题
+    }
 }

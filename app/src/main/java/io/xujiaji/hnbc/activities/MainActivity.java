@@ -20,6 +20,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -36,6 +38,7 @@ import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.Msg;
+import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.presenters.MainPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.FirHelper;
@@ -48,11 +51,13 @@ import no.agens.depth.lib.tween.interpolators.QuintOut;
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
     //当前Fragment
     private BaseMainFragment currentFragment;
+    private static String previousFragmentName;
     private static boolean isMenuVisible = false;
     @BindView(R.id.menu_container)
     LinearLayout menu;
     private MenuHelper menuHelper;
     private ObjectAnimator translationOpen, translationClose;
+    private Handler handler;
 
     @Override
     protected void beforeSetContentView() {
@@ -81,6 +86,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         addFragment(currentFragment, R.id.fragment_container);
         menuHelper = new MenuHelper();
         menuHelper.createMenu(menu, presenter.getMenuData());
+        handler = new Handler(Looper.getMainLooper());
         FirHelper.getInstance().checkUpdate(this);
 //        NetRequest.Instance().uploadHeadPic(new File("/storage/emulated/0/Download/trim.jpg"));
 //        NetRequest.Instance().editSign("求仁而得仁，又何怨 发愤忘食，乐以忘忧，不知老之将至 敬鬼神而远之 子罕言利，与命，与仁", new NetRequest.RequestListener<String>() {
@@ -158,6 +164,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void clickCollect() {
         LogUtil.e3("clickCollect()");
         if (presenter.checkLocalUser()) {
+            BaseMainFragment.saveData(User.class.getSimpleName(), presenter.getUser());
             goToFragment(C.fragment.COLLECT);
         } else {
             goToFragment(C.fragment.LOGIN);
@@ -252,6 +259,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         BaseMainFragment newFragment = FragmentFactory.getOrCreate(fragmentKey);
         currentFragment.exitFromMenu();
         final BaseMainFragment oldFragment = currentFragment;
+        previousFragmentName = oldFragment.getClass().getSimpleName();
         currentFragment = newFragment;
         newFragment.setIntroAnimate(true);
         if (newFragment.isAdded()) {
@@ -262,7 +270,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             LogUtil.e3("没有添加" + newFragment.getClass().getSimpleName() + "，添加显示");
             getFragmentManager().beginTransaction().add(R.id.fragment_container, newFragment).commit();
         }
-        getWindow().getDecorView().postDelayed(new Runnable() {
+
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (oldFragment.isDeleted()) {
@@ -343,5 +352,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         currentFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static String getPreviousFragmentName() {
+        return previousFragmentName;
     }
 }

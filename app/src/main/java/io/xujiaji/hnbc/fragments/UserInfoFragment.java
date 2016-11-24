@@ -26,6 +26,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
+import io.xujiaji.hnbc.contracts.UserListContract;
 import io.xujiaji.hnbc.factory.FragmentFactory;
 import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.User;
@@ -73,7 +74,9 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
     @Override
     public void introAnimate() {
         super.introAnimate();
-        presenter.requestUserInfo();
+        if (!UserListFragment.class.getSimpleName().equals(MainActivity.getPreviousFragmentName())) {
+            presenter.requestUserInfo();
+        }
     }
 
     /**
@@ -84,7 +87,7 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
         tvNickname.getPaint().setFakeBoldText(true);
     }
 
-    @OnClick({R.id.menu, R.id.more})
+    @OnClick({R.id.menu, R.id.more, R.id.btnFans, R.id.btnFocus, R.id.btnCollect})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.menu:
@@ -93,8 +96,28 @@ public class UserInfoFragment extends BaseMainFragment<UserInfoPresenter> implem
             case R.id.more:
                 openMore();
                 break;
+            case R.id.btnFans:
+                goUserList(UserListContract.FANS);
+                break;
+            case R.id.btnFocus:
+                goUserList(UserListContract.FOCUS);
+                break;
+            case R.id.btnCollect:
+                BaseMainFragment.saveData(User.class.getSimpleName(), presenter.getUser());
+                MainActivity.startFragment(C.fragment.COLLECT);
+                break;
         }
     }
+
+    /**
+     * 跳转到用户列表
+     */
+    private void goUserList(int pageType) {
+        saveData(UserListContract.class.getSimpleName(), pageType);
+        saveData(User.class.getSimpleName(), presenter.getUser());
+        MainActivity.startFragment(C.fragment.USER_LIST);
+    }
+
 
     private void openMore() {
         if (pupList == null) {

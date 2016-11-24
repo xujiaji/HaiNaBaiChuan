@@ -88,7 +88,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout style="@style/UserInfoUIClickStyle">
+                <LinearLayout
+                    android:id="@+id/btnFans"
+                    style="@style/UserInfoUIClickStyle">
 
                     <TextView
                         android:id="@+id/tvFans"
@@ -103,6 +105,7 @@
                 <View style="@style/userInfoUIVerticalLineStyle" />
 
                 <LinearLayout
+                    android:id="@+id/btnFocus"
                     style="@style/UserInfoUIClickStyle">
 
                     <TextView
@@ -116,6 +119,7 @@
                 </LinearLayout>
                 <View style="@style/userInfoUIVerticalLineStyle" />
                 <LinearLayout
+                    android:id="@+id/btnCollect"
                     style="@style/UserInfoUIClickStyle">
                     <TextView
                         android:id="@+id/tvCollect"
