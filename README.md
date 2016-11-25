@@ -28,6 +28,7 @@ Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信
 |![阅读1](display/read_article_page_2.png)|![登陆1](display/login_page_1.png)|[浏览更多图片>>](display/display.md)<hr>[查看Gif图片>>](display/running.gif)|
 
 ## 进度
+- [ ] 消息推送
 - [ ] 首页中间的标签小功能
  - [ ] 手机号码归属地
  - [ ] 历史上的今天

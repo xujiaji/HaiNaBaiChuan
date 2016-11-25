@@ -1,1 +1,1 @@
-include ':app', ':depth', ':crop', ':dialog', ':citypicker'
+include ':app', ':depth', ':crop', ':dialog', ':citypicker', ':JPushLibrary'
