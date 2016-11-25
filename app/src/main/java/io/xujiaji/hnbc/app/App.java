@@ -22,6 +22,7 @@ import android.graphics.Typeface;
 import com.squareup.leakcanary.LeakCanary;
 
 import cn.bmob.v3.Bmob;
+import cn.jpush.android.api.JPushInterface;
 import im.fir.sdk.FIR;
 import io.xujiaji.hnbc.config.C;
 import me.drakeet.library.CrashWoodpecker;
@@ -48,6 +49,15 @@ public class App extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        initJPush();
+    }
+
+    /**
+     * 初始化极光推送
+     */
+    private void initJPush() {
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
     /**

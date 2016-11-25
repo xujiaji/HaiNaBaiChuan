@@ -57,6 +57,7 @@ dependencies {
     compile project(':dialog')
     //城市选择
     compile project(':citypicker')
+    compile project(':JPushLibrary')
     //QQ sdk
     compile files('libs/open_sdk_r5509_lite.jar')
     testCompile "junit:junit:$rootProject.junitVersion"
