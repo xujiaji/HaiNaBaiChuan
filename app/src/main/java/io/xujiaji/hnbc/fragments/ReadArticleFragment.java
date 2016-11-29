@@ -219,6 +219,7 @@ public class ReadArticleFragment extends BaseMainFragment<ReadArticlePresenter> 
         }
         mExpandableCommentItemAdapter = new ExpandableCommentItemAdapter(res);
         rvComments.setAdapter(mExpandableCommentItemAdapter);
+        onListener();
     }
 
     @Override
