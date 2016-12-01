@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/fragment_about">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
+
+        <io.xujiaji.hnbc.widget.TextViewBoldNew
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/text_color_level_2"
+            android:textSize="@dimen/text_size_level2" />
+
+        <io.xujiaji.hnbc.widget.TextViewNew
+            android:id="@+id/tvNowVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/small_margin"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_error_outline_black_24dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/now_version" />
+
+
+        <io.xujiaji.hnbc.widget.TextViewNew
+            android:id="@+id/btnContactMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/small_margin"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/contact_me" />
+
+        <io.xujiaji.hnbc.widget.TextViewNew
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/small_margin"
+            android:drawableStart="@drawable/ic_wb_cloudy_black_24dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:autoLink="web"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/copyright_address" />
+
+        <TextView
+            android:id="@+id/about_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/about_icon_copy_right"
+            android:gravity="center"
+            android:text="@string/copy_right" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

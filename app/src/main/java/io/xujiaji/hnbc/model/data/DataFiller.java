@@ -24,6 +24,7 @@ import cn.bmob.v3.BmobUser;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.model.entity.EditItem;
 import io.xujiaji.hnbc.model.entity.MainTag;
+import io.xujiaji.hnbc.model.entity.Set;
 import io.xujiaji.hnbc.model.entity.User;
 
 /**
@@ -31,6 +32,13 @@ import io.xujiaji.hnbc.model.entity.User;
  */
 
 public class DataFiller {
+    public static List<Set> getSetShowData() {
+        List<Set> list = new ArrayList<>();
+        list.add(new Set("缓存大小", "0.0KB"));
+        list.add(new Set("关于", ""));
+        return list;
+    }
+
     /**
      * 获取首页tag标签集合
      * @return

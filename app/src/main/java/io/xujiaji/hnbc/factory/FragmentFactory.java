@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
+import io.xujiaji.hnbc.fragments.AboutFragment;
 import io.xujiaji.hnbc.fragments.ReleaseFragment;
 import io.xujiaji.hnbc.fragments.SetFragment;
 import io.xujiaji.hnbc.fragments.UserListFragment;
@@ -41,7 +42,7 @@ public class FragmentFactory {
     /**
      * 主页Fragment数量
      */
-    private static final int FRAGMENT_NUM = 10;
+    private static final int FRAGMENT_NUM = 11;
 
     /**
      * 统一管理MainActivity中所有Fragment
@@ -85,6 +86,9 @@ public class FragmentFactory {
                 break;
             case C.fragment.SET:
                 newFragment = SetFragment.newInstance();
+                break;
+            case C.fragment.ABOUT:
+                newFragment = AboutFragment.newInstance();
                 break;
             default:
                 break;
