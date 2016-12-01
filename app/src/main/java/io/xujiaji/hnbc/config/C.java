@@ -156,6 +156,10 @@ public class C {
          */
         public static final String SET = "SetFragment";
 
+        /**
+         * 关于
+         */
+        public static final String ABOUT = "AboutFragment";
     }
 
     /**
@@ -261,5 +265,20 @@ public class C {
          * 文章标题
          */
         public static final String ARTICLE_TITLE = "article_title";
+    }
+
+    /**
+     * 设置页面item下标
+     */
+    public static class set {
+        /**
+         * 清理
+         */
+        public static final int CLEAR = 0;
+
+        /**
+         * 关于
+         */
+        public static final int ABOUT = 1;
     }
 }

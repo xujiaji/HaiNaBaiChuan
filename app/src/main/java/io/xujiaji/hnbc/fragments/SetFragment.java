@@ -1,21 +1,29 @@
 package io.xujiaji.hnbc.fragments;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+
+import java.util.List;
+
 import butterknife.BindView;
-import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.activities.MainActivity;
+import io.xujiaji.hnbc.adapters.SetAdapter;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.SetContract;
 import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
+import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.entity.Set;
 import io.xujiaji.hnbc.presenters.SetPresenter;
 import io.xujiaji.hnbc.utils.ActivityUtils;
 import io.xujiaji.hnbc.utils.FileUtils;
 import io.xujiaji.hnbc.utils.ToastUtil;
-import io.xujiaji.hnbc.widget.TextViewNew;
 
 /**
  * Created by jiana on 16-11-20.
@@ -24,21 +32,17 @@ import io.xujiaji.hnbc.widget.TextViewNew;
 
 public class SetFragment extends BaseMainFragment<SetPresenter> implements SetContract.View {
 
-    @BindView(R.id.tvValue)
-    TextViewNew tvValue;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.rvSet)
+    RecyclerView rvSet;
+    private List<Set> setData;
     private SweetAlertDialog mDialog;
+    private SetAdapter adapter;
 
     public static SetFragment newInstance() {
         return new SetFragment();
     }
-
-    @OnClick(R.id.btnClean)
-    public void onClick(View view) {
-        showStartCleanCache();
-    }
-
 
     @Override
     public void introAnimate() {
@@ -51,6 +55,14 @@ public class SetFragment extends BaseMainFragment<SetPresenter> implements SetCo
         super.onInit();
         ActivityUtils.initBar(toolbar, R.string.set);
         FileUtils.getAllCacheFile();
+        initRecycler();
+    }
+
+    private void initRecycler() {
+        rvSet.setLayoutManager(new LinearLayoutManager(getActivity()));
+        setData = DataFiller.getSetShowData();
+        adapter = new SetAdapter(setData);
+        rvSet.setAdapter(adapter);
     }
 
     @Override
@@ -62,11 +74,25 @@ public class SetFragment extends BaseMainFragment<SetPresenter> implements SetCo
                 clickBack();
             }
         });
+        rvSet.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                switch (i) {
+                    case C.set.CLEAR:
+                        showStartCleanCache();
+                        break;
+                    case C.set.ABOUT:
+                        MainActivity.startFragment(C.fragment.ABOUT);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
     public void showCacheSize(String size) {
-        tvValue.setText(size);
+        setData.get(C.set.CLEAR).setValue(size);
+        adapter.notifyItemChanged(C.set.CLEAR);
     }
 
     @Override
@@ -97,7 +123,8 @@ public class SetFragment extends BaseMainFragment<SetPresenter> implements SetCo
 
     @Override
     public void showCleanCacheSuccess() {
-        tvValue.setText("0.0KB");
+        setData.get(C.set.CLEAR).setValue("0.0KB");
+        adapter.notifyDataSetChanged();
         if (mDialog == null || !mDialog.isShowing()) {
             return;
         }

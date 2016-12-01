@@ -153,4 +153,14 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="about_style">
+        <item name="android:textSize">@dimen/text_size_level5</item>
+        <item name="android:textColor">@color/text_color_level_2</item>
+        <item name="android:padding">@dimen/small_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
 </resources>

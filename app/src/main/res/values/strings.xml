@@ -110,4 +110,12 @@
     <string name="like_cuccess">喜欢上了</string>
     <string name="follow_success">已关注</string>
     <string name="cache_size">缓存大小</string>
+    <string name="copy_right" translatable="false">Copyrights © 2016</string>
+    <string name="contact_me">联系我</string>
+    <string name="copyright_address">开源地址: https://github.com/xujiaji/HaiNaBaiChuan</string>
+    <string name="now_version">当前版本</string>
+    <string name="from_hnbc">来自海纳百川的联系</string>
+    <string name="cannot_find_email_app">找不到邮箱应用!\nMy E-mail：jiajixu@qq.com</string>
+    <string name="about">关于</string>
+    <string name="sen_email_to_xu">mailto:jiajixu@qq.com</string>
 </resources>
