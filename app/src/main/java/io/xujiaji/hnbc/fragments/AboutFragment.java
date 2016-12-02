@@ -72,9 +72,10 @@ public class AboutFragment extends BaseMainFragment<AboutPresenter> implements A
     @Override
     public boolean clickBack() {
         if (super.clickBack()) {
-            setDeleted(true);
-            MainActivity.startFragment(C.fragment.SET);
+            return true;
         }
+        setDeleted(true);
+        MainActivity.startFragment(C.fragment.SET);
         return true;
     }
 
