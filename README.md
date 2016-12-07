@@ -5,10 +5,11 @@ Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信
 
 欢迎star、fork。
 
-# XMVP [在该项目的XMVP分支](https://github.com/xujiaji/HaiNaBaiChuan/tree/XMVP)
+# [XMVP](https://github.com/xujiaji/XMVP)
+
 > 将项目中使用的XMVP提取出来方便以后使用。
 
-[浏览XMVP sample APP](https://github.com/xujiaji/HaiNaBaiChuan/releases)
+[浏览 sample APP](https://github.com/xujiaji/XMVP/releases/download/1.0.0/sample-debug.apk)
 
 # 海纳百川 debug apk下载：
 > 下载地址
