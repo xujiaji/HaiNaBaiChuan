@@ -32,12 +32,12 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activities.WelcomeActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
