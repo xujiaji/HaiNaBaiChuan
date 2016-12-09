@@ -13,34 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.xujiaji.hnbc.contract;
 
-package io.xujiaji.hnbc.model.entity;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import android.widget.ImageView;
 
-import io.xujiaji.hnbc.adapter.ExpandableCommentItemAdapter;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
- * Created by jiana on 16-11-17.
+ * 管理welcome的view和presenter的契约
  */
-
-public class ReplyFill implements MultiItemEntity {
-    private Reply reply;
-    public ReplyFill(Reply reply) {
-        this.reply = reply;
+public interface WelcomeContract {
+    interface Presenter extends XContract.Presenter {
+        void setWelPic(ImageView pic);
     }
 
-
-    public Reply getReply() {
-        return reply;
-    }
-
-    public void setReply(Reply reply) {
-        this.reply = reply;
-    }
-
-    @Override
-    public int getItemType() {
-        return ExpandableCommentItemAdapter.TYPE_LEVEL_1;
+    interface View extends XContract.View {
+        void startAnim();
+        void showHello();
     }
 }

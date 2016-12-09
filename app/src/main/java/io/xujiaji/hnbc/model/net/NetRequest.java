@@ -42,7 +42,7 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.activities.WelcomeActivity;
+import io.xujiaji.hnbc.activity.WelcomeActivity;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.factory.ErrMsgFactory;

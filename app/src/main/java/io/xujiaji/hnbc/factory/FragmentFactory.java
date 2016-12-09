@@ -20,18 +20,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.xujiaji.hnbc.config.C;
-import io.xujiaji.hnbc.fragments.AboutFragment;
-import io.xujiaji.hnbc.fragments.ReleaseFragment;
-import io.xujiaji.hnbc.fragments.SetFragment;
-import io.xujiaji.hnbc.fragments.UserListFragment;
-import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
-import io.xujiaji.hnbc.fragments.CollectFragment;
-import io.xujiaji.hnbc.fragments.EditUserInfoFragment;
-import io.xujiaji.hnbc.fragments.LoginFragment;
-import io.xujiaji.hnbc.fragments.MainFragment;
-import io.xujiaji.hnbc.fragments.ReadArticleFragment;
-import io.xujiaji.hnbc.fragments.RegisterFragment;
-import io.xujiaji.hnbc.fragments.UserInfoFragment;
+import io.xujiaji.hnbc.fragment.AboutFragment;
+import io.xujiaji.hnbc.fragment.ReleaseFragment;
+import io.xujiaji.hnbc.fragment.SetFragment;
+import io.xujiaji.hnbc.fragment.UserListFragment;
+import io.xujiaji.hnbc.fragment.base.BaseMainFragment;
+import io.xujiaji.hnbc.fragment.CollectFragment;
+import io.xujiaji.hnbc.fragment.EditUserInfoFragment;
+import io.xujiaji.hnbc.fragment.LoginFragment;
+import io.xujiaji.hnbc.fragment.MainFragment;
+import io.xujiaji.hnbc.fragment.ReadArticleFragment;
+import io.xujiaji.hnbc.fragment.RegisterFragment;
+import io.xujiaji.hnbc.fragment.UserInfoFragment;
 import io.xujiaji.hnbc.utils.LogUtil;
 
 /**

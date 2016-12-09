@@ -19,7 +19,7 @@ package io.xujiaji.hnbc.model.entity;
 import com.chad.library.adapter.base.entity.AbstractExpandableItem;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-import io.xujiaji.hnbc.adapters.ExpandableCommentItemAdapter;
+import io.xujiaji.hnbc.adapter.ExpandableCommentItemAdapter;
 
 /**
  * Created by jiana on 16-11-17.
