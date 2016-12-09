@@ -21,17 +21,18 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.RegisterContract;
-import io.xujiaji.hnbc.utils.check.LoginCheck;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.MD5Util;
+import io.xujiaji.hnbc.utils.check.LoginCheck;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-5.
  */
 
-public class RegisterPresenter extends BasePresenter <RegisterContract.View> implements RegisterContract.Presenter{
+public class RegisterPresenter extends XBasePresenter<RegisterContract.View> implements RegisterContract.Presenter{
     private String passwordSave;
     private User user = null;
     //密码确认

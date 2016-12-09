@@ -17,14 +17,14 @@ package io.xujiaji.hnbc.contracts;
 
 import java.util.Date;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-7.
  */
 
 public interface EditUserInfoContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         void requestChangeHeadPic(String picPath);
         void requestChangeNickname(String nickname);
         void requestChangePhone(String phoneNumber);
@@ -36,7 +36,7 @@ public interface EditUserInfoContract {
         void requestChangePassword(String oldPwd, String newPwd);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void changeHeadPicSuccess();
         void changeHeadPicFail(String err);
         void changeNicknameSuccess();

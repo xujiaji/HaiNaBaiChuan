@@ -1,13 +1,13 @@
 package io.xujiaji.hnbc.contracts;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-20.
  */
 
 public interface SetContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         /**
          * 扫描缓存大小
          */
@@ -19,7 +19,7 @@ public interface SetContract {
         void cleanCache();
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         /**
          * 显示缓存大小
          * @param size

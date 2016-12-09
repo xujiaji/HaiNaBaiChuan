@@ -15,13 +15,13 @@
  */
 package io.xujiaji.hnbc.contracts;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-7-27.
  */
 public interface EditorContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         /**
          * 上传图片
          * @param path 图片地址
@@ -37,7 +37,7 @@ public interface EditorContract {
         void uploadArticle(String coverPicture, String title, String article);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
 
         void showCompressingPicDialog();
 

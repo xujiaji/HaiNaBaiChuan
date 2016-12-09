@@ -18,17 +18,17 @@ package io.xujiaji.hnbc.contracts;
 
 import android.widget.ImageView;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * 管理welcome的view和presenter的契约
  */
 public interface WelcomeContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         void setWelPic(ImageView pic);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void startAnim();
         void showHello();
     }

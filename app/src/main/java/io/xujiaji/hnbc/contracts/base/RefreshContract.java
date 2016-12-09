@@ -2,13 +2,15 @@ package io.xujiaji.hnbc.contracts.base;
 
 import java.util.List;
 
+import io.xujiaji.xmvp.contracts.XContract;
+
 /**
  * Created by jiana on 16-11-20.
  */
 
 public interface RefreshContract {
 
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         /**
          * 请求数据
          * @param nowSize 当前数据长度
@@ -21,7 +23,7 @@ public interface RefreshContract {
         void requestUpdateListData();
     }
 
-    interface View <X> extends Contract.BaseView {
+    interface View <X> extends XContract.View {
 
         /**
          * 更新列表成功

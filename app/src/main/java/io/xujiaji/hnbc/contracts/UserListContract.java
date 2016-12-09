@@ -20,8 +20,8 @@ import android.support.annotation.StringRes;
 
 import java.util.List;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-24.
@@ -42,7 +42,7 @@ public interface UserListContract {
     int FOCUS = 125;
 
 
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         /**
          * 请求用户列表
          */
@@ -51,7 +51,7 @@ public interface UserListContract {
         void judgmentPage();
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         /**
          * 显示标题
          * @param title

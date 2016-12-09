@@ -29,12 +29,13 @@ import io.xujiaji.hnbc.model.entity.Reply;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.LogUtil;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-14.
  */
 
-public class ReadArticlePresenter extends BasePresenter<ReadActicleContract.View> implements ReadActicleContract.Presenter {
+public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.View> implements ReadActicleContract.Presenter {
     private Post post;
 
     public ReadArticlePresenter(ReadActicleContract.View view) {

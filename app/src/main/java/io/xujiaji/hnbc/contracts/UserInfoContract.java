@@ -18,8 +18,8 @@ package io.xujiaji.hnbc.contracts;
 import android.content.Context;
 import android.widget.ImageView;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-6.
@@ -27,7 +27,7 @@ import io.xujiaji.hnbc.model.entity.User;
 
 public interface UserInfoContract {
 
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         void requestExitLogin();
         void requestUserInfo();
         void requestEdit(Context context);
@@ -40,7 +40,7 @@ public interface UserInfoContract {
         void requestCollectNum(User user);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void displayUser(User user);
         void exitLoginSuccess();
 

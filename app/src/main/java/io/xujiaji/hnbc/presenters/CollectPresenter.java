@@ -10,13 +10,14 @@ import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-20.
  * 收藏
  */
 
-public class CollectPresenter extends BasePresenter<CollectContract.View> implements CollectContract.Presenter{
+public class CollectPresenter extends XBasePresenter<CollectContract.View> implements CollectContract.Presenter{
 
     private User user;
 

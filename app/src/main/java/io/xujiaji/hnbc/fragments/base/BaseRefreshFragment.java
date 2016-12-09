@@ -14,16 +14,16 @@ import java.util.List;
 
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contracts.base.RefreshContract;
-import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.ToastUtil;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-20.
  * 抽象刷新功能
  */
 
-public abstract class BaseRefreshFragment<X, T extends BasePresenter> extends BaseMainFragment<T> implements
+public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends BaseMainFragment<T> implements
         RefreshContract.View<X>,
         BaseQuickAdapter.RequestLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener {

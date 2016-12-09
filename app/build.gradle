@@ -124,6 +124,7 @@ dependencies {
 
     //fir内测平台
     compile 'im.fir:fir-sdk:latest.integration@aar'
+    compile 'com.github.xujiaji:xmvp:0.0.4'
 }
 
 repositories {

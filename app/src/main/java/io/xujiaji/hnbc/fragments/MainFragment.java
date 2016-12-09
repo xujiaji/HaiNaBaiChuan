@@ -216,7 +216,7 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     }
 
     private void initSheetLayout() {
-        View view = ButterKnife.findById(rootView, R.id.fab_container);
+        View view = ButterKnife.findById(getRootView(), R.id.fab_container);
         mSheetLayout.setFab(view);
         mSheetLayout.setFabAnimationEndListener(new SheetLayout.OnFabAnimationEndListener() {
             @Override

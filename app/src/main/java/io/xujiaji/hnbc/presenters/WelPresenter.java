@@ -20,8 +20,9 @@ package io.xujiaji.hnbc.presenters;
 import android.widget.ImageView;
 
 import io.xujiaji.hnbc.contracts.WelcomeContract;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
-public class WelPresenter extends BasePresenter <WelcomeContract.View> implements WelcomeContract.Presenter {
+public class WelPresenter extends XBasePresenter<WelcomeContract.View> implements WelcomeContract.Presenter {
     public WelPresenter(WelcomeContract.View view) {
         super(view);
     }

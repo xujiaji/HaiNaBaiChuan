@@ -15,14 +15,14 @@
  */
 package io.xujiaji.hnbc.contracts;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-4.
  */
 
 public interface RegisterContract {
-    interface Presenter extends Contract.BasePresenter{
+    interface Presenter extends XContract.Presenter{
         void requestRegister();
         void checkUsername(String username);
         void checkNickname(String nickname);
@@ -33,7 +33,7 @@ public interface RegisterContract {
         void sex(int type);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void callRegisterSuccess(String username);
         void callRegisterFail(String err);
         void errUsername(String err);

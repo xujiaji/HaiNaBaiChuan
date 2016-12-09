@@ -22,11 +22,12 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contracts.EditorContract;
 import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-7-27.
  */
-public class EditorPresenter extends BasePresenter <EditorContract.View> implements EditorContract.Presenter{
+public class EditorPresenter extends XBasePresenter<EditorContract.View> implements EditorContract.Presenter{
 
     public EditorPresenter(EditorContract.View view) {
         super(view);

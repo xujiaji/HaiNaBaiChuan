@@ -5,6 +5,7 @@ import java.io.File;
 import io.xujiaji.hnbc.contracts.SetContract;
 import io.xujiaji.hnbc.utils.FileUtils;
 import io.xujiaji.hnbc.utils.LogUtil;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,7 +19,7 @@ import rx.schedulers.Schedulers;
  * 设置
  */
 
-public class SetPresenter extends BasePresenter<SetContract.View> implements SetContract.Presenter {
+public class SetPresenter extends XBasePresenter<SetContract.View> implements SetContract.Presenter {
     public SetPresenter(SetContract.View view) {
         super(view);
     }

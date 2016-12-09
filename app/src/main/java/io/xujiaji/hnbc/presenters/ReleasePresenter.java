@@ -6,13 +6,14 @@ import io.xujiaji.hnbc.contracts.ReleaseContract;
 import io.xujiaji.hnbc.fragments.base.BaseRefreshFragment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-20.
  * 收藏
  */
 
-public class ReleasePresenter extends BasePresenter<ReleaseContract.View> implements ReleaseContract.Presenter{
+public class ReleasePresenter extends XBasePresenter<ReleaseContract.View> implements ReleaseContract.Presenter{
 
     public ReleasePresenter(ReleaseContract.View view) {
         super(view);

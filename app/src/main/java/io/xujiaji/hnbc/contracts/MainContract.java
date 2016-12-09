@@ -20,23 +20,23 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.contracts.base.RefreshContract;
 import io.xujiaji.hnbc.model.entity.MainTag;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-7-22.
  */
 public interface MainContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
         List<String> getMenuData();
         boolean checkLocalUser();
         User getUser();
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void menuOpen();
         void menuClose();
         void menuToggle();
