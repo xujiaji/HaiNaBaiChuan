@@ -23,15 +23,15 @@ import android.view.ViewTreeObserver;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.xujiaji.hnbc.presenters.BasePresenter;
 import io.xujiaji.hnbc.utils.LogUtil;
 import io.xujiaji.hnbc.utils.TransitionHelper;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-5.
  */
 
-public abstract class BaseMainFragment<T extends BasePresenter> extends BaseFragment<T> {
+public abstract class BaseMainFragment<T extends XBasePresenter> extends BaseFragment<T> {
     //是否是打开LoginFragment
     private boolean introAnimate = false;
     /**
@@ -156,14 +156,14 @@ public abstract class BaseMainFragment<T extends BasePresenter> extends BaseFrag
             return;
         }
         LogUtil.e2("Fragment Animate introAnimate start");
-        rootView.setTranslationY(0);
+        getRootView().setTranslationY(0);
         isAgreeBlack = false;
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        getRootView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 introAnimate = false;
-                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                TransitionHelper.startIntroAnim(rootView, showShadowListener);
+                getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                TransitionHelper.startIntroAnim(getRootView(), showShadowListener);
             }
         });
 

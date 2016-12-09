@@ -22,19 +22,20 @@ import android.widget.ImageView;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contracts.UserInfoContract;
-import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.fragments.UserInfoFragment;
+import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-6.
  *
  */
 
-public class UserInfoPresenter extends BasePresenter <UserInfoContract.View> implements UserInfoContract.Presenter {
+public class UserInfoPresenter extends XBasePresenter<UserInfoContract.View> implements UserInfoContract.Presenter {
 
     public UserInfoPresenter(UserInfoContract.View view) {
         super(view);

@@ -17,11 +17,11 @@ package io.xujiaji.hnbc.contracts;
 
 import java.util.List;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
 import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.Reply;
 import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-14.
@@ -29,7 +29,7 @@ import io.xujiaji.hnbc.model.entity.User;
  */
 
 public interface ReadActicleContract {
-    interface Presenter extends Contract.BasePresenter {
+    interface Presenter extends XContract.Presenter {
 
         /**
          * 通过文章的id查询所有评论
@@ -67,7 +67,7 @@ public interface ReadActicleContract {
         void addReply(User replyUser, Comment comment, String content);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         /**
          * 显示文章
          * @param post

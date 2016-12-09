@@ -17,14 +17,14 @@ package io.xujiaji.hnbc.contracts;
 
 import com.facebook.login.LoginResult;
 
-import io.xujiaji.hnbc.contracts.base.Contract;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
  * Created by jiana on 16-11-4.
  */
 
 public interface LoginContract {
-    interface Presenter extends Contract.BasePresenter{
+    interface Presenter extends XContract.Presenter{
         void requestLogin(String name, String password);
         void requestSina();
         void requestQQ();
@@ -32,7 +32,7 @@ public interface LoginContract {
         void requestFacebook(LoginResult loginResult);
     }
 
-    interface View extends Contract.BaseView {
+    interface View extends XContract.View {
         void showDialog();
         void nameFormatError(String err);
         void passwordFormatError(String err);

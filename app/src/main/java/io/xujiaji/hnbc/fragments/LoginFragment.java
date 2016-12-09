@@ -135,7 +135,7 @@ public class LoginFragment extends BaseMainFragment<LoginPresenter> implements L
      * 将其他登录方式加粗
      */
     private void initOtherLoginBold() {
-        TextView tvOtherLogin = ButterKnife.findById(rootView, R.id.tvOtherLogin);
+        TextView tvOtherLogin = ButterKnife.findById(getRootView(), R.id.tvOtherLogin);
         TextPaint paint = tvOtherLogin.getPaint();
         paint.setFakeBoldText(true);
     }

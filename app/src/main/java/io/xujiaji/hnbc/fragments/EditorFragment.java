@@ -205,7 +205,7 @@ public class EditorFragment extends BaseFragment<EditorPresenter> implements Edi
     }
 
     private void initTab() {
-        mTabIconView = ButterKnife.findById(rootView, R.id.tabIconView);
+        mTabIconView = ButterKnife.findById(getRootView(), R.id.tabIconView);
         mTabIconView.addTab(R.drawable.ic_shortcut_format_list_bulleted, R.id.id_shortcut_list_bulleted, this);
         mTabIconView.addTab(R.drawable.ic_shortcut_format_list_numbers, R.id.id_shortcut_format_numbers, this);
         mTabIconView.addTab(R.drawable.ic_shortcut_insert_link, R.id.id_shortcut_insert_link, this);

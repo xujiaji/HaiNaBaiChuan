@@ -23,13 +23,14 @@ import io.xujiaji.hnbc.contracts.UserListContract;
 import io.xujiaji.hnbc.fragments.base.BaseMainFragment;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-11-24.
  * 用户列表
  */
 
-public class UserListPresenter extends BasePresenter<UserListContract.View> implements UserListContract.Presenter {
+public class UserListPresenter extends XBasePresenter<UserListContract.View> implements UserListContract.Presenter {
 
     private User nowUser;
     /**

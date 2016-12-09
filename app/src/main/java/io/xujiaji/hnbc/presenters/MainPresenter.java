@@ -24,11 +24,12 @@ import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contracts.MainContract;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.User;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainPresenter extends BasePresenter <MainContract.View> implements MainContract.Presenter {
+public class MainPresenter extends XBasePresenter<MainContract.View> implements MainContract.Presenter {
     private List<String> menuData;
     public MainPresenter(MainContract.View view) {
         super(view);

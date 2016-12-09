@@ -35,11 +35,12 @@ import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainFragPresenter extends BasePresenter<MainContract.MainFragView> implements MainContract.MainFragPersenter {
+public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView> implements MainContract.MainFragPersenter {
     private List<BannerData> bannerDataList = null;
 
     public MainFragPresenter(MainContract.MainFragView view) {

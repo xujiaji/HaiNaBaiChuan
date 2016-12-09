@@ -5,12 +5,13 @@ import android.content.pm.PackageManager;
 
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contracts.AboutContract;
+import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 01/12/16.
  */
 
-public class AboutPresenter extends BasePresenter<AboutContract.View> implements AboutContract.Presenter {
+public class AboutPresenter extends XBasePresenter<AboutContract.View> implements AboutContract.Presenter {
     public AboutPresenter(AboutContract.View view) {
         super(view);
     }
