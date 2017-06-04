@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
@@ -18,6 +20,7 @@ import java.io.File;
 
 import im.fir.sdk.FIR;
 import im.fir.sdk.VersionCheckCallback;
+import io.xujiaji.hnbc.BuildConfig;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.model.entity.UpdateEntity;
@@ -121,7 +124,17 @@ public class FirHelper {
                             + "\n大　　小：" + String.format("%.2f M", (updateEntity.getBinary().getFsize()) / (1000.0 * 1000.0)), updateEntity.getInstallUrl());
                 } else if ("io.xujiaji.hnbc.update_progress".equals(action)) {
                     Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setDataAndType(Uri.fromFile(new File(intent.getStringExtra(UpdateService.APK_LOCAL))), "application/vnd.android.package-archive");
+//                    i.setDataAndType(Uri.fromFile(new File(intent.getStringExtra(UpdateService.APK_LOCAL))), "application/vnd.android.package-archive");
+                    File apkFile = new File(intent.getStringExtra(UpdateService.APK_LOCAL));
+                    //判断是否是AndroidN以及更高的版本
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
+                        i.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                    } else {
+                        i.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    }
                     context.startActivity(i);
                 }
             }

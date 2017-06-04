@@ -97,6 +97,7 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
     @Override
     public void requestLoadHead(final ImageView head) {
         User user = BmobUser.getCurrentUser(User.class);
+        System.out.println(user);
         if (user == null) {
             head.setImageResource(R.drawable.head);
             return;

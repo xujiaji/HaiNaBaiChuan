@@ -152,7 +152,7 @@ public class EditUserInfoPresenter extends XBasePresenter<EditUserInfoContract.V
     }
 
     @Override
-    public void requestBirthday(Date birthday) {
+    public void requestBirthday(String birthday) {
         NetRequest.Instance().updateInfo(NetRequest.UpdateType.BIRTHDAY,
                 birthday,
                 new NetRequest.RequestListener<User>() {

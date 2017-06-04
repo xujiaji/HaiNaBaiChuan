@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -38,13 +38,13 @@ ext{
     junitVersion='4.12'
     rxandroidVersion='1.2.1'
     rxjavaVersion='1.1.6'
-    gsonVersion='2.7'
+    gsonVersion='2.8.1'
     reboundVersion='0.3.5'
     bannerVersion='1.4.2'
     kenburnsviewVersion='1.0.7'
     overscrollVersion='1.0.3'
     butterknifeVersion='8.4.0'
-    bmobVersion='3.5.0'
+    bmobVersion='3.5.5'
     rippleVersion='1.0.2'
     legacyVersion='1.0'
     glideVersion='3.7.0'

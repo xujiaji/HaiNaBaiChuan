@@ -31,7 +31,7 @@ public interface EditUserInfoContract {
         void requestChangeSign(String sign);
         void requestChangeCity(String city);
         void requestChangeSex(int sex);
-        void requestBirthday(Date birthday);
+        void requestBirthday(String birthday);
         void requestChangeEmail(String email);
         void requestChangePassword(String oldPwd, String newPwd);
     }

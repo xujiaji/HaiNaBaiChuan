@@ -8,7 +8,7 @@ android {
 
     signingConfigs {
         key {
-            storeFile file("../xjj.jks")
+            storeFile file("E:\\AndroidStudioProjects\\xjj.jks")
             storePassword KEYSTORE_PASSWORD
             keyAlias KEY_ALIAS
             keyPassword KEY_PASSWORD
@@ -20,7 +20,7 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.3"
     }
 
     buildTypes {
