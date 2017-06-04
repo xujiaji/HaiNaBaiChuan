@@ -6,14 +6,14 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
     useLibrary 'org.apache.http.legacy'
 
-//    signingConfigs {
-//        key {
-//            storeFile file("../xjj.jks")
-//            storePassword KEYSTORE_PASSWORD
-//            keyAlias KEY_ALIAS
-//            keyPassword KEY_PASSWORD
-//        }
-//    }
+    signingConfigs {
+        key {
+            storeFile file("E:\\AndroidStudioProjects\\xjj.jks")
+            storePassword KEYSTORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
 
     defaultConfig {
         applicationId "io.xujiaji.hnbc"
@@ -23,24 +23,24 @@ android {
         versionName "1.0.1"
     }
 
-//    buildTypes {
-//        release {
-//            buildConfigField("boolean", "LOG_DEBUG", "false")
-//            signingConfig signingConfigs.key
-//            minifyEnabled true
-//            debuggable true
-//            //Zipalign优化
-//            zipAlignEnabled true
-//            // 移除无用的resource文件
-//            shrinkResources true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//
-//        debug {
-//            minifyEnabled false
-//            signingConfig signingConfigs.key
-//        }
-//    }
+    buildTypes {
+        release {
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            signingConfig signingConfigs.key
+            minifyEnabled true
+            debuggable true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.key
+        }
+    }
 
     testOptions {
         unitTests.returnDefaultValues = true
