@@ -19,7 +19,9 @@ package io.xujiaji.hnbc.presenter;
 
 import android.widget.ImageView;
 
+import io.xujiaji.hnbc.activity.WelcomeActivity;
 import io.xujiaji.hnbc.contract.WelcomeContract;
+import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 public class WelPresenter extends XBasePresenter<WelcomeContract.View> implements WelcomeContract.Presenter {

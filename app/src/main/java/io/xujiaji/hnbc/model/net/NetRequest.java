@@ -21,6 +21,7 @@ import android.app.Activity;
 
 import com.facebook.login.LoginManager;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
@@ -38,6 +40,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -551,6 +554,7 @@ public class NetRequest {
 //            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
 //        }
 
+
         query.findObjects(new FindListener<Post>() {
             @Override
             public void done(List<Post> list, BmobException e) {
@@ -873,7 +877,7 @@ public class NetRequest {
                 newUser.setNickname((String) info);
                 break;
             case BIRTHDAY:
-                newUser.setBirthday((Date) info);
+                newUser.setBirthday((String) info);
                 break;
             case SEX:
                 newUser.setSex((Integer) info);

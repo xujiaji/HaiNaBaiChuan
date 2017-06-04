@@ -73,12 +73,7 @@ public class DataFiller {
         editItems.add(C.euii.SEX, new EditItem("性别", user.getSex() == 0 ? "男" : user.getSex() == 1 ? "女" : "保密"));
         editItems.add(C.euii.PHONE, new EditItem("手机", user.getMobilePhoneNumber()));
         editItems.add(C.euii.CITY, new EditItem("城市", user.getCity() == null ? "从星空而来" : user.getCity()));
-        try{
-            editItems.add(C.euii.BIRTHDAY, new EditItem("生日", SimpleDateFormat.getDateInstance().format(user.getBirthday())));
-        }catch (Exception e) {
-            editItems.add(C.euii.BIRTHDAY, new EditItem("生日", "yyyy-MM-dd"));
-            e.printStackTrace();
-        }
+        editItems.add(C.euii.BIRTHDAY, new EditItem("生日", user.getBirthday() == null ? "yyyy-MM-dd" : user.getBirthday()));
         editItems.add(C.euii.EMAIL, new EditItem("Email", user.getEmail()));
         editItems.add(C.euii.PASSWORD, new EditItem("密码", "***"));
         editItems.add(C.euii.SIGN, new EditItem("签名", user.getSign()));

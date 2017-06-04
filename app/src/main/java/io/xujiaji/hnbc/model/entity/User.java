@@ -28,7 +28,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 public class User extends BmobUser{
     private String nickname;
     private int age;
-    private Date birthday;
+    private String birthday;
     private int sex;
     private String sign;
     private String headPic;
@@ -75,11 +75,11 @@ public class User extends BmobUser{
         this.age = age;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

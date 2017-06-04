@@ -430,10 +430,11 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        try {
-            presenter.requestBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        presenter.requestBirthday(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//        try {
+//            presenter.requestBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 }
