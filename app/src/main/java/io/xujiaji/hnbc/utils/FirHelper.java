@@ -12,17 +12,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 import java.io.File;
 
-import im.fir.sdk.FIR;
-import im.fir.sdk.VersionCheckCallback;
 import io.xujiaji.hnbc.BuildConfig;
 import io.xujiaji.hnbc.R;
-import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.model.entity.UpdateEntity;
 import io.xujiaji.hnbc.service.UpdateService;
 
@@ -47,42 +41,42 @@ public class FirHelper {
     public void checkUpdate(Context context) {
         this.context = context;
         addBroadcast();
-        FIR.checkForUpdateInFIR("09ec021f5e836152f27b896d88ebded2", new VersionCheckCallback() {
-            @Override
-            public void onSuccess(String s) {
-                UpdateEntity updateEntity = new Gson().fromJson(s, UpdateEntity.class);
-                String oldVersion = getVersionName(App.getAppContext());
-                String newVersion = updateEntity.getVersionShort();
-                if (!oldVersion.equals(newVersion)) {
-                    Intent intent = new Intent("io.xujiaji.hnbc.update");
-                    intent.putExtra("update_entity", updateEntity);
-                    App.getAppContext().sendBroadcast(intent);
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                Log.i("fir", "获取更新失败" + "\n" + e.getMessage());
-            }
-
-            @Override
-            public void onStart() {
-                Log.i("fir", "正在获取更新");
-            }
-
-            @Override
-            public void onFinish() {
-                Log.i("fir", "成功获取更新");
-            }
-        });
+//        FIR.checkForUpdateInFIR("09ec021f5e836152f27b896d88ebded2", new VersionCheckCallback() {
+//            @Override
+//            public void onSuccess(String s) {
+//                UpdateEntity updateEntity = new Gson().fromJson(s, UpdateEntity.class);
+//                String oldVersion = getVersionName(App.getAppContext());
+//                String newVersion = updateEntity.getVersionShort();
+//                if (!oldVersion.equals(newVersion)) {
+//                    Intent intent = new Intent("io.xujiaji.hnbc.update");
+//                    intent.putExtra("update_entity", updateEntity);
+//                    App.getAppContext().sendBroadcast(intent);
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Exception e) {
+//                Log.i("fir", "获取更新失败" + "\n" + e.getMessage());
+//            }
+//
+//            @Override
+//            public void onStart() {
+//                Log.i("fir", "正在获取更新");
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                Log.i("fir", "成功获取更新");
+//            }
+//        });
     }
 
     public static void addCustomizeValue(String key, String value) {
-        FIR.addCustomizeValue(key, value);
+//        FIR.addCustomizeValue(key, value);
     }
 
     public static void removeCustomizeValue(String key) {
-        FIR.removeCustomizeValue(key);
+//        FIR.removeCustomizeValue(key);
     }
 
     //版本名

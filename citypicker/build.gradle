@@ -11,9 +11,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
-    compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    implementation "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
+    implementation "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
 }

@@ -3,10 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:3.1.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,6 +19,7 @@ allprojects {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
+        google()
     }
 }
 
@@ -29,12 +30,12 @@ task clean(type: Delete) {
 //固定一个地方定义版本
 ext{
     minSdkVersion = 21
-    targetSdkVersion = 24
-    compileSdkVersion = 24
-    buildToolsVersion = '25'
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.3'
 
     //依赖库版本
-    supportLibraryVersion = '25.0.0'
+    supportLibraryVersion = '27.1.1'
     junitVersion='4.12'
     rxandroidVersion='1.2.1'
     rxjavaVersion='1.1.6'

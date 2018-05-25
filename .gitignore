@@ -16,3 +16,5 @@
 将删除 depth/libs/
 /JPushLibrary/build/
 .gradle/
+.idea/codeStyles/
+.idea/caches/

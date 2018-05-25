@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -48,83 +47,81 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //view厚度视觉
-    compile project(':depth')
+    implementation project(':depth')
     //图片剪切
-    compile project(':crop')
+    implementation project(':crop')
     //sweet-alert-dialog
-    compile project(':dialog')
+    implementation project(':dialog')
     //城市选择
-    compile project(':citypicker')
-    compile project(':JPushLibrary')
+    implementation project(':citypicker')
+    api project(':JPushLibrary')
     //QQ sdk
-    compile files('libs/open_sdk_r5509_lite.jar')
-    testCompile "junit:junit:$rootProject.junitVersion"
-//    compile 'com.android.support:support-v13:25.0.0'
-    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation files('libs/open_sdk_r5509_lite.jar')
+    testImplementation "junit:junit:$rootProject.junitVersion"
+//    implementation 'com.android.support:support-v13:25.0.0'
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     //图片轮播
-    compile "com.youth.banner:banner:$rootProject.bannerVersion"
+    implementation "com.youth.banner:banner:$rootProject.bannerVersion"
     //图片动态移动展示
-    compile "com.flaviofaria:kenburnsview:$rootProject.kenburnsviewVersion"
+    implementation "com.flaviofaria:kenburnsview:$rootProject.kenburnsviewVersion"
     //ios风格列表边缘过度效果
-    compile "me.everything:overscroll-decor-android:$rootProject.overscrollVersion"
+    implementation "me.everything:overscroll-decor-android:$rootProject.overscrollVersion"
     //绑定UI
-    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
     //波纹效果
-    compile "com.balysv:material-ripple:$rootProject.rippleVersion"
+    implementation "com.balysv:material-ripple:$rootProject.rippleVersion"
     //Bmob数据后端
-    compile "cn.bmob.android:bmob-sdk:$rootProject.bmobVersion"
+    implementation "cn.bmob.android:bmob-sdk:$rootProject.bmobVersion"
     //因Bmob数据后端而导入
-    compile "cn.bmob.android:http-legacy:$rootProject.legacyVersion"
+    implementation "cn.bmob.android:http-legacy:$rootProject.legacyVersion"
     //图片加载框架
-    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     //抽象RecyclerView Adapter
-    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelperVersion"
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelperVersion"
     //实现圆形动画展开另一个页面，如打开写作页面
-    compile('com.github.ozodrukh:CircularReveal:1.3.1@aar') {
+    implementation('com.github.ozodrukh:CircularReveal:1.3.1@aar') {
         transitive = true;
     }
     //消息传递
-    compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+    implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
     //底部弹出试图
-    compile "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
-    compile "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
+    implementation "com.flipboard:bottomsheet-core:$rootProject.bottomsheetVersion"
+    implementation "com.flipboard:bottomsheet-commons:$rootProject.bottomsheetVersion"
     //material风格时间选择
-    compile "com.wdullaer:materialdatetimepicker:$rootProject.materialdatetimepicker"
+    implementation "com.wdullaer:materialdatetimepicker:$rootProject.materialdatetimepicker"
     //Facebook SDK
-    compile "com.facebook.android:facebook-android-sdk:$rootProject.facebookVersion"
+    implementation "com.facebook.android:facebook-android-sdk:$rootProject.facebookVersion"
     //EditText撤销和恢复
-    compile "ren.qinc.edit:lib:$rootProject.editVersion"
+    implementation "ren.qinc.edit:lib:$rootProject.editVersion"
 
     //内存泄露提示
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakcanaryVersion"
 
     //崩溃异常提示
-    compile "me.drakeet.library:crashwoodpecker:$rootProject.crashwoodpeckerVersion"
+    implementation "me.drakeet.library:crashwoodpecker:$rootProject.crashwoodpeckerVersion"
     //使用请求框架retrofit搭配okhttp、gson和rxjava
-    compile ("com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version") {
+    implementation ("com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version") {
         exclude group: 'com.squareup.okhttp3'
     }
-    compile ("com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version") {
+    implementation ("com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version") {
         exclude group: 'com.google.code.gson'
         exclude group: 'com.squareup.okhttp3'
     }
-    compile ("com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version") {
+    implementation ("com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version") {
         exclude group: 'io.reactivex'
         exclude group: 'com.squareup.okhttp3'
     }
 
-    //fir内测平台
-    compile 'im.fir:fir-sdk:latest.integration@aar'
-    compile 'com.github.xujiaji:xmvp:0.0.4'
+    implementation 'com.github.xujiaji:xmvp:0.0.4'
 }
 
 repositories {

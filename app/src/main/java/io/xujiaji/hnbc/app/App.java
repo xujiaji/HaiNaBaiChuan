@@ -23,7 +23,6 @@ import com.squareup.leakcanary.LeakCanary;
 
 import cn.bmob.v3.Bmob;
 import cn.jpush.android.api.JPushInterface;
-import im.fir.sdk.FIR;
 import io.xujiaji.hnbc.config.C;
 import me.drakeet.library.CrashWoodpecker;
 import me.drakeet.library.PatchMode;
@@ -40,7 +39,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this.getApplicationContext();
-        FIR.init(this);
         initLeak();
         initCrashWoodpecker();
         initTypeface();
