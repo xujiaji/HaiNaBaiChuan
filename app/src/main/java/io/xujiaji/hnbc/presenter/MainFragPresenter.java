@@ -24,28 +24,23 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.BmobUser;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contract.MainContract;
 import io.xujiaji.hnbc.fragment.MainFragment;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.BannerData;
 import io.xujiaji.hnbc.model.entity.MainTag;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
-import io.xujiaji.hnbc.utils.ImgLoadUtil;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView> implements MainContract.MainFragPersenter {
+public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView, BaseModel> implements MainContract.MainFragPersenter {
     private List<BannerData> bannerDataList = null;
-
-    public MainFragPresenter(MainContract.MainFragView view) {
-        super(view);
-    }
 
     @Override
     public void start() {
@@ -96,13 +91,13 @@ public class MainFragPresenter extends XBasePresenter<MainContract.MainFragView>
 
     @Override
     public void requestLoadHead(final ImageView head) {
-        User user = BmobUser.getCurrentUser(User.class);
-        System.out.println(user);
-        if (user == null) {
+//        User user = BmobUser.getCurrentUser(User.class);
+//        System.out.println(user);
+//        if (user == null) {
             head.setImageResource(R.drawable.head);
-            return;
-        }
-        ImgLoadUtil.loadHead(head.getContext(), head, user.getHeadPic());
+//            return;
+//        }
+//        ImgLoadUtil.loadHead(head.getContext(), head, user.getHeadPic());
     }
 
     @Override

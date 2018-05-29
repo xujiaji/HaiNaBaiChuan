@@ -35,6 +35,13 @@ public abstract class BaseFragment<T extends XBasePresenter> extends XBaseFragme
         initStatus();
     }
 
+    @Override
+    protected void onInit()
+    {
+        super.onInit();
+        ButterKnife.bind(this, getRootView());
+    }
+
     private void initStatus() {
         View status = ButterKnife.findById(getRootView(), R.id.status);
         if (status != null) {

@@ -56,7 +56,6 @@ import io.xujiaji.hnbc.utils.FileUtils;
 import io.xujiaji.hnbc.utils.ToastUtil;
 
 import static android.app.Activity.RESULT_OK;
-import static cn.bmob.v3.Bmob.getCacheDir;
 
 /**
  * Created by jiana on 16-11-7.
@@ -100,40 +99,40 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
     @Override
     protected void onListener() {
         super.onListener();
-        rvUserInfo.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                switch (i) {
-                    case C.euii.HEAD:
-                        editHead();
-                        break;
-                    case C.euii.NICKNAME:
-                        editInfo(R.string.edit_nickname);
-                        break;
-                    case C.euii.SEX:
-                        editSex();
-                        break;
-                    case C.euii.PHONE:
-                        editInfo(R.string.edit_phone_number);
-                        break;
-                    case C.euii.CITY:
-                        editCity();
-                        break;
-                    case C.euii.BIRTHDAY:
-                        editBirthday();
-                        break;
-                    case C.euii.EMAIL:
-                        editInfo(R.string.edit_email);
-                        break;
-                    case C.euii.PASSWORD:
-                        editPassword();
-                        break;
-                    case C.euii.SIGN:
-                        editSign();
-                        break;
-                }
-            }
-        });
+//        rvUserInfo.addOnItemTouchListener(new OnItemClickListener() {
+//            @Override
+//            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                switch (i) {
+//                    case C.euii.HEAD:
+//                        editHead();
+//                        break;
+//                    case C.euii.NICKNAME:
+//                        editInfo(R.string.edit_nickname);
+//                        break;
+//                    case C.euii.SEX:
+//                        editSex();
+//                        break;
+//                    case C.euii.PHONE:
+//                        editInfo(R.string.edit_phone_number);
+//                        break;
+//                    case C.euii.CITY:
+//                        editCity();
+//                        break;
+//                    case C.euii.BIRTHDAY:
+//                        editBirthday();
+//                        break;
+//                    case C.euii.EMAIL:
+//                        editInfo(R.string.edit_email);
+//                        break;
+//                    case C.euii.PASSWORD:
+//                        editPassword();
+//                        break;
+//                    case C.euii.SIGN:
+//                        editSign();
+//                        break;
+//                }
+//            }
+//        });
     }
 
     /**
@@ -249,23 +248,23 @@ public class EditUserInfoFragment extends BaseMainFragment<EditUserInfoPresenter
      * 编辑头像
      */
     private void editHead() {
-        BottomSheetImagePicker
-                .getInstance()
-                .showImagePicker(BottomSheetImagePicker.PickerType.BOTH,
-                        getActivity(),
-                        bottomSheet,
-                        new BottomSheetImagePicker.Listener() {
-                            @Override
-                            public void onImageArrived(Uri selectedImageUri) {
-                                String imgPath = FileUtils.getImageAbsolutePath(getActivity(), selectedImageUri);
-                                if (FileUtils.isGif(imgPath)) {
-                                    presenter.requestChangeHeadPic(imgPath);
-                                    return;
-                                }
-                                Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
-                                Crop.of(selectedImageUri, destination).asSquare().start(getActivity());
-                            }
-                        });
+//        BottomSheetImagePicker
+//                .getInstance()
+//                .showImagePicker(BottomSheetImagePicker.PickerType.BOTH,
+//                        getActivity(),
+//                        bottomSheet,
+//                        new BottomSheetImagePicker.Listener() {
+//                            @Override
+//                            public void onImageArrived(Uri selectedImageUri) {
+//                                String imgPath = FileUtils.getImageAbsolutePath(getActivity(), selectedImageUri);
+//                                if (FileUtils.isGif(imgPath)) {
+//                                    presenter.requestChangeHeadPic(imgPath);
+//                                    return;
+//                                }
+//                                Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+//                                Crop.of(selectedImageUri, destination).asSquare().start(getActivity());
+//                            }
+//                        });
     }
 
     @Override

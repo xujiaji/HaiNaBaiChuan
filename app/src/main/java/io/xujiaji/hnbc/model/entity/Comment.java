@@ -16,7 +16,6 @@
 
 package io.xujiaji.hnbc.model.entity;
 
-import cn.bmob.v3.BmobObject;
 
 /**
  * Created by jiana on 16-11-13.
@@ -24,7 +23,7 @@ import cn.bmob.v3.BmobObject;
  * 帖子评论类
  */
 
-public class Comment extends BmobObject{
+public class Comment extends Base{
     private String content;//评论内容
 
     private User user;//评论的用户，Pointer类型，一对一关系

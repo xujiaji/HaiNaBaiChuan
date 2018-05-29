@@ -16,16 +16,12 @@
 
 package io.xujiaji.hnbc.model.entity;
 
-import java.util.Date;
-
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobRelation;
-
 /**
  * Created by jiana on 16-11-4.
  */
 
-public class User extends BmobUser{
+public class User extends Base{
+    private String username;
     private String nickname;
     private int age;
     private String birthday;
@@ -33,14 +29,15 @@ public class User extends BmobUser{
     private String sign;
     private String headPic;
     private String city;
-    private BmobRelation followPerson;
 
-    public BmobRelation getFollowPerson() {
-        return followPerson;
+    public String getUsername()
+    {
+        return username;
     }
 
-    public void setFollowPerson(BmobRelation followPerson) {
-        this.followPerson = followPerson;
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
 
     public String getCity() {
@@ -97,17 +94,5 @@ public class User extends BmobUser{
 
     public void setSign(String sign) {
         this.sign = sign;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", birthday=" + birthday +
-                ", sex=" + sex +
-                ", sign='" + sign + '\'' +
-                ", headPic='" + headPic + '\'' +
-                '}' + super.toString();
     }
 }

@@ -18,12 +18,7 @@ package io.xujiaji.hnbc.app;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
-
 import com.squareup.leakcanary.LeakCanary;
-
-import cn.bmob.v3.Bmob;
-import cn.jpush.android.api.JPushInterface;
-import io.xujiaji.hnbc.config.C;
 import me.drakeet.library.CrashWoodpecker;
 import me.drakeet.library.PatchMode;
 
@@ -42,21 +37,17 @@ public class App extends Application {
         initLeak();
         initCrashWoodpecker();
         initTypeface();
-        try {
-            Bmob.initialize(this, C.CBmob.BMOB_ID);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        initJPush();
+
+//        initJPush();
     }
 
-    /**
-     * 初始化极光推送
-     */
-    private void initJPush() {
-        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);     		// 初始化 JPush
-    }
+//    /**
+//     * 初始化极光推送
+//     */
+//    private void initJPush() {
+//        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+//        JPushInterface.init(this);     		// 初始化 JPush
+//    }
 
     /**
      * 崩溃提示

@@ -22,6 +22,7 @@ import java.util.List;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contract.MainContract;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.data.DataFiller;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
@@ -29,10 +30,11 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
 /**
  * Created by jiana on 16-7-22.
  */
-public class MainPresenter extends XBasePresenter<MainContract.View> implements MainContract.Presenter {
+public class MainPresenter extends XBasePresenter<MainContract.View, BaseModel> implements MainContract.Presenter {
     private List<String> menuData;
-    public MainPresenter(MainContract.View view) {
-        super(view);
+
+
+    public MainPresenter() {
         menuData = new ArrayList<>();
         menuData.add(App.getAppContext().getString(R.string.main_page));
         menuData.add(App.getAppContext().getString(R.string.self_info));
@@ -40,6 +42,7 @@ public class MainPresenter extends XBasePresenter<MainContract.View> implements 
         menuData.add(App.getAppContext().getString(R.string.my_release));
         menuData.add(App.getAppContext().getString(R.string.set));
     }
+
 
     @Override
     public List<String> getMenuData() {
@@ -59,6 +62,7 @@ public class MainPresenter extends XBasePresenter<MainContract.View> implements 
 
     @Override
     public void start() {
+
 //        ApiNet.phoneNumAttrApiInstance().search("10000", "f3e2cd2caa8f1eb446078eb63edf3f87")
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())

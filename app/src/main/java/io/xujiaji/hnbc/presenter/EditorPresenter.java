@@ -21,17 +21,15 @@ import java.io.File;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.contract.EditorContract;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
 
 /**
  * Created by jiana on 16-7-27.
  */
-public class EditorPresenter extends XBasePresenter<EditorContract.View> implements EditorContract.Presenter{
+public class EditorPresenter extends XBasePresenter<EditorContract.View, BaseModel> implements EditorContract.Presenter{
 
-    public EditorPresenter(EditorContract.View view) {
-        super(view);
-    }
 
     @Override
     public void uploadPic(String path) {

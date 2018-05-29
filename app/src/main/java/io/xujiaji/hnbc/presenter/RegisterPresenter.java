@@ -21,6 +21,7 @@ import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contract.RegisterContract;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.LogUtil;
@@ -32,14 +33,11 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * Created by jiana on 16-11-5.
  */
 
-public class RegisterPresenter extends XBasePresenter<RegisterContract.View> implements RegisterContract.Presenter{
+public class RegisterPresenter extends XBasePresenter<RegisterContract.View, BaseModel> implements RegisterContract.Presenter{
     private String passwordSave;
     private User user = null;
     //密码确认
     private boolean pwdConfirm = false;
-    public RegisterPresenter(RegisterContract.View view) {
-        super(view);
-    }
 
 
     @Override
@@ -58,41 +56,41 @@ public class RegisterPresenter extends XBasePresenter<RegisterContract.View> imp
 
     @Override
     public void requestRegister() {
-        if (
-//                user.getEmail() != null &&
-//                user.getNickname() != null &&
-                user.getUsername() != null &&
-//                user.getMobilePhoneNumber() != null &&
-//                user.getEmail() != null &&
-                passwordSave != null &&
-                pwdConfirm) {
-            user.setNickname(App.getAppContext().getString(R.string.secret_man));
-            NetRequest.Instance().userRegister(user, new NetRequest.RequestListener<User>() {
-                @Override
-                public void success(User userGet) {
-                    view.callRegisterSuccess(user.getUsername());
-                    LogUtil.e3("user = " + userGet.toString());
-                }
-
-                @Override
-                public void error(String err) {
-                    LogUtil.e3("err = " + err);
-                    view.callRegisterFail(err);
-                }
-            });
-        } else {
-            view.callRegisterFail("请检查您的输入信息！");
-        }
+//        if (
+////                user.getEmail() != null &&
+////                user.getNickname() != null &&
+//                user.getUsername() != null &&
+////                user.getMobilePhoneNumber() != null &&
+////                user.getEmail() != null &&
+//                passwordSave != null &&
+//                pwdConfirm) {
+//            user.setNickname(App.getAppContext().getString(R.string.secret_man));
+//            NetRequest.Instance().userRegister(user, new NetRequest.RequestListener<User>() {
+//                @Override
+//                public void success(User userGet) {
+//                    view.callRegisterSuccess(user.getUsername());
+//                    LogUtil.e3("user = " + userGet.toString());
+//                }
+//
+//                @Override
+//                public void error(String err) {
+//                    LogUtil.e3("err = " + err);
+//                    view.callRegisterFail(err);
+//                }
+//            });
+//        } else {
+//            view.callRegisterFail("请检查您的输入信息！");
+//        }
     }
 
     @Override
     public void checkUsername(String username) {
-        String value = LoginCheck.checkAccount(username);
-        if (value == null) {
-            user.setUsername(username);
-            return;
-        }
-        view.errUsername(value);
+//        String value = LoginCheck.checkAccount(username);
+//        if (value == null) {
+//            user.setUsername(username);
+//            return;
+//        }
+//        view.errUsername(value);
     }
 
     @Override
@@ -107,33 +105,33 @@ public class RegisterPresenter extends XBasePresenter<RegisterContract.View> imp
 
     @Override
     public void checkPhone(String phone) {
-        String value = LoginCheck.checkPhone(phone);
-        if (value == null) {
-            user.setMobilePhoneNumber(phone);
-            return;
-        }
-        view.errPhone(value);
+//        String value = LoginCheck.checkPhone(phone);
+//        if (value == null) {
+//            user.setMobilePhoneNumber(phone);
+//            return;
+//        }
+//        view.errPhone(value);
     }
 
     @Override
     public void checkEmail(String email) {
-        String value = LoginCheck.checkEmail(email);
-        if (value == null) {
-            user.setEmail(email);
-            return;
-        }
-        view.errEmail(value);
+//        String value = LoginCheck.checkEmail(email);
+//        if (value == null) {
+//            user.setEmail(email);
+//            return;
+//        }
+//        view.errEmail(value);
     }
 
     @Override
     public void checkPassword(String password) {
-        String value = LoginCheck.checkPassword(password);
-        if (value == null) {
-            passwordSave = password;
-            user.setPassword(MD5Util.getMD5(password));
-            return;
-        }
-        view.errPassword(value);
+//        String value = LoginCheck.checkPassword(password);
+//        if (value == null) {
+//            passwordSave = password;
+//            user.setPassword(MD5Util.getMD5(password));
+//            return;
+//        }
+//        view.errPassword(value);
     }
 
     @Override

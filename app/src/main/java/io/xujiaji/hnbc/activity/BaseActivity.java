@@ -41,6 +41,13 @@ public abstract class BaseActivity<T extends XBasePresenter> extends XBaseActivi
         initStatus();
     }
 
+    @Override
+    protected void onInit()
+    {
+        super.onInit();
+        ButterKnife.bind(this);
+    }
+
     private void initStatus() {
         View status = ButterKnife.findById(this, R.id.status);
         if (status != null) {

@@ -114,14 +114,14 @@ public class PupList extends PopupWindow {
             data.add(new PopupItem("编辑", C.pupmenu.EDIT, R.drawable.ic_border_color_black_24dp));
             data.add(new PopupItem("退出登录", C.pupmenu.EXIT_LOGIN, R.drawable.ic_keyboard_tab_black_24dp));
             rv.setAdapter(new PupAdapter(data));
-            rv.addOnItemTouchListener(new OnItemClickListener() {
-                @Override
-                public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                    if (listener != null) {
-                        listener.itemClick(data.get(i).getId());
-                    }
-                }
-            });
+//            rv.addOnItemTouchListener(new OnItemClickListener() {
+//                @Override
+//                public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                    if (listener != null) {
+//                        listener.itemClick(data.get(i).getId());
+//                    }
+//                }
+//            });
         }
 
         private PupListener listener;

@@ -16,13 +16,11 @@
 
 package io.xujiaji.hnbc.model.entity;
 
-import cn.bmob.v3.BmobObject;
-
 /**
  * Created by jiana on 16-11-15.
  */
 
-public class BannerData extends BmobObject{
+public class BannerData extends Base{
     private String picUrl;
     private String title;
     private String linkTo;

@@ -250,42 +250,42 @@ public class MainFragment extends BaseRefreshFragment<Post, MainFragPresenter> i
     @Override
     protected void onListener() {
 
-        mainBottomRecycler.addOnItemTouchListener(new OnItemChildClickListener() {
-            @Override
-            public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                LogUtil.e2("position = " + i);
-                LogUtil.e3(view.toString());
-                switch (view.getId()) {
-                    case R.id.tvUserName:
-                        //跳转到用户信息查看
-                        goLookUser(baseQuickAdapter, i);
-                        break;
-                    case R.id.imgHead:
-                        //跳转到用户信息查看
-                        goLookUser(baseQuickAdapter, i);
-                        break;
-                    case R.id.layoutBaseArticle:
-                        saveData(C.data.KEY_POST, baseQuickAdapter.getData().get(i));
-                        MainActivity.startFragment(C.fragment.READ_ARTICLE);
-                        break;
-                    case R.id.btnLike:
-                        Post post = (Post) baseQuickAdapter.getData().get(i);
-                        presenter.requestLike(post);
-                        break;
-                    case R.id.btnFollow:
-                        Post postF = (Post) baseQuickAdapter.getData().get(i);
-                        presenter.requestFollow(postF.getAuthor());
-                        break;
-                }
-            }
-
-            private void goLookUser(BaseQuickAdapter baseQuickAdapter, int i){
-                Post post = (Post) baseQuickAdapter.getData().get(i);
-                saveData(C.data.KEY_USER, post.getAuthor());
-                UserInfoFragment.SelfSwitch = false;
-                MainActivity.startFragment(C.fragment.USER_INFO);
-            }
-        });
+//        mainBottomRecycler.addOnItemTouchListener(new OnItemChildClickListener() {
+//            @Override
+//            public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                LogUtil.e2("position = " + i);
+//                LogUtil.e3(view.toString());
+//                switch (view.getId()) {
+//                    case R.id.tvUserName:
+//                        //跳转到用户信息查看
+//                        goLookUser(baseQuickAdapter, i);
+//                        break;
+//                    case R.id.imgHead:
+//                        //跳转到用户信息查看
+//                        goLookUser(baseQuickAdapter, i);
+//                        break;
+//                    case R.id.layoutBaseArticle:
+//                        saveData(C.data.KEY_POST, baseQuickAdapter.getData().get(i));
+//                        MainActivity.startFragment(C.fragment.READ_ARTICLE);
+//                        break;
+//                    case R.id.btnLike:
+//                        Post post = (Post) baseQuickAdapter.getData().get(i);
+//                        presenter.requestLike(post);
+//                        break;
+//                    case R.id.btnFollow:
+//                        Post postF = (Post) baseQuickAdapter.getData().get(i);
+//                        presenter.requestFollow(postF.getAuthor());
+//                        break;
+//                }
+//            }
+//
+//            private void goLookUser(BaseQuickAdapter baseQuickAdapter, int i){
+//                Post post = (Post) baseQuickAdapter.getData().get(i);
+//                saveData(C.data.KEY_USER, post.getAuthor());
+//                UserInfoFragment.SelfSwitch = false;
+//                MainActivity.startFragment(C.fragment.USER_INFO);
+//            }
+//        });
 
         mainBottomRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int dyDiff = 0;

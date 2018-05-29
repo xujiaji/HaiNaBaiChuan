@@ -17,15 +17,12 @@
 
 package io.xujiaji.hnbc.model.entity;
 
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobRelation;
-
 /**
  * Created by jiana on 16-11-13.
  * 帖子类
  */
 
-public class Post extends BmobObject{
+public class Post extends Base{
     /**
      *  帖子标题
      */
@@ -49,7 +46,7 @@ public class Post extends BmobObject{
     /**
      * 喜欢该帖子的人
      */
-    private BmobRelation likes;//多对多关系：用于存储喜欢该帖子的所有用户
+//    private BmobRelation likes;//多对多关系：用于存储喜欢该帖子的所有用户
 
     public String getCoverPicture() {
         return coverPicture;
@@ -83,22 +80,13 @@ public class Post extends BmobObject{
         this.author = author;
     }
 
-    public BmobRelation getLikes() {
-        return likes;
-    }
+//    public BmobRelation getLikes() {
+//        return likes;
+//    }
+//
+//    public void setLikes(BmobRelation likes) {
+//        this.likes = likes;
+//    }
 
-    public void setLikes(BmobRelation likes) {
-        this.likes = likes;
-    }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", coverPicture='" + coverPicture + '\'' +
-                ", author=" + author +
-                ", likes=" + likes +
-                '}';
-    }
 }

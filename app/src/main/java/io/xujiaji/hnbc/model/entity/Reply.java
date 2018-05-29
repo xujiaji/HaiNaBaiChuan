@@ -16,14 +16,12 @@
 
 package io.xujiaji.hnbc.model.entity;
 
-import cn.bmob.v3.BmobObject;
-
 /**
  * Created by jiana on 16-11-17.
  * 回复类，回复评论
  */
 
-public class Reply extends BmobObject {
+public class Reply extends Base {
     //评论
     private Comment comment;
     //说话的人

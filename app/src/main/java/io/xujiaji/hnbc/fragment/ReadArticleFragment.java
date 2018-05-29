@@ -127,40 +127,40 @@ public class ReadArticleFragment extends BaseMainFragment<ReadArticlePresenter> 
                 clickBack();
             }
         });
-        rvComments.addOnItemTouchListener(new OnItemChildClickListener() {
-
-            @Override
-            public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                switch (view.getId()) {
-                    case R.id.btnReply:
-                        List<MultiItemEntity> res = baseQuickAdapter.getData();
-                        CommentFill commentFill = (CommentFill) res.get(i);
-                        Comment comment = commentFill.getComment();
-                        clickReply(comment.getUser(), comment);
-                        break;
-                    case R.id.imgHead:
-                        ToastUtil.getInstance().showLongT("点击头像，跳转用户信息界面");
-                        break;
-                    case R.id.tvReplyUser:
-                        if (!(baseQuickAdapter.getData().get(i) instanceof ReplyFill)) {
-                            break;
-                        }
-                        ReplyFill replyFill = (ReplyFill) baseQuickAdapter.getData().get(i);
-                        Reply reply = replyFill.getReply();
-                        clickReply(reply.getSpeakUser(), reply.getComment());
-//                        clickReply(reply.getSpeakUser(), comment);
-                        break;
-                    case R.id.tvReplyWho:
-                        if (!(baseQuickAdapter.getData().get(i) instanceof ReplyFill)) {
-                            break;
-                        }
-                        ReplyFill replyFillWho = (ReplyFill) baseQuickAdapter.getData().get(i);
-                        Reply replyWho = replyFillWho.getReply();
-                        clickReply(replyWho.getReplyUser(), replyWho.getComment());
-                        break;
-                }
-            }
-        });
+//        rvComments.addOnItemTouchListener(new OnItemChildClickListener() {
+//
+//            @Override
+//            public void SimpleOnItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                switch (view.getId()) {
+//                    case R.id.btnReply:
+//                        List<MultiItemEntity> res = baseQuickAdapter.getData();
+//                        CommentFill commentFill = (CommentFill) res.get(i);
+//                        Comment comment = commentFill.getComment();
+//                        clickReply(comment.getUser(), comment);
+//                        break;
+//                    case R.id.imgHead:
+//                        ToastUtil.getInstance().showLongT("点击头像，跳转用户信息界面");
+//                        break;
+//                    case R.id.tvReplyUser:
+//                        if (!(baseQuickAdapter.getData().get(i) instanceof ReplyFill)) {
+//                            break;
+//                        }
+//                        ReplyFill replyFill = (ReplyFill) baseQuickAdapter.getData().get(i);
+//                        Reply reply = replyFill.getReply();
+//                        clickReply(reply.getSpeakUser(), reply.getComment());
+////                        clickReply(reply.getSpeakUser(), comment);
+//                        break;
+//                    case R.id.tvReplyWho:
+//                        if (!(baseQuickAdapter.getData().get(i) instanceof ReplyFill)) {
+//                            break;
+//                        }
+//                        ReplyFill replyFillWho = (ReplyFill) baseQuickAdapter.getData().get(i);
+//                        Reply replyWho = replyFillWho.getReply();
+//                        clickReply(replyWho.getReplyUser(), replyWho.getComment());
+//                        break;
+//                }
+//            }
+//        });
     }
 
 
@@ -207,13 +207,13 @@ public class ReadArticleFragment extends BaseMainFragment<ReadArticlePresenter> 
         for (Comment comment : comments) {
             final CommentFill commentFill = new CommentFill(comment);
             LogUtil.e2(comment.getContent());
-            for (Reply reply : replyList) {
-                if (!reply.getComment().getObjectId().equals(comment.getObjectId())) {
-                    continue;
-                }
-                final ReplyFill rf = new ReplyFill(reply);
-                commentFill.addSubItem(rf);
-            }
+//            for (Reply reply : replyList) {
+//                if (!reply.getComment().getObjectId().equals(comment.getObjectId())) {
+//                    continue;
+//                }
+//                final ReplyFill rf = new ReplyFill(reply);
+//                commentFill.addSubItem(rf);
+//            }
 
             res.add(commentFill);
         }

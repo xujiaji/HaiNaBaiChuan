@@ -21,6 +21,7 @@ import java.util.List;
 import io.xujiaji.hnbc.R;
 import io.xujiaji.hnbc.contract.UserListContract;
 import io.xujiaji.hnbc.fragment.base.BaseMainFragment;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
@@ -30,18 +31,13 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * 用户列表
  */
 
-public class UserListPresenter extends XBasePresenter<UserListContract.View> implements UserListContract.Presenter {
+public class UserListPresenter extends XBasePresenter<UserListContract.View, BaseModel> implements UserListContract.Presenter {
 
     private User nowUser;
     /**
      * 该页面是什么
      */
     private int pageType = 0;
-
-    public UserListPresenter(UserListContract.View view) {
-        super(view);
-    }
-
     @Override
     public void start() {
         super.start();

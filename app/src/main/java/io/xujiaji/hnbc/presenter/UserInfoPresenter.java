@@ -24,7 +24,9 @@ import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contract.UserInfoContract;
 import io.xujiaji.hnbc.fragment.UserInfoFragment;
 import io.xujiaji.hnbc.fragment.base.BaseMainFragment;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.data.DataFiller;
+import io.xujiaji.hnbc.model.entity.Base;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.ImgLoadUtil;
@@ -35,11 +37,8 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  *
  */
 
-public class UserInfoPresenter extends XBasePresenter<UserInfoContract.View> implements UserInfoContract.Presenter {
+public class UserInfoPresenter extends XBasePresenter<UserInfoContract.View, BaseModel> implements UserInfoContract.Presenter {
 
-    public UserInfoPresenter(UserInfoContract.View view) {
-        super(view);
-    }
     private User user;
 
     @Override
@@ -51,23 +50,23 @@ public class UserInfoPresenter extends XBasePresenter<UserInfoContract.View> imp
 
     @Override
     public void requestUserInfo() {
-        if (UserInfoFragment.SelfSwitch) {
-            user = DataFiller.getLocalUser();
-            view.displayUser(user);
-        } else {
-            user = BaseMainFragment.getData(C.data.KEY_USER);
-            if (user != null) {
-                if (DataFiller.getLocalUser() != null && user.getObjectId().equals(DataFiller.getLocalUser().getObjectId())) {
-                    UserInfoFragment.SelfSwitch = true;
-                }
-                view.displayUser(user);
-                BaseMainFragment.clearData();
-            }
-        }
-
-        requestFansNum(user);
-        requestFocusNum(user);
-        requestCollectNum(user);
+//        if (UserInfoFragment.SelfSwitch) {
+//            user = DataFiller.getLocalUser();
+//            view.displayUser(user);
+//        } else {
+//            user = BaseMainFragment.getData(C.data.KEY_USER);
+//            if (user != null) {
+//                if (DataFiller.getLocalUser() != null && user.getObjectId().equals(DataFiller.getLocalUser().getObjectId())) {
+//                    UserInfoFragment.SelfSwitch = true;
+//                }
+//                view.displayUser(user);
+//                BaseMainFragment.clearData();
+//            }
+//        }
+//
+//        requestFansNum(user);
+//        requestFocusNum(user);
+//        requestCollectNum(user);
     }
 
     @Override

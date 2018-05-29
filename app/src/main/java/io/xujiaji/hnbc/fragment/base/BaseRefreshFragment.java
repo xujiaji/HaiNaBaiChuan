@@ -61,8 +61,8 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         swipeLayout.setOnRefreshListener(this);
         mAdapter.openLoadAnimation();
-        mAdapter.openLoadMore(PAGE_SIZE);
-        mAdapter.setOnLoadMoreListener(this);
+//        mAdapter.openLoadMore(PAGE_SIZE);
+//        mAdapter.setOnLoadMoreListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -82,7 +82,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
             return;
         }
         mAdapter.setNewData(datas);
-        mAdapter.openLoadMore(PAGE_SIZE);
+//        mAdapter.openLoadMore(PAGE_SIZE);
         mAdapter.removeAllFooterView();
         mCurrentCounter = PAGE_SIZE;
         swipeLayout.setRefreshing(false);
@@ -129,7 +129,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
         mRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                mAdapter.showLoadMoreFailedView();
+//                mAdapter.showLoadMoreFailedView();
             }
         });
         ToastUtil.getInstance().showLongT(err);
@@ -140,7 +140,7 @@ public abstract class BaseRefreshFragment<X, T extends XBasePresenter> extends B
      */
     @Override
     public void loadListDateOver() {
-        mAdapter.loadComplete();
+//        mAdapter.loadComplete();
         if (notLoadingView == null) {
             notLoadingView = LayoutInflater.from(getActivity()).inflate(R.layout.not_loading, (ViewGroup) mRecyclerView.getParent(), false);
         }

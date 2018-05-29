@@ -17,33 +17,21 @@
 package io.xujiaji.hnbc.model.entity;
 
 /**
- * Created by jiana on 16-7-24.
+ * author: xujiaji
+ * created on: 2018/5/29 10:46
+ * description:
  */
-public class Wel extends Base {
-    private String imgDate;
-    private String imgAddress;
+public class Base
+{
+    private String createdAt;
 
-    public String getImgDate() {
-        return imgDate;
+    public String getCreatedAt()
+    {
+        return createdAt;
     }
 
-    public void setImgDate(String imgDate) {
-        this.imgDate = imgDate;
-    }
-
-    public String getImgAddress() {
-        return imgAddress;
-    }
-
-    public void setImgAddress(String imgAddress) {
-        this.imgAddress = imgAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "Wel{" +
-                "imgDate='" + imgDate + '\'' +
-                ", imgAddress='" + imgAddress + '\'' +
-                '}';
+    public void setCreatedAt(String createdAt)
+    {
+        this.createdAt = createdAt;
     }
 }

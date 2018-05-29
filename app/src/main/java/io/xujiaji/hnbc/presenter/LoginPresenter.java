@@ -23,6 +23,7 @@ import com.facebook.login.LoginResult;
 
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contract.LoginContract;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.MD5Util;
@@ -34,11 +35,7 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * Created by jiana on 16-11-4.
  */
 
-public class LoginPresenter extends XBasePresenter<LoginContract.View> implements LoginContract.Presenter {
-
-    public LoginPresenter(LoginContract.View view) {
-        super(view);
-    }
+public class LoginPresenter extends XBasePresenter<LoginContract.View, BaseModel> implements LoginContract.Presenter {
 
     @Override
     public void requestLogin(String name, String password) {

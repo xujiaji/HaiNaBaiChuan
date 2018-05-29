@@ -56,16 +56,16 @@ dependencies {
     implementation project(':dialog')
     //城市选择
     implementation project(':citypicker')
-    api project(':JPushLibrary')
+//    api project(':JPushLibrary')
     //QQ sdk
     implementation files('libs/open_sdk_r5509_lite.jar')
     testImplementation "junit:junit:$rootProject.junitVersion"
-//    implementation 'com.android.support:support-v13:25.0.0'
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
     //图片轮播
     implementation "com.youth.banner:banner:$rootProject.bannerVersion"
     //图片动态移动展示
@@ -78,9 +78,9 @@ dependencies {
     //波纹效果
     implementation "com.balysv:material-ripple:$rootProject.rippleVersion"
     //Bmob数据后端
-    implementation "cn.bmob.android:bmob-sdk:$rootProject.bmobVersion"
+//    implementation "cn.bmob.android:bmob-sdk:$rootProject.bmobVersion"
     //因Bmob数据后端而导入
-    implementation "cn.bmob.android:http-legacy:$rootProject.legacyVersion"
+//    implementation "cn.bmob.android:http-legacy:$rootProject.legacyVersion"
     //图片加载框架
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     //抽象RecyclerView Adapter
@@ -97,7 +97,9 @@ dependencies {
     //material风格时间选择
     implementation "com.wdullaer:materialdatetimepicker:$rootProject.materialdatetimepicker"
     //Facebook SDK
-    implementation "com.facebook.android:facebook-android-sdk:$rootProject.facebookVersion"
+    implementation ("com.facebook.android:facebook-android-sdk:$rootProject.facebookVersion") {
+        exclude group: 'com.android.support:customtabs'
+    }
     //EditText撤销和恢复
     implementation "ren.qinc.edit:lib:$rootProject.editVersion"
 
@@ -109,19 +111,11 @@ dependencies {
     //崩溃异常提示
     implementation "me.drakeet.library:crashwoodpecker:$rootProject.crashwoodpeckerVersion"
     //使用请求框架retrofit搭配okhttp、gson和rxjava
-    implementation ("com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version") {
-        exclude group: 'com.squareup.okhttp3'
-    }
-    implementation ("com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version") {
-        exclude group: 'com.google.code.gson'
-        exclude group: 'com.squareup.okhttp3'
-    }
-    implementation ("com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version") {
-        exclude group: 'io.reactivex'
-        exclude group: 'com.squareup.okhttp3'
-    }
+    implementation ("com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version")
+    implementation ("com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version")
+    implementation ("com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version")
 
-    implementation 'com.github.xujiaji:xmvp:0.0.4'
+    implementation 'com.github.xujiaji:xmvp:1.1.5'
 }
 
 repositories {

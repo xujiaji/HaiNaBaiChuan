@@ -90,19 +90,19 @@ public class SetFragment extends BaseMainFragment<SetPresenter> implements SetCo
                 clickBack();
             }
         });
-        rvSet.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                switch (i) {
-                    case C.set.CLEAR:
-                        showStartCleanCache();
-                        break;
-                    case C.set.ABOUT:
-                        MainActivity.startFragment(C.fragment.ABOUT);
-                        break;
-                }
-            }
-        });
+//        rvSet.addOnItemTouchListener(new OnItemClickListener() {
+//            @Override
+//            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                switch (i) {
+//                    case C.set.CLEAR:
+//                        showStartCleanCache();
+//                        break;
+//                    case C.set.ABOUT:
+//                        MainActivity.startFragment(C.fragment.ABOUT);
+//                        break;
+//                }
+//            }
+//        });
     }
 
     @Override

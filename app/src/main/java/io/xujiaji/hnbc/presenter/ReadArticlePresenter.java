@@ -23,6 +23,7 @@ import io.xujiaji.hnbc.app.App;
 import io.xujiaji.hnbc.config.C;
 import io.xujiaji.hnbc.contract.ReadActicleContract;
 import io.xujiaji.hnbc.fragment.base.BaseMainFragment;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.Comment;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.entity.Reply;
@@ -35,12 +36,8 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * Created by jiana on 16-11-14.
  */
 
-public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.View> implements ReadActicleContract.Presenter {
+public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.View, BaseModel> implements ReadActicleContract.Presenter {
     private Post post;
-
-    public ReadArticlePresenter(ReadActicleContract.View view) {
-        super(view);
-    }
 
     @Override
     public void end() {
@@ -85,7 +82,7 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
         post = BaseMainFragment.getData(C.data.KEY_POST);
         if (post != null) {
             view.showArticle(post);
-            requestCommentsData(post.getObjectId());
+//            requestCommentsData(post.getObjectId());
             BaseMainFragment.clearData();
         }
     }
@@ -129,7 +126,7 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
             @Override
             public void success(String s) {
                 view.addCommentSuccess();
-                requestCommentsData(post.getObjectId());
+//                requestCommentsData(post.getObjectId());
             }
 
             @Override
@@ -144,7 +141,7 @@ public class ReadArticlePresenter extends XBasePresenter<ReadActicleContract.Vie
         NetRequest.Instance().replyComment(replyUser, comment, content, new NetRequest.RequestListener() {
             @Override
             public void success(Object o) {
-                requestCommentsData(post.getObjectId());
+//                requestCommentsData(post.getObjectId());
                 view.replyCommentSuccess();
             }
 

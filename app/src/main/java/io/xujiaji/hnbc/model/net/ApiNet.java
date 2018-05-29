@@ -18,7 +18,6 @@
 package io.xujiaji.hnbc.model.net;
 
 import io.xujiaji.hnbc.model.api.PhoneNumAttrApi;
-import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -31,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiNet {
     private static PhoneNumAttrApi phoneNumAttrApi = null;
-    private static OkHttpClient okHttpClient = new OkHttpClient();
+//    private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 

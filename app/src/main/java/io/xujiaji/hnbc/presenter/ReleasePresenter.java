@@ -20,6 +20,7 @@ import java.util.List;
 
 import io.xujiaji.hnbc.contract.ReleaseContract;
 import io.xujiaji.hnbc.fragment.base.BaseRefreshFragment;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.Post;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.xmvp.presenters.XBasePresenter;
@@ -29,12 +30,7 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * 收藏
  */
 
-public class ReleasePresenter extends XBasePresenter<ReleaseContract.View> implements ReleaseContract.Presenter{
-
-    public ReleasePresenter(ReleaseContract.View view) {
-        super(view);
-    }
-
+public class ReleasePresenter extends XBasePresenter<ReleaseContract.View, BaseModel> implements ReleaseContract.Presenter{
     @Override
     public void start() {
         super.start();

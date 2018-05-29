@@ -19,12 +19,7 @@ package io.xujiaji.hnbc.config;
  * 常量
  */
 public class C {
-    /**
-     * Bmob云后台
-     */
-    public static class CBmob {
-        public static final String BMOB_ID = "b9e6bbef9e92ca59a543ff3702b1836d";
-    }
+
 
     /**
      * 文件配置

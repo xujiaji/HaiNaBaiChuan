@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.Date;
 
 import io.xujiaji.hnbc.contract.EditUserInfoContract;
+import io.xujiaji.hnbc.model.BaseModel;
 import io.xujiaji.hnbc.model.entity.User;
 import io.xujiaji.hnbc.model.net.NetRequest;
 import io.xujiaji.hnbc.utils.check.LoginCheck;
@@ -30,11 +31,8 @@ import io.xujiaji.xmvp.presenters.XBasePresenter;
  * Created by jiana on 16-11-7.
  */
 
-public class EditUserInfoPresenter extends XBasePresenter<EditUserInfoContract.View> implements EditUserInfoContract.Presenter {
+public class EditUserInfoPresenter extends XBasePresenter<EditUserInfoContract.View, BaseModel> implements EditUserInfoContract.Presenter {
 
-    public EditUserInfoPresenter(EditUserInfoContract.View view) {
-        super(view);
-    }
 
     @Override
     public void requestChangeHeadPic(String picPath) {

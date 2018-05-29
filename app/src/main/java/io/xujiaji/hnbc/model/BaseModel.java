@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package io.xujiaji.hnbc.model.api;
+package io.xujiaji.hnbc.model;
 
-import io.xujiaji.hnbc.model.entity.PhoneNumAttr;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import rx.Observable;
+import io.xujiaji.xmvp.contracts.XContract;
 
 /**
- * Created by jiana on 16-11-15.
+ * author: xujiaji
+ * created on: 2018/5/29 10:39
+ * description:
  */
-
-public interface PhoneNumAttrApi {
-//    @GET("mobile/get")
-//    Observable<PhoneNumAttr> search(@Query("phone") String phoneNum, @Query("key") String key);
+public class BaseModel implements XContract.Model
+{
 }
