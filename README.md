@@ -97,7 +97,7 @@ Markdown写作、发帖、评论、登陆、喜欢、关注、注册、用户信
 
 # License
 ```
-   Copyright 2016 XuJiaji
+   Copyright 2018 XuJiaji
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
